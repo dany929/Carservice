@@ -39,6 +39,7 @@
         <beans:property name="annotatedClasses">
             <beans:list>
                 <beans:value>com.customer.model.Customer</beans:value>
+                <beans:value>com.part.model.Part</beans:value>
             </beans:list>
         </beans:property>
 
@@ -56,6 +57,7 @@
         </beans:property>
     </beans:bean>
 
+    <context:component-scan base-package="com.customer"/>
     <beans:bean class="com.customer.dao.CustomerDao" id="customerdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
@@ -64,7 +66,16 @@
         <beans:property name="customerDao" ref="customerDao"/>
     </beans:bean>
 
-    <context:component-scan base-package="com.customer"/>
+
+    <context:component-scan base-package="com.part"/>
+    <beans:bean class="com.part.dao.PartDao" id="partdao">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+
+    <beans:bean class="com.part.service.PartService" id="partservive">
+        <beans:property name="partDao" ref="partdao"/>
+    </beans:bean>
+
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 

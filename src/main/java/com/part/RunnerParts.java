@@ -1,17 +1,15 @@
-package com.customer;
+package com.part;
 
-import com.customer.model.Customer;
+import com.part.model.Part;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
-
-import javax.persistence.Query;
 import java.util.List;
 
 
-public class Runner {
+public class RunnerParts {
     @Test
     public void crud()
     {
@@ -19,17 +17,19 @@ public class Runner {
         Session session = sessionFactory.openSession();
         getAll(session);
        // add(session);
-     //   findById(session,"A666AA152");
+        findById(session,"2");
+        /*
         updateById(session,"A666AA152","Bartolomeo","Simpson","8-800-555-35-35");
         deleteById(session," ");
         getAll(session);
+        */
         session.close();
     }
 
     private void getAll(Session session) {
-        List<Customer> customerList = session.createQuery("SELECT c FROM Customer c ").list();
+        List<Part> customerList = session.createQuery("SELECT c FROM Part c ").list();
         System.out.println("Full list of Customers---------");
-        for (Customer c : customerList)
+        for (Part c : customerList)
         {
             System.out.println(c);
         }
@@ -38,15 +38,15 @@ public class Runner {
 
     private void findById(Session session,String id)
     {
-        List<Customer> customerList  = session.createQuery("select  c from Customer c where c.gosznak ="+"'"+id+"'").list();
-        for (Customer c : customerList) {
+        List<Part> customerList  = session.createQuery("select  c from Part c where c.partid ="+"'"+id+"'").list();
+        for (Part c : customerList) {
 
             System.out.println("Customer FOUND by id: " + c);
             System.out.println(" ");
         }
         getAll(session);
     }
-
+/*
     private void deleteById(Session session,String id)
     {
         List<Customer> customerList  = session.createQuery("select c from Customer c where c.gosznak =" + "'"+id+"'").list();
@@ -97,4 +97,6 @@ public class Runner {
     }
 
 
+
+ */
 }

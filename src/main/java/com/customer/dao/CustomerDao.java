@@ -87,7 +87,7 @@ public class CustomerDao
      */
     public void removeCustomer(String id) {
         Session session = this.sessionFactory.getCurrentSession();
-      //  Customer c = (Customer) session.load(Customer.class, new String(id));
+        //  Customer c = (Customer) session.load(Customer.class, new String(id));
 
 
         List<Customer> customerList  =
@@ -119,7 +119,7 @@ public class CustomerDao
                 session.createQuery("select  c from Customer c where c.gosznak ="+"'"+id+"'").list();
         for (Customer c : customerList)
         {
-           customer=c;
+            customer=c;
         }
 
         logger.info("Customer found: " + customer);

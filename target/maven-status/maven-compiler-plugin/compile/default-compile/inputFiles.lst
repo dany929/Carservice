@@ -1,5 +1,9 @@
+D:\YandexDisk\UD\Carservice\src\main\java\com\part\service\PartService.java
 D:\YandexDisk\UD\Carservice\src\main\java\com\customer\dao\CustomerDao.java
 D:\YandexDisk\UD\Carservice\src\main\java\com\customer\model\Customer.java
 D:\YandexDisk\UD\Carservice\src\main\java\com\customer\service\CustomerService.java
+D:\YandexDisk\UD\Carservice\src\main\java\com\part\dao\PartDao.java
 D:\YandexDisk\UD\Carservice\src\main\java\com\customer\client\CustomerController.java
+D:\YandexDisk\UD\Carservice\src\main\java\com\part\client\PartController.java
 D:\YandexDisk\UD\Carservice\src\main\java\com\customer\Runner.java
+D:\YandexDisk\UD\Carservice\src\main\java\com\part\model\Part.java

@@ -72,7 +72,7 @@ public class CustomerService
        */
     }
     @Transactional
-  public void removeCustomer(String id)
+    public void removeCustomer(String id)
     {
         this.customerDao.removeCustomer(id);
     }

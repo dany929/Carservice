@@ -23,6 +23,7 @@
 
     <!-- Annotated entity classes -->
     <mapping class="com.customer.model.Customer"/>
+    <mapping class="com.part.model.Part"/>
 
   </session-factory>
 </hibernate-configuration>
