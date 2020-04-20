@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+        xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
+        xmlns:tx="http://www.springframework.org/schema/tx"
+        xmlns:context="http://www.springframework.org/schema/context"
+        xmlns:beans="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/mvc"
+        xmlns:mvc="http://www.springframework.org/schema/mvc">
+    <context:component-scan base-package="com.customer"/>
+    <mvc:default-servlet-handler/>
+    <mvc:annotation-driven/>
+
+    <beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <beans:property value="WEB-INF/pages/" name="prefix"/>
+        <beans:property value=".jsp" name="suffix"/>
+    </beans:bean>
+
+
+    <beans:bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <beans:property value="org.postgresql.Driver" name="driverClassName"/>
+        <beans:property value="jdbc:postgresql://localhost:5432/Carservice" name="url"/>
+        <beans:property value="postgres" name="username"/>
+        <beans:property value="1488" name="password"/>
+    </beans:bean>
+
+
+    <beans:bean class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
+                id="hibernate4AnnotatedSessionFactory">
+        <beans:property name="dataSource" ref="dataSource"/>
+
+        <beans:property name="annotatedClasses">
+            <beans:list>
+                <beans:value>com.customer.model.Customer</beans:value>
+            </beans:list>
+        </beans:property>
+
+        <beans:property name="hibernateProperties">
+            <beans:props>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</beans:prop>
+                <beans:prop key="connection.driver_class">org.postgresql.Driver</beans:prop>
+                <beans:prop key="connection.url">jdbc:postgresql://localhost:5432/Carservice</beans:prop>
+                <beans:prop key="hibernate.connection.username">postgres</beans:prop>
+                <beans:prop key="hibernate.connection.password">1488</beans:prop>
+                <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <beans:prop key="generateDdl">true</beans:prop>
+                <beans:prop key="hbm2ddl.auto">update</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean class="com.customer.dao.CustomerDao" id="customerdao">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+
+    <beans:bean class="com.customer.service.CustomerService" id="customerservice">
+        <beans:property name="customerDao" ref="customerDao"/>
+    </beans:bean>
+
+    <context:component-scan base-package="com.customer"/>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <beans:bean class="org.springframework.orm.hibernate4.HibernateTransactionManager" id="transactionManager">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+
+</beans:beans>
+
+
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="Carservice@localhost" uuid="7ab7b553-c7f3-45c4-8192-0f3c59473dea">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/Carservice</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="b70b6d2c-6388-468d-ad07-79badfcb007c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+D:/YandexDisk/_1_учеба/3курс/УД/laba2/src/main/resources/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/Carservice</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="dataSource" uuid="0931d621-3f45-42a1-a7ce-6df148852d7e">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>spring
+
+D:/YandexDisk/UD/laba2/webapp/WEB-INF/dispatcher-servlet.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/Carservice</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate4AnnotatedSessionFactory/Hibernate" uuid="c70610ab-cc71-4593-b586-1d365a884e28">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+D:/YandexDisk/UD/laba2/webapp/WEB-INF/dispatcher-servlet.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/Carservice</jdbc-url>
+    </data-source>
+  </component>
+</project>
