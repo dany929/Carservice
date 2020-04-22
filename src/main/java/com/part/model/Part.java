@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Embeddable
+//@Embeddable
 @Table(name = "parts")
 
 public class Part
@@ -12,7 +12,7 @@ public class Part
 
     @Id
     @Column(name = "partid")
-  //  @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int partid;
 
     @Column(name = "category")

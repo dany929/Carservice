@@ -17,7 +17,7 @@ public class PartService
     @Autowired
     private PartDao partDao;
 
-    public void setPartDao(PartDao partsDao)
+    public void setPartDao(PartDao partDao)
     {
         this.partDao = partDao;
     }

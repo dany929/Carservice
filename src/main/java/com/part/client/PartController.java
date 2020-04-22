@@ -4,18 +4,14 @@ import com.part.model.Part;
 import com.part.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
-@ImportResource("/WEB-INF/dispatcher-servlet.xml")
+//@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
 public class PartController {
 
@@ -49,7 +45,7 @@ public class PartController {
     public String addCustomer(@ModelAttribute("part") Part part)
     {
 
-        if(!partService.listParts().contains(part))
+        if(part.getPartid() == 0)
         {
             System.err.println("Контроллер Адд попал в иф");
             this.partService.addPart(part);

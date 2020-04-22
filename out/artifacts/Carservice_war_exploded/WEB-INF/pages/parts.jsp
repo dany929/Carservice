@@ -59,7 +59,8 @@
 
 <body>
 <h1>
-    <a href="/parts">Customers</a>
+    <a href="/customers">Customers</a>
+    <a href="/parts">Parts</a>
 
 </h1>
 
@@ -68,7 +69,7 @@
 <form:form action="${addAction}" modelAttribute="part">
     <table>
 
-
+        <c:if test="${!empty part.title}">
         <tr>
             <td>
                 <form:label path="partid">
@@ -76,11 +77,11 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="partid"  size="8" />
-
+                <form:input path="partid" readonly="true" size="8" disabled="true"/>
+                <form:hidden path="partid"/>
             </td>
         </tr>
-
+        </c:if>
         <tr>
             <td>
                 <form:label path="category">
@@ -113,11 +114,11 @@
         </tr>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty part.partid}">
+                <c:if test="${!empty part.title}">
                     <input type="submit"
                            value="<spring:message text="Edit Customer"/>"/>
                 </c:if>
-                <c:if test="${empty part.partid}">
+                <c:if test="${empty part.title}">
                     <input type="submit"
                            value="<spring:message text="Add New Customer"/>"/>
                 </c:if>
@@ -139,7 +140,7 @@
             <th width="80">Edit</th>
             <th width="80">Delete</th>
         </tr>
-        <c:forEach items="${listParts}" var="customer">
+        <c:forEach items="${listParts}" var="part">
             <tr>
                 <td>${part.partid}</td>
                 <td>${part.category}</td>

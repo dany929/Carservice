@@ -68,24 +68,13 @@ public class PartDao
     public void removePart(int id) {
         Session session = this.sessionFactory.getCurrentSession();
       //  Customer c = (Customer) session.load(Customer.class, new String(id));
+        Part part = (Part) session.load(Part.class, new Integer(id));
 
-
-        List<Part> partList  =
-                session.createQuery("select c from Customer c where c.gosznak =" + "'"+id+"'").list();
-
-        for (Part c : partList)
+        if ( part != null)
         {
-            session.delete(c);
-            logger.info("Customer removed: " + c);
+            session.delete(part);
         }
-
-
-
-       /* if(c!=null){
-            session.delete(c);
-        }
-
-        */
+        logger.info("Part deleted "+part);
 
     }
 
