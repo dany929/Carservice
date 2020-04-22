@@ -15,7 +15,7 @@
 
 <html>
 <head>
-    <title>Parts</title>
+    <title>Customers</title>
 
     <style type="text/css">
         .tg {
@@ -65,63 +65,55 @@
     </br>
     <a href="/operations">Operations</a>
 
+
 </h1>
 
-<c:url var="addAction" value="/parts/add"/>
+<c:url var="addAction" value="/operations/add"/>
 
-<form:form action="${addAction}" modelAttribute="part">
+<form:form action="${addAction}" modelAttribute="operation">
     <table>
 
-        <c:if test="${!empty part.title}">
+
         <tr>
             <td>
-                <form:label path="partid">
-                    <spring:message text="Partid"/>
+                <form:label path="operationid">
+                    <spring:message text="operationid"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="partid" readonly="true" size="8" disabled="true"/>
-                <form:hidden path="partid"/>
+                <form:input path="operationid"  size="9" />
+
             </td>
         </tr>
-        </c:if>
+
         <tr>
             <td>
-                <form:label path="category">
-                    <spring:message text="Category"/>
+                <form:label path="description">
+                    <spring:message text="First Name"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="category"/>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <form:label path="title">
-                    <spring:message text="Title"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="title"/>
+                <form:input path="description"/>
             </td>
         </tr>
         <tr>
             <td>
                 <form:label path="price">
-                    <spring:message text="price"/>
+                    <spring:message text="Last name"/>
                 </form:label>
             </td>
             <td>
                 <form:input path="price"/>
             </td>
         </tr>
+
         <tr>
             <td colspan="2">
-                <c:if test="${!empty part.title}">
+                <c:if test="${!empty operation.description}">
                     <input type="submit"
                            value="<spring:message text="Edit Customer"/>"/>
                 </c:if>
-                <c:if test="${empty part.title}">
+                <c:if test="${empty operation.description}">
                     <input type="submit"
                            value="<spring:message text="Add New Customer"/>"/>
                 </c:if>
@@ -133,24 +125,24 @@
 </br>
 </br>
 
-<c:if test="${!empty listParts }">
+<c:if test="${!empty listOperations }">
     <table class="tg">
         <tr>
-            <th width="80">Partid</th>
-            <th width="80">Category</th>
-            <th width="80">Title</th>
-            <th width="80">Price</th>
+            <th width="80">Gosznak</th>
+            <th width="80">First Name</th>
+            <th width="80">Last Name</th>
+            <th width="80">Telephone</th>
             <th width="80">Edit</th>
             <th width="80">Delete</th>
         </tr>
-        <c:forEach items="${listParts}" var="part">
+        <c:forEach items="${listOperations}" var="operation">
             <tr>
-                <td>${part.partid}</td>
-                <td>${part.category}</td>
-                <td>${part.title}</td>
-                <td>${part.price}</td>
-                <td><a href="<c:url value='/editpart/${part.partid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removepart/${part.partid}'/>">Delete</a></td>
+                <td>${operation.operationid}</td>
+                <td>${operation.description}</td>
+                <td>${operation.price}</td>
+
+                <td><a href="<c:url value='/edit/${operation.operationid}'/>">Edit</a></td>
+                <td><a href="<c:url value='/remove/${operation.operationid}'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

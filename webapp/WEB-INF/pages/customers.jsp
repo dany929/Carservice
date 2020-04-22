@@ -60,7 +60,10 @@
 <body>
 <h1>
     <a href="/customers">Customers</a>
+    </br>
     <a href="/parts">Parts</a>
+    </br>
+    <a href="/operations">Operations</a>
 
 </h1>
 

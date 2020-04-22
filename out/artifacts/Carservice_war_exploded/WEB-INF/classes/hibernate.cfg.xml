@@ -24,6 +24,7 @@
     <!-- Annotated entity classes -->
     <mapping class="com.customer.model.Customer"/>
     <mapping class="com.part.model.Part"/>
+    <mapping class="com.operation.model.Operation"/>
 
   </session-factory>
 </hibernate-configuration>
