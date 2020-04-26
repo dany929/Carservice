@@ -31,7 +31,7 @@ public class PartController {
      */
 
     @RequestMapping(value ="parts", method = RequestMethod.GET)
-    public String listCustomers(Model model) {
+    public String listParts(Model model) {
         model.addAttribute("part", new Part());
         model.addAttribute("listParts", this.partService.listParts());
         return "parts";
@@ -42,7 +42,7 @@ public class PartController {
      * проверка на повторяющийся элемент в списке
      */
     @RequestMapping(value ="/parts/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute("part") Part part)
+    public String addPart(@ModelAttribute("part") Part part)
     {
 
         if(part.getPartid() == 0)

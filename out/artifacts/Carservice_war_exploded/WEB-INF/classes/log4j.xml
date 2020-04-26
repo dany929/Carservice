@@ -23,6 +23,14 @@
         <level value="info"/>
     </logger>
 
+    <logger name="com.operation">
+        <level value="info"/>
+    </logger>
+
+    <logger name="com.order">
+        <level value="info"/>
+    </logger>
+
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
         <level value="info"/>

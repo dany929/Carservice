@@ -64,7 +64,8 @@
     <a href="/parts">Parts</a>
     </br>
     <a href="/operations">Operations</a>
-
+    </br>
+    <a href="/orders">Orders</a>
 </h1>
 
 <c:url var="addAction" value="/parts/add"/>
@@ -119,11 +120,11 @@
             <td colspan="2">
                 <c:if test="${!empty part.title}">
                     <input type="submit"
-                           value="<spring:message text="Edit Customer"/>"/>
+                           value="<spring:message text="Edit Part"/>"/>
                 </c:if>
                 <c:if test="${empty part.title}">
                     <input type="submit"
-                           value="<spring:message text="Add New Customer"/>"/>
+                           value="<spring:message text="Add Part"/>"/>
                 </c:if>
             </td>
         </tr>

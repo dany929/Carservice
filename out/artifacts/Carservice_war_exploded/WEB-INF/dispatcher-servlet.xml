@@ -16,6 +16,8 @@
         xmlns:mvc="http://www.springframework.org/schema/mvc">
     <context:component-scan base-package="com.customer"/>
     <context:component-scan base-package="com.part"/>
+    <context:component-scan base-package="com.operation"/>
+    <context:component-scan base-package="com.order"/>
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
 
@@ -42,6 +44,7 @@
                 <beans:value>com.customer.model.Customer</beans:value>
                 <beans:value>com.part.model.Part</beans:value>
                 <beans:value>com.operation.model.Operation</beans:value>
+                <beans:value>com.order.model.Order</beans:value>
             </beans:list>
         </beans:property>
 
@@ -72,7 +75,7 @@
     <beans:bean class="com.part.dao.PartDao" id="partdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.part.service.PartService" id="partservive">
+    <beans:bean class="com.part.service.PartService" id="partservice">
         <beans:property name="partDao" ref="partdao"/>
     </beans:bean>
 
@@ -80,8 +83,16 @@
     <beans:bean class="com.operation.dao.OperationDao" id="operationdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.operation.service.OperationService" id="operationservive">
+    <beans:bean class="com.operation.service.OperationService" id="operationservice">
         <beans:property name="operationDao" ref="operationDao"/>
+    </beans:bean>
+
+    <context:component-scan base-package="com.order"/>
+    <beans:bean class="com.order.dao.OrderDao" id="orderdao">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.order.service.OrderService" id="orderservice">
+        <beans:property name="orderDao" ref="orderDao"/>
     </beans:bean>
 
 

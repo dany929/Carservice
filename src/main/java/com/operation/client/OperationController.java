@@ -31,7 +31,7 @@ public class OperationController {
      */
 
     @RequestMapping(value ="operations", method = RequestMethod.GET)
-    public String listCustomers(Model model) {
+    public String listOperations(Model model) {
         model.addAttribute("operation", new Operation());
         model.addAttribute("listOperations", this.operationService.listOperations());
         return "operations";
@@ -42,7 +42,7 @@ public class OperationController {
      * проверка на повторяющийся элемент в списке
      */
     @RequestMapping(value ="/operations/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute("operation") Operation operation)
+    public String addOperation(@ModelAttribute("operation") Operation operation)
     {
 
         if(operation.getOperationid() == 0)

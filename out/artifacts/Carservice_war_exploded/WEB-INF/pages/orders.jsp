@@ -1,0 +1,183 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: daniil
+  Date: 03.04.2020
+  Time: 14:07
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
+<%@ page session="false" %>
+
+
+<html>
+<head>
+    <title>Orders</title>
+
+    <style type="text/css">
+        .tg {
+            border-collapse: collapse;
+            border-spacing: 0;
+            border-color: #ccc;
+        }
+
+        .tg td {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #fff;
+        }
+
+        .tg th {
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            font-weight: normal;
+            padding: 10px 5px;
+            border-style: solid;
+            border-width: 1px;
+            overflow: hidden;
+            word-break: normal;
+            border-color: #ccc;
+            color: #333;
+            background-color: #f0f0f0;
+        }
+
+        .tg .tg-4eph {
+            background-color: #f9f9f9
+        }
+    </style>
+</head>
+
+<body>
+<h1>
+    <a href="/customers">Customers</a>
+    </br>
+    <a href="/orders">Parts</a>
+    </br>
+    <a href="/operations">Operations</a>
+    </br>
+    <a href="/orders">Orders</a>
+</h1>
+
+<c:url var="addAction" value="/orders/add"/>
+
+<form:form action="${addAction}" modelAttribute="order">
+    <table>
+
+        <c:if test="${!empty order.gosznak}">
+            <tr>
+                <td>
+                    <form:label path="orderid">
+                        <spring:message text="Orderid"/>
+                    </form:label>
+                </td>
+                <td>
+                    <form:input path="orderid" readonly="true" size="8" disabled="true"/>
+                    <form:hidden path="orderid"/>
+                </td>
+            </tr>
+        </c:if>
+        <tr>
+            <td>
+                <form:label path="gosznak">
+                    <spring:message text="gosznak"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="gosznak"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <form:label path="datein">
+                    <spring:message text="datein"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input  path="datein"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="dateout">
+                    <spring:message text="dateout"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="dateout"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <form:label path="discount">
+                    <spring:message text="discount"/>
+                </form:label>
+            </td>
+            <td>
+                <form:input path="discount"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <c:if test="${!empty order.gosznak}">
+                    <input type="submit"
+                           value="<spring:message text="Edit order"/>"/>
+                </c:if>
+                <c:if test="${empty order.gosznak}">
+                    <input type="submit"
+                           value="<spring:message text="Add order"/>"/>
+                </c:if>
+            </td>
+        </tr>
+    </table>
+</form:form>
+
+</br>
+</br>
+
+<c:if test="${!empty listOrders }">
+    <table class="tg">
+        <tr>
+            <th width="80">orderid</th>
+
+            <th width="80">gosznak</th>
+            <th width="80">datein</th>
+            <th width="80">dateout</th>
+            <th width="80">discount</th>
+            <th width="80">Edit</th>
+            <th width="80">Delete</th>
+        </tr>
+        <c:forEach items="${listOrders}" var="order">
+            <tr>
+                <td>${order.orderid}</td>
+                <td>${order.gosznak}</td>
+                <td>${order.datein}</td>
+                <td>${order.dateout}</td>
+                <td>${order.discount}</td>
+                <td><a href="<c:url value='/editorder/${order.orderid}'/>">Edit</a></td>
+                <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+
+
+
+
+
+
+
+
+</body>
+</html>
+
