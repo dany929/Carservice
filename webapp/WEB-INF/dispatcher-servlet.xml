@@ -18,6 +18,7 @@
     <context:component-scan base-package="com.part"/>
     <context:component-scan base-package="com.operation"/>
     <context:component-scan base-package="com.order"/>
+    <context:component-scan base-package="com.toorder"/>
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
 
@@ -45,6 +46,7 @@
                 <beans:value>com.part.model.Part</beans:value>
                 <beans:value>com.operation.model.Operation</beans:value>
                 <beans:value>com.order.model.Order</beans:value>
+                <beans:value>com.toorder.model.Toorder</beans:value>
             </beans:list>
         </beans:property>
 
@@ -71,7 +73,7 @@
     </beans:bean>
 
 
-    <context:component-scan base-package="com.part"/>
+    <context:component-scan base-package="com.toorder"/>
     <beans:bean class="com.part.dao.PartDao" id="partdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
@@ -93,6 +95,14 @@
     </beans:bean>
     <beans:bean class="com.order.service.OrderService" id="orderservice">
         <beans:property name="orderDao" ref="orderDao"/>
+    </beans:bean>
+
+    <context:component-scan base-package="com.toorder"/>
+    <beans:bean class="com.toorder.dao.ToorderDao" id="toorderdao">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+    <beans:bean class="com.toorder.service.ToorderService" id="toorderservice">
+        <beans:property name="toorderDao" ref="toorderDao"/>
     </beans:bean>
 
 

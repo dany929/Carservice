@@ -31,6 +31,10 @@
         <level value="info"/>
     </logger>
 
+    <logger name="com.toorder">
+        <level value="info"/>
+    </logger>
+
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
         <level value="info"/>

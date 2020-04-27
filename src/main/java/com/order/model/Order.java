@@ -1,6 +1,7 @@
 package com.order.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,7 +9,7 @@ import java.util.Objects;
 //@Embeddable
 @Table(name = "orders")
 
-public class Order
+public class Order implements Serializable
 {
 
     @Id
@@ -17,9 +18,11 @@ public class Order
     private int orderid;
 
     @Column(name = "datein")
+    @Temporal(TemporalType.DATE)
     private Date datein;
 
     @Column(name = "dateout")
+    @Temporal(TemporalType.DATE)
     private Date dateout;
 
     @Column(name = "discount")

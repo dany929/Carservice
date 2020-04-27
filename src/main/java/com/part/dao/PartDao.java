@@ -32,7 +32,7 @@ public class PartDao
     {
         Session session = this.sessionFactory.getCurrentSession();
         List<Part> partList =
-                session.createQuery("SELECT p FROM Part p").list();
+                session.createQuery("SELECT p FROM Part p ORDER BY p.partid").list();
 
         //вывод в консоль сервера
         for(Part p: partList)

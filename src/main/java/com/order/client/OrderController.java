@@ -44,9 +44,9 @@ public class OrderController {
      * проверка на повторяющийся элемент в списке
      */
     @RequestMapping(value ="/orders/add", method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("order") Order order)
+    public String addOrder(@ModelAttribute("orders") Order order)
     {
-
+        System.err.println("Контроллер Адд ");
         if(order.getOrderid() == 0)
         {
             System.err.println("Контроллер Адд попал в иф");
@@ -85,20 +85,7 @@ public class OrderController {
         return "orders";
     }
 
-/*
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public List<Customer> listFilter()
-    {
-        return this.orderService.listFilter();
-    }
 
-    @RequestMapping("customerdata/{id}")
-    public String bookData(@PathVariable("id") String id, Model model){
-        model.addAttribute("customer", this.orderService.getCustomerById(id));
-
-        return "customerdata";
-    }
-   // */
 
 
 

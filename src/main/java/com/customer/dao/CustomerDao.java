@@ -32,7 +32,7 @@ public class CustomerDao
     {
         Session session = this.sessionFactory.getCurrentSession();
         List<Customer> customerList =
-                session.createQuery("SELECT p FROM Customer p").list();
+                session.createQuery("SELECT p FROM Customer p ").list();
 
         //вывод в консоль сервера
         for(Customer p: customerList)

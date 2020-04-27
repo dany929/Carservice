@@ -59,13 +59,7 @@
 
 <body>
 <h1>
-    <a href="/customers">Customers</a>
-    </br>
-    <a href="/orders">Parts</a>
-    </br>
-    <a href="/operations">Operations</a>
-    </br>
-    <a href="/orders">Orders</a>
+    <%@ include file="header.jsp"%>
 </h1>
 
 <c:url var="addAction" value="/orders/add"/>
