@@ -21,6 +21,7 @@ public class Operation
     @Column(name = "price")
     private int price;
 
+
    
 
     public int getOperationid() {

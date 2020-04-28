@@ -12,14 +12,26 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 
-<!-- Подключение библиотеки jQuery -->
-<script src="jquery.js"></script>
-<!-- Подключение jQuery плагина Masked Input -->
-<script src="jquery.maskedinput.min.js"></script>
+
 
 
 <html>
+
+
+
 <head>
+    <!-- Подключение библиотеки jQuery -->
+    <script type="text/javascript" src="../../jquery.js"></script>
+    <!-- Подключение jQuery плагина Masked Input -->
+    <script type="text/javascript" src="../../jquery.mask.js"></script>
+    <script type="text/javascript" src="../../jquery.mask.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.phone').mask('8-000-000-00-00');
+            $('.gosznak').mask('\\D [^0-9]')
+        })
+    </script>
+
     <title>Customers</title>
 
     <style type="text/css">
@@ -78,7 +90,7 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input namer="znak"  path="gosznak"  size="9" />
+                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9" />
 
                 </td>
             </tr>
@@ -111,15 +123,9 @@
             </td>
             <td>
 
-                <form:input id="phone" path="tel" type="text"/>
-                <script>
-                    //Код jQuery, установливающий маску для ввода телефона элементу input
-                    //1. После загрузки страницы,  когда все элементы будут доступны выполнить...
-                    $(function(){
-                        //2. Получить элемент, к которому необходимо добавить маску
-                        $("#tel").mask("8(999) 999-9999");
-                    });
-                </script>
+                <form:input path="tel" class="phone"  type="text"/>
+
+
             </td>
         </tr>
         <tr>

@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-
-import java.util.List;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 //@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
@@ -45,14 +45,15 @@ public class PartController {
     public String addPart(@ModelAttribute("part") Part part)
     {
 
+
         if(part.getPartid() == 0)
         {
-            System.err.println("Контроллер Адд попал в иф");
+            System.err.println("Контроллер Адд ПАРТ попал в иф");
             this.partService.addPart(part);
         }
         else
             {
-                System.err.println("Контроллер Адд попал в елсу");
+                System.err.println("Контроллер Адд ПАРТ попал в елсу");
                 this.partService.updatePart(part);
             }
 

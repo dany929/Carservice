@@ -1,7 +1,6 @@
 package com.customer.model;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +23,8 @@ public class Customer
 
     @Column(name = "tel")
     private String tel;
+
+
 
     public String getGosznak() {
         return gosznak;

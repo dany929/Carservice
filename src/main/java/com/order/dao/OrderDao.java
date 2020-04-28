@@ -33,7 +33,7 @@ public class OrderDao
     {
         Session session = this.sessionFactory.getCurrentSession();
         List<Order> orderList =
-                session.createQuery("SELECT p FROM Order p").list();
+                session.createQuery("SELECT p FROM Order p ORDER BY p.orderid").list();
 
         //вывод в консоль сервера
         for(Order p: orderList)

@@ -2,7 +2,6 @@ package com.order.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -18,18 +17,20 @@ public class Order implements Serializable
     private int orderid;
 
     @Column(name = "datein")
-    @Temporal(TemporalType.DATE)
-    private Date datein;
+   // @Temporal(TemporalType.DATE)
+    private String datein;
 
     @Column(name = "dateout")
-    @Temporal(TemporalType.DATE)
-    private Date dateout;
+
+    private String dateout;
 
     @Column(name = "discount")
-    private String discount;
+    private int discount;
 
     @Column(name = "gosznak")
     private String gosznak;
+
+
 
     public String getGosznak() {
         return gosznak;
@@ -49,27 +50,27 @@ public class Order implements Serializable
     }
 
 
-    public Date getDatein() {
+    public String getDatein() {
         return datein;
     }
 
-    public void setDatein(Date datein) {
+    public void setDatein(String datein) {
         this.datein = datein;
     }
 
-    public Date getDateout() {
+    public String getDateout() {
         return dateout;
     }
 
-    public void setDateout(Date dateout) {
+    public void setDateout(String dateout) {
         this.dateout = dateout;
     }
 
-    public String getDiscount() {
+    public int getDiscount() {
         return discount;
     }
 
-    public void setDiscount(String discount) {
+    public void setDiscount(int discount) {
         this.discount = discount;
     }
 

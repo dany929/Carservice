@@ -17,12 +17,15 @@ public class Toorder implements Serializable
     @Id
     @Column(name = "partid")
     private int partid;
+
     @Id
     @Column(name = "operationid")
     private int operationid;
 
     @Column(name = "numofparts")
     private int numofparts;
+
+
 
     public void setOrderid(int orderid) {
         this.orderid = orderid;
@@ -67,7 +70,7 @@ public class Toorder implements Serializable
                                      */
     @Override
     public String toString() {
-        return "Part{ " +
+        return "ToOrder{ " +
                 "orderid='" + orderid +'\'' +
                 ", partid='" + partid + '\'' +
                 ", operationid='" + operationid + '\'' +
@@ -80,18 +83,19 @@ public class Toorder implements Serializable
         if (this == o) return true;
         if (!(o instanceof Toorder)) return false;
         Toorder toorder = (Toorder) o;
-        return Objects.equals(getPartid(), toorder.getPartid());
-    }
-/*
-    @Override
-    public int hashCode() {
-        int result = partid.hashCode();
-        result = 31 * result + category.hashCode();
-        result = 31 * result + title.hashCode();
-        result = 31 * result + price.hashCode();
-        return result;
+        return Objects.equals(getOrderid(), toorder.getOrderid());
     }
 
- */
+
+/*
+    public int hashCode(int orderid, int operationid,int partid) {
+        int result = orderid;
+        result = 31 * result + operationid;
+        result = 31 * result +partid;
+
+        return result;
+    }
+*/
+
 }
 

@@ -61,7 +61,7 @@
 <%@ include file="header.jsp"%>
 
 
-<c:url var="addAction" value="/parts/add"/>
+<c:url var="addAction" value="/toorders/add"/>
 
 <form:form action="${addAction}" modelAttribute="toorder">
     <table>

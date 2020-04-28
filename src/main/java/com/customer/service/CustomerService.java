@@ -33,6 +33,7 @@ public class CustomerService
     {
         return  this.customerDao.listCustomerFiltered();
     }
+
     @Transactional
     public void addCustomer(Customer customer)
     {

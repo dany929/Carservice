@@ -89,14 +89,14 @@ public class CustomerController {
     {
         return this.customerService.listFilter();
     }
-
+/*
     @RequestMapping("customerdata/{id}")
     public String bookData(@PathVariable("id") String id, Model model){
         model.addAttribute("customer", this.customerService.getCustomerById(id));
 
         return "customerdata";
     }
-
+*/
 
 
 }

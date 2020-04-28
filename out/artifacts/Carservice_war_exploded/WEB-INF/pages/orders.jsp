@@ -98,7 +98,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input  path="datein"/>
+                <form:input type="date" path="datein"/>
             </td>
         </tr>
         <tr>
@@ -108,7 +108,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="dateout"/>
+                <form:input type="date" path="dateout"/>
             </td>
         </tr>
         <tr>

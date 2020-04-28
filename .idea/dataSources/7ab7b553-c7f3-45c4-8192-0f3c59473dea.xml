@@ -8,7 +8,7 @@
     <database id="2" parent="1" name="Carservice">
       <ObjectId>16393</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>969</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1033</IntrospectionStateNumber>
       <Current>1</Current>
       <Relations>sequence|table|16421|16423|1
 sequence|table|49157|49159|1
@@ -60,7 +60,7 @@ sequence|table|57377|57379|1
       <Comment>standard public schema</Comment>
       <StateNumber>352</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>970</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1034</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="13" parent="2" name="btree">
@@ -146,7 +146,7 @@ sequence|table|57377|57379|1
     <table id="23" parent="12" name="customers">
       <ObjectId>16394</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>948</StateNumber>
+      <StateNumber>1032</StateNumber>
     </table>
     <table id="24" parent="12" name="operations">
       <ObjectId>16423</ObjectId>
@@ -156,7 +156,7 @@ sequence|table|57377|57379|1
     <table id="25" parent="12" name="orders">
       <ObjectId>57379</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>954</StateNumber>
+      <StateNumber>1000</StateNumber>
     </table>
     <table id="26" parent="12" name="parts">
       <ObjectId>49159</ObjectId>
@@ -194,13 +194,13 @@ sequence|table|57377|57379|1
     </column>
     <column id="32" parent="23" name="tel">
       <Position>4</Position>
-      <DataType>char(15)|0s</DataType>
-      <StateNumber>558</StateNumber>
+      <DataType>char(20)|0s</DataType>
+      <StateNumber>1032</StateNumber>
       <TypeId>1042</TypeId>
     </column>
     <index id="33" parent="23" name="customers_pkey">
       <ObjectId>40960</ObjectId>
-      <StateNumber>691</StateNumber>
+      <StateNumber>1032</StateNumber>
       <ColNames>gosznak</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
@@ -262,15 +262,15 @@ sequence|table|57377|57379|1
     </column>
     <column id="42" parent="25" name="datein">
       <Position>3</Position>
-      <DataType>date|0s</DataType>
-      <StateNumber>948</StateNumber>
-      <TypeId>1082</TypeId>
+      <DataType>char(10)|0s</DataType>
+      <StateNumber>997</StateNumber>
+      <TypeId>1042</TypeId>
     </column>
     <column id="43" parent="25" name="dateout">
       <Position>4</Position>
-      <DataType>date|0s</DataType>
-      <StateNumber>948</StateNumber>
-      <TypeId>1082</TypeId>
+      <DataType>char(10)|0s</DataType>
+      <StateNumber>1000</StateNumber>
+      <TypeId>1042</TypeId>
     </column>
     <column id="44" parent="25" name="discount">
       <Position>5</Position>
@@ -280,7 +280,7 @@ sequence|table|57377|57379|1
     </column>
     <index id="45" parent="25" name="orders_pkey">
       <ObjectId>57383</ObjectId>
-      <StateNumber>948</StateNumber>
+      <StateNumber>1000</StateNumber>
       <ColNames>orderid</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>

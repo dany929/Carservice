@@ -42,17 +42,17 @@ public class ToorderController {
      * проверка на повторяющийся элемент в списке
      */
     @RequestMapping(value ="/toorders/add", method = RequestMethod.POST)
-    public String addPart(@ModelAttribute("toorder") Toorder toorder)
+    public String addToOrder(@ModelAttribute("toorder") Toorder toorder)
     {
-
-        if(toorder.getPartid() == 0)
+        System.err.println("Детали у тек объекта"+toorder.getPartid());
+        if(!toorderService.listToorders().contains(toorder))
         {
-            System.err.println("Контроллер Адд попал в иф");
+            System.err.println("Контроллер Адд ТООРДЕР попал в иф");
             this.toorderService.addToorder(toorder);
         }
         else
             {
-                System.err.println("Контроллер Адд попал в елсу");
+                System.err.println("Контроллер Адд ТООРДЕР попал в елсу");
                 this.toorderService.updateToorder(toorder);
             }
 
@@ -63,7 +63,7 @@ public class ToorderController {
      * Запрос на удаление по id
      */
     @RequestMapping("/removetoorder/{id}")
-    public String  removePart(@PathVariable("id") int id)
+    public String  removeToOrder(@PathVariable("id") int id)
     {
         this.toorderService.removeToorder(id);
         return  "redirect:/toorders";
@@ -73,7 +73,7 @@ public class ToorderController {
      * Заполнение полей для добавления\обновления записи
      */
     @RequestMapping("/edittoorder/{id}")
-    public String  updatePart(@PathVariable("id") int id, Model model)
+    public String  updateToOrder(@PathVariable("id") int id, Model model)
     {
         model.addAttribute("toorder", this.toorderService.getToorderById(id));
         model.addAttribute("listToorder", this.toorderService.listToorders());

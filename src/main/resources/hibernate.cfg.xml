@@ -26,6 +26,6 @@
     <mapping class="com.part.model.Part"/>
     <mapping class="com.operation.model.Operation"/>
     <mapping class="com.order.model.Order"/>
-    <mapping class="com.toorder.model.Toorder"/>
+    <mapping class="com.toorder.model.Toorder" />
   </session-factory>
 </hibernate-configuration>
