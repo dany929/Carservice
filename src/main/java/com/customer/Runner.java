@@ -19,7 +19,7 @@ public class Runner {
         Session session = sessionFactory.openSession();
         getAll(session);
        // add(session);
-        findById(session,"A666AA152");
+     //   findById(session,"A666AA152");
         updateById(session,"A666AA152","Bartolomeo","Simpson","8-800-555-35-35");
         deleteById(session," ");
         getAll(session);

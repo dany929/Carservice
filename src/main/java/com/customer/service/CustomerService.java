@@ -33,6 +33,7 @@ public class CustomerService
     {
         return  this.customerDao.listCustomerFiltered();
     }
+
     @Transactional
     public void addCustomer(Customer customer)
     {
@@ -72,7 +73,7 @@ public class CustomerService
        */
     }
     @Transactional
-  public void removeCustomer(String id)
+    public void removeCustomer(String id)
     {
         this.customerDao.removeCustomer(id);
     }

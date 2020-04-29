@@ -3,27 +3,22 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.17">
     <root id="1">
       <ServerVersion>10.12</ServerVersion>
-      <StartupTime>1585642163</StartupTime>
+      <StartupTime>1587894652</StartupTime>
     </root>
     <database id="2" parent="1" name="Carservice">
       <ObjectId>16393</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>647</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1033</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16529|16531|1
-sequence|table|16413|16415|1
-sequence|table|16421|16423|1
+      <Relations>sequence|table|16421|16423|1
+sequence|table|49157|49159|1
+sequence|table|57377|57379|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">
       <ObjectId>12938</ObjectId>
       <Comment>default administrative connection database</Comment>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>633</IntrospectionStateNumber>
-      <Relations>sequence|table|24632|24634|1
-sequence|table|24624|24626|1
-sequence|table|24616|24618|1
-</Relations>
     </database>
     <role id="4" parent="1" name="pg_monitor">
       <ObjectId>3373</ObjectId>
@@ -65,7 +60,7 @@ sequence|table|24616|24618|1
       <Comment>standard public schema</Comment>
       <StateNumber>352</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>648</IntrospectionStateNumber>
+      <IntrospectionStateNumber>1034</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="13" parent="2" name="btree">
@@ -132,17 +127,17 @@ sequence|table|24616|24618|1
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="21" parent="12" name="order_orderid_seq">
-      <ObjectId>16529</ObjectId>
-      <StateNumber>578</StateNumber>
+    <sequence id="21" parent="12" name="orders_orderid_seq">
+      <ObjectId>57377</ObjectId>
+      <StateNumber>948</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>integer</DataType>
     </sequence>
-    <sequence id="22" parent="12" name="spare_parts_partid_seq">
-      <ObjectId>16413</ObjectId>
-      <StateNumber>562</StateNumber>
+    <sequence id="22" parent="12" name="parts_partid_seq">
+      <ObjectId>49157</ObjectId>
+      <StateNumber>874</StateNumber>
       <Owner>postgres</Owner>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
@@ -151,22 +146,22 @@ sequence|table|24616|24618|1
     <table id="23" parent="12" name="customers">
       <ObjectId>16394</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>642</StateNumber>
+      <StateNumber>1032</StateNumber>
     </table>
     <table id="24" parent="12" name="operations">
       <ObjectId>16423</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>577</StateNumber>
+      <StateNumber>954</StateNumber>
     </table>
-    <table id="25" parent="12" name="order">
-      <ObjectId>16531</ObjectId>
+    <table id="25" parent="12" name="orders">
+      <ObjectId>57379</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>642</StateNumber>
+      <StateNumber>1000</StateNumber>
     </table>
     <table id="26" parent="12" name="parts">
-      <ObjectId>16415</ObjectId>
+      <ObjectId>49159</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>577</StateNumber>
+      <StateNumber>954</StateNumber>
     </table>
     <table id="27" parent="12" name="test">
       <ObjectId>24591</ObjectId>
@@ -174,56 +169,50 @@ sequence|table|24616|24618|1
       <StateNumber>620</StateNumber>
     </table>
     <table id="28" parent="12" name="toorder">
-      <ObjectId>16512</ObjectId>
+      <ObjectId>57392</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>642</StateNumber>
+      <StateNumber>954</StateNumber>
     </table>
-    <view id="29" parent="12" name="info">
-      <ObjectId>24586</ObjectId>
-      <Owner>postgres</Owner>
-      <StateNumber>615</StateNumber>
-      <SourceTextLength>492</SourceTextLength>
-    </view>
-    <column id="30" parent="23" name="gosznak">
+    <column id="29" parent="23" name="gosznak">
       <Position>1</Position>
-      <DataType>char(6)|0s</DataType>
+      <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>558</StateNumber>
+      <StateNumber>689</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="31" parent="23" name="firstname">
+    <column id="30" parent="23" name="firstname">
       <Position>2</Position>
       <DataType>varchar(30)|0s</DataType>
       <StateNumber>558</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="32" parent="23" name="lastname">
+    <column id="31" parent="23" name="lastname">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
       <StateNumber>558</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="33" parent="23" name="tel">
+    <column id="32" parent="23" name="tel">
       <Position>4</Position>
-      <DataType>char(15)|0s</DataType>
-      <StateNumber>558</StateNumber>
+      <DataType>char(20)|0s</DataType>
+      <StateNumber>1032</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <index id="34" parent="23" name="customers_pkey">
-      <ObjectId>16397</ObjectId>
-      <StateNumber>642</StateNumber>
+    <index id="33" parent="23" name="customers_pkey">
+      <ObjectId>40960</ObjectId>
+      <StateNumber>1032</StateNumber>
       <ColNames>gosznak</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="35" parent="23" name="customers_pkey">
-      <ObjectId>16398</ObjectId>
-      <StateNumber>558</StateNumber>
+    <key id="34" parent="23" name="customers_pkey">
+      <ObjectId>40961</ObjectId>
+      <StateNumber>689</StateNumber>
       <ColNames>gosznak</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>customers_pkey</UnderlyingIndexName>
     </key>
-    <column id="36" parent="24" name="operationid">
+    <column id="35" parent="24" name="operationid">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
@@ -231,92 +220,81 @@ sequence|table|24616|24618|1
       <DefaultExpression>nextval(&apos;operations_operationid_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="37" parent="24" name="description">
+    <column id="36" parent="24" name="description">
       <Position>2</Position>
       <DataType>varchar(60)|0s</DataType>
       <StateNumber>563</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="38" parent="24" name="price">
+    <column id="37" parent="24" name="price">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>563</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="39" parent="24" name="operations_pkey">
+    <index id="38" parent="24" name="operations_pkey">
       <ObjectId>16427</ObjectId>
-      <StateNumber>563</StateNumber>
+      <StateNumber>881</StateNumber>
       <ColNames>operationid</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="40" parent="24" name="operations_pkey">
+    <key id="39" parent="24" name="operations_pkey">
       <ObjectId>16428</ObjectId>
       <StateNumber>563</StateNumber>
       <ColNames>operationid</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>operations_pkey</UnderlyingIndexName>
     </key>
-    <column id="41" parent="25" name="orderid">
+    <column id="40" parent="25" name="orderid">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>599</StateNumber>
+      <StateNumber>948</StateNumber>
+      <DefaultExpression>nextval(&apos;orders_orderid_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="42" parent="25" name="gosznak">
+    <column id="41" parent="25" name="gosznak">
       <Position>2</Position>
-      <DataType>char(6)|0s</DataType>
-      <StateNumber>578</StateNumber>
+      <DataType>char(9)|0s</DataType>
+      <StateNumber>948</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="43" parent="25" name="datein">
+    <column id="42" parent="25" name="datein">
       <Position>3</Position>
-      <DataType>date|0s</DataType>
-      <StateNumber>578</StateNumber>
-      <TypeId>1082</TypeId>
+      <DataType>char(10)|0s</DataType>
+      <StateNumber>997</StateNumber>
+      <TypeId>1042</TypeId>
     </column>
-    <column id="44" parent="25" name="dateout">
+    <column id="43" parent="25" name="dateout">
       <Position>4</Position>
-      <DataType>date|0s</DataType>
-      <StateNumber>578</StateNumber>
-      <TypeId>1082</TypeId>
+      <DataType>char(10)|0s</DataType>
+      <StateNumber>1000</StateNumber>
+      <TypeId>1042</TypeId>
     </column>
-    <column id="45" parent="25" name="discount">
-      <Position>7</Position>
+    <column id="44" parent="25" name="discount">
+      <Position>5</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>591</StateNumber>
+      <StateNumber>948</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="46" parent="25" name="order_orderid_key">
-      <ObjectId>16553</ObjectId>
-      <StateNumber>642</StateNumber>
-      <ColNames>orderid</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="47" parent="25" name="order_pkey">
-      <ObjectId>16535</ObjectId>
-      <StateNumber>642</StateNumber>
+    <index id="45" parent="25" name="orders_pkey">
+      <ObjectId>57383</ObjectId>
+      <StateNumber>1000</StateNumber>
       <ColNames>orderid</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="48" parent="25" name="order_pkey">
-      <ObjectId>16536</ObjectId>
-      <StateNumber>578</StateNumber>
+    <key id="46" parent="25" name="orders_pkey">
+      <ObjectId>57384</ObjectId>
+      <StateNumber>948</StateNumber>
       <ColNames>orderid</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>order_pkey</UnderlyingIndexName>
+      <UnderlyingIndexName>orders_pkey</UnderlyingIndexName>
     </key>
-    <key id="49" parent="25" name="order_orderid_key">
-      <ObjectId>16554</ObjectId>
-      <StateNumber>598</StateNumber>
-      <ColNames>orderid</ColNames>
-      <UnderlyingIndexName>order_orderid_key</UnderlyingIndexName>
-    </key>
-    <foreign-key id="50" parent="25" name="order_gosznak_fkey">
-      <ObjectId>16542</ObjectId>
-      <StateNumber>578</StateNumber>
+    <foreign-key id="47" parent="25" name="orders_gosznak_fkey">
+      <ObjectId>57385</ObjectId>
+      <StateNumber>948</StateNumber>
       <ColNames>gosznak</ColNames>
       <RefTableId>16394</RefTableId>
       <RefColPositions>1</RefColPositions>
@@ -324,147 +302,141 @@ sequence|table|24616|24618|1
       <RefKeyName>customers_pkey</RefKeyName>
       <RefColNames>gosznak</RefColNames>
     </foreign-key>
-    <column id="51" parent="26" name="partid">
+    <column id="48" parent="26" name="partid">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>562</StateNumber>
-      <DefaultExpression>nextval(&apos;spare_parts_partid_seq&apos;::regclass)</DefaultExpression>
+      <StateNumber>874</StateNumber>
+      <DefaultExpression>nextval(&apos;parts_partid_seq&apos;::regclass)</DefaultExpression>
       <TypeId>23</TypeId>
     </column>
-    <column id="52" parent="26" name="category">
+    <column id="49" parent="26" name="category">
       <Position>2</Position>
       <DataType>varchar(60)|0s</DataType>
-      <StateNumber>562</StateNumber>
+      <StateNumber>874</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="53" parent="26" name="title">
+    <column id="50" parent="26" name="title">
       <Position>3</Position>
       <DataType>varchar(30)|0s</DataType>
-      <StateNumber>562</StateNumber>
+      <StateNumber>874</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="54" parent="26" name="price">
+    <column id="51" parent="26" name="price">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>562</StateNumber>
+      <StateNumber>874</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="55" parent="26" name="spare_parts_pkey">
-      <ObjectId>16419</ObjectId>
-      <StateNumber>562</StateNumber>
+    <index id="52" parent="26" name="parts_pkey">
+      <ObjectId>49163</ObjectId>
+      <StateNumber>874</StateNumber>
       <ColNames>partid</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="56" parent="26" name="spare_parts_pkey">
-      <ObjectId>16420</ObjectId>
-      <StateNumber>562</StateNumber>
+    <key id="53" parent="26" name="parts_pkey">
+      <ObjectId>49164</ObjectId>
+      <StateNumber>874</StateNumber>
       <ColNames>partid</ColNames>
       <Primary>1</Primary>
-      <UnderlyingIndexName>spare_parts_pkey</UnderlyingIndexName>
+      <UnderlyingIndexName>parts_pkey</UnderlyingIndexName>
     </key>
-    <column id="57" parent="27" name="test1">
+    <column id="54" parent="27" name="test1">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>616</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="58" parent="27" name="test2">
+    <column id="55" parent="27" name="test2">
       <Position>2</Position>
       <DataType>text|0s</DataType>
       <StateNumber>616</StateNumber>
       <TypeId>25</TypeId>
     </column>
-    <index id="59" parent="27" name="test_table_pkey">
+    <index id="56" parent="27" name="test_table_pkey">
       <ObjectId>24597</ObjectId>
       <StateNumber>620</StateNumber>
       <ColNames>test1</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <key id="60" parent="27" name="test_table_pkey">
+    <key id="57" parent="27" name="test_table_pkey">
       <ObjectId>24598</ObjectId>
       <StateNumber>616</StateNumber>
       <ColNames>test1</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>test_table_pkey</UnderlyingIndexName>
     </key>
-    <column id="61" parent="28" name="orderid">
+    <column id="58" parent="28" name="orderid">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>577</StateNumber>
+      <StateNumber>954</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="62" parent="28" name="partid">
+    <column id="59" parent="28" name="partid">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>577</StateNumber>
+      <StateNumber>954</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="63" parent="28" name="operationid">
+    <column id="60" parent="28" name="operationid">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>577</StateNumber>
+      <StateNumber>954</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="64" parent="28" name="numofparts">
+    <column id="61" parent="28" name="numofparts">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>586</StateNumber>
-      <DefaultExpression>1</DefaultExpression>
+      <StateNumber>954</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <index id="65" parent="28" name="toorder_pkey">
-      <ObjectId>16515</ObjectId>
-      <StateNumber>642</StateNumber>
+    <index id="62" parent="28" name="toorder_pkey">
+      <ObjectId>57395</ObjectId>
+      <StateNumber>954</StateNumber>
       <ColNames>orderid
 partid
 operationid</ColNames>
       <Unique>1</Unique>
       <Primary>1</Primary>
     </index>
-    <index id="66" parent="28" name="fki_test">
-      <ObjectId>16560</ObjectId>
-      <StateNumber>642</StateNumber>
-      <ColNames>orderid</ColNames>
-    </index>
-    <key id="67" parent="28" name="toorder_pkey">
-      <ObjectId>16516</ObjectId>
-      <StateNumber>577</StateNumber>
+    <key id="63" parent="28" name="toorder_pkey">
+      <ObjectId>57396</ObjectId>
+      <StateNumber>954</StateNumber>
       <ColNames>orderid
 partid
 operationid</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>toorder_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="68" parent="28" name="toorder_orderid_fkey">
-      <ObjectId>16555</ObjectId>
-      <StateNumber>605</StateNumber>
+    <foreign-key id="64" parent="28" name="toorder_orderid_fkey">
+      <ObjectId>57407</ObjectId>
+      <StateNumber>954</StateNumber>
       <ColNames>orderid</ColNames>
-      <RefTableId>16531</RefTableId>
+      <RefTableId>57379</RefTableId>
       <RefColPositions>1</RefColPositions>
-      <RefTableName>order</RefTableName>
-      <RefKeyName>order_pkey</RefKeyName>
+      <RefTableName>orders</RefTableName>
+      <RefKeyName>orders_pkey</RefKeyName>
       <RefColNames>orderid</RefColNames>
     </foreign-key>
-    <foreign-key id="69" parent="28" name="toorder_partid_fkey">
-      <ObjectId>16519</ObjectId>
-      <StateNumber>577</StateNumber>
+    <foreign-key id="65" parent="28" name="toorder_partid_fkey">
+      <ObjectId>57397</ObjectId>
+      <StateNumber>954</StateNumber>
       <ColNames>partid</ColNames>
-      <RefTableId>16415</RefTableId>
+      <RefTableId>49159</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>parts</RefTableName>
-      <RefKeyName>spare_parts_pkey</RefKeyName>
+      <RefKeyName>parts_pkey</RefKeyName>
       <RefColNames>partid</RefColNames>
     </foreign-key>
-    <foreign-key id="70" parent="28" name="toorder_operationid_fkey">
-      <ObjectId>16524</ObjectId>
-      <StateNumber>577</StateNumber>
+    <foreign-key id="66" parent="28" name="toorder_operationid_fkey">
+      <ObjectId>57402</ObjectId>
+      <StateNumber>954</StateNumber>
       <ColNames>operationid</ColNames>
       <RefTableId>16423</RefTableId>
       <RefColPositions>1</RefColPositions>
@@ -472,45 +444,5 @@ operationid</ColNames>
       <RefKeyName>operations_pkey</RefKeyName>
       <RefColNames>operationid</RefColNames>
     </foreign-key>
-    <column id="71" parent="29" name="Номер заказа">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="72" parent="29" name="Категория">
-      <Position>2</Position>
-      <DataType>varchar(60)|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="73" parent="29" name="Наименование">
-      <Position>3</Position>
-      <DataType>varchar(30)|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="74" parent="29" name="Цена">
-      <Position>4</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="75" parent="29" name="Количество">
-      <Position>5</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="76" parent="29" name="Работа">
-      <Position>6</Position>
-      <DataType>varchar(60)|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="77" parent="29" name="Стоимость работы">
-      <Position>7</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
-    <column id="78" parent="29" name="Итого">
-      <Position>8</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>615</StateNumber>
-    </column>
   </database-model>
 </dataSource>

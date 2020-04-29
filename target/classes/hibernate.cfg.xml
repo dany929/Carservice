@@ -23,6 +23,9 @@
 
     <!-- Annotated entity classes -->
     <mapping class="com.customer.model.Customer"/>
-
+    <mapping class="com.part.model.Part"/>
+    <mapping class="com.operation.model.Operation"/>
+    <mapping class="com.order.model.Order"/>
+    <mapping class="com.toorder.model.Toorder" />
   </session-factory>
 </hibernate-configuration>

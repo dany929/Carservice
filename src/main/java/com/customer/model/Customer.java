@@ -1,7 +1,6 @@
 package com.customer.model;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Entity
@@ -13,7 +12,7 @@ public class Customer
 
     @Id
     @Column(name = "gosznak")
-   // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String gosznak;
 
     @Column(name = "firstname")
@@ -24,6 +23,8 @@ public class Customer
 
     @Column(name = "tel")
     private String tel;
+
+
 
     public String getGosznak() {
         return gosznak;
@@ -57,15 +58,15 @@ public class Customer
         this.tel = tel;
     }
 
-  /*  public Customer(String firstname, String lastname, String tel) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.tel = tel;
-    }
+    /*  public Customer(String firstname, String lastname, String tel) {
+          this.firstname = firstname;
+          this.lastname = lastname;
+          this.tel = tel;
+      }
 
- public Customer() {
- }
-   */
+   public Customer() {
+   }
+     */
     @Override
     public String toString() {
         return "Customer{ " +

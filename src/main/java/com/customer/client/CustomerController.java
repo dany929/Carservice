@@ -4,18 +4,14 @@ import com.customer.model.Customer;
 import com.customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
 
-@ImportResource("/WEB-INF/dispatcher-servlet.xml")
+//@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
 public class CustomerController {
 
@@ -55,10 +51,10 @@ public class CustomerController {
             this.customerService.addCustomer(customer);
         }
         else
-            {
-                System.err.println("Контроллер Адд попал в елсу");
-                this.customerService.updateCustomer(customer);
-            }
+        {
+            System.err.println("Контроллер Адд попал в елсу");
+            this.customerService.updateCustomer(customer);
+        }
 
         return "redirect:/customers";
     }
@@ -93,14 +89,14 @@ public class CustomerController {
     {
         return this.customerService.listFilter();
     }
-
+/*
     @RequestMapping("customerdata/{id}")
     public String bookData(@PathVariable("id") String id, Model model){
         model.addAttribute("customer", this.customerService.getCustomerById(id));
 
         return "customerdata";
     }
-
+*/
 
 
 }
