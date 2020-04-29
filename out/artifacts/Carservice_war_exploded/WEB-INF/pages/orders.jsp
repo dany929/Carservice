@@ -17,44 +17,7 @@
 <head>
     <title>Orders</title>
 
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 
 <body>
@@ -75,7 +38,7 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input path="orderid" readonly="true" size="8" disabled="true"/>
+                    <form:input path="orderid" readonly="true" size="8" disabled="true" required="required"/>
                     <form:hidden path="orderid"/>
                 </td>
             </tr>
@@ -87,7 +50,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="gosznak"/>
+                <form:input path="gosznak" required="required"/>
             </td>
         </tr>
 
@@ -98,7 +61,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input type="date" path="datein"/>
+                <form:input type="date" path="datein" required="required"/>
             </td>
         </tr>
         <tr>
@@ -108,7 +71,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input type="date" path="dateout"/>
+                <form:input type="date" path="dateout" required="required"/>
             </td>
         </tr>
         <tr>
@@ -118,7 +81,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="discount"/>
+                <form:input path="discount" required="required"/>
             </td>
         </tr>
         <tr>

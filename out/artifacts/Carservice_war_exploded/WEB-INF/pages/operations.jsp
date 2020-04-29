@@ -16,45 +16,7 @@
 <html>
 <head>
     <title>Customers</title>
-
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 
 <body>
@@ -72,7 +34,7 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input path="operationid" readonly="true" size="8" disabled="true"/>
+                    <form:input path="operationid" readonly="true" size="8" disabled="true" required="required"/>
                     <form:hidden path="operationid"/>
                 </td>
             </tr>
@@ -85,7 +47,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="description"/>
+                <form:input path="description" required="required"/>
             </td>
         </tr>
         <tr>
@@ -95,7 +57,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="price"/>
+                <form:input path="price" required="required"/>
             </td>
         </tr>
 

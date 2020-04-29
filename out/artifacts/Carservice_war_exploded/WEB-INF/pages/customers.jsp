@@ -28,50 +28,29 @@
     <script>
         $(document).ready(function(){
             $('.phone').mask('8-000-000-00-00');
-            $('.gosznak').mask('\\D [^0-9]')
+            $('.gosznak').mask('G000GG000',{
+                translation: {
+                    'G':{
+                        pattern: /[A-CEKMOPTY]/
+                    }
+                }
+            });
+
+            $('.name').mask('LUUUUUUUUUUUUUUU',
+                {
+                translation: {
+                    'L':{pattern: /[A-Z]/},
+                    'U':{pattern: /[a-z]/}
+
+                }
+            });
+
         })
     </script>
 
     <title>Customers</title>
 
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
-
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
-
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 
 <body>
@@ -90,7 +69,7 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9" />
+                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9" required="required" />
 
                 </td>
             </tr>
@@ -102,7 +81,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="firstname"/>
+                <form:input class="name" path="firstname" required="required" />
             </td>
         </tr>
         <tr>
@@ -112,7 +91,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="lastname"/>
+                <form:input class="name" path="lastname" required="required"/>
             </td>
         </tr>
         <tr>
@@ -123,7 +102,7 @@
             </td>
             <td>
 
-                <form:input path="tel" class="phone"  type="text"/>
+                <form:input path="tel" class="phone" required="required"/>
 
 
             </td>
