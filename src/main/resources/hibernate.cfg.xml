@@ -22,10 +22,10 @@
 
 
     <!-- Annotated entity classes -->
-    <mapping class="com.customer.model.Customer"/>
-    <mapping class="com.part.model.Part"/>
-    <mapping class="com.operation.model.Operation"/>
-    <mapping class="com.order.model.Order"/>
-    <mapping class="com.toorder.model.Toorder" />
+    <mapping class="com.Carservice.model.Customer"/>
+    <mapping class="com.Carservice.model.Part"/>
+    <mapping class="com.Carservice.model.Operation"/>
+    <mapping class="com.Carservice.model.Order"/>
+    <mapping class="com.Carservice.model.Toorder" />
   </session-factory>
 </hibernate-configuration>

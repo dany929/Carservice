@@ -14,11 +14,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.springframework.org/schema/mvc"
         xmlns:mvc="http://www.springframework.org/schema/mvc">
-    <context:component-scan base-package="com.customer"/>
-    <context:component-scan base-package="com.part"/>
-    <context:component-scan base-package="com.operation"/>
-    <context:component-scan base-package="com.order"/>
-    <context:component-scan base-package="com.toorder"/>
+    <context:component-scan base-package="com.Carservice"/>
+
     <mvc:default-servlet-handler/>
     <mvc:annotation-driven/>
 
@@ -42,11 +39,11 @@
 
         <beans:property name="annotatedClasses">
             <beans:list>
-                <beans:value>com.customer.model.Customer</beans:value>
-                <beans:value>com.part.model.Part</beans:value>
-                <beans:value>com.operation.model.Operation</beans:value>
-                <beans:value>com.order.model.Order</beans:value>
-                <beans:value>com.toorder.model.Toorder</beans:value>
+                <beans:value>com.Carservice.model.Customer</beans:value>
+                <beans:value>com.Carservice.model.Part</beans:value>
+                <beans:value>com.Carservice.model.Operation</beans:value>
+                <beans:value>com.Carservice.model.Order</beans:value>
+                <beans:value>com.Carservice.model.Toorder</beans:value>
             </beans:list>
         </beans:property>
 
@@ -65,44 +62,44 @@
     </beans:bean>
 
     <context:component-scan base-package="com.customer"/>
-    <beans:bean class="com.customer.dao.CustomerDao" id="customerdao">
+    <beans:bean class="com.Carservice.dao.CustomerDao" id="customerdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.customer.service.CustomerService" id="customerservice">
-        <beans:property name="customerDao" ref="customerDao"/>
+    <beans:bean class="com.Carservice.service.CustomerService" id="customerservice">
+        <beans:property name="customerDao" ref="customerdao"/>
     </beans:bean>
 
 
     <context:component-scan base-package="com.toorder"/>
-    <beans:bean class="com.part.dao.PartDao" id="partdao">
+    <beans:bean class="com.Carservice.dao.PartDao" id="partdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.part.service.PartService" id="partservice">
+    <beans:bean class="com.Carservice.service.PartService" id="partservice">
         <beans:property name="partDao" ref="partdao"/>
     </beans:bean>
 
     <context:component-scan base-package="com.operation"/>
-    <beans:bean class="com.operation.dao.OperationDao" id="operationdao">
+    <beans:bean class="com.Carservice.dao.OperationDao" id="operationdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.operation.service.OperationService" id="operationservice">
-        <beans:property name="operationDao" ref="operationDao"/>
+    <beans:bean class="com.Carservice.service.OperationService" id="operationservice">
+        <beans:property name="operationDao" ref="operationdao"/>
     </beans:bean>
 
     <context:component-scan base-package="com.order"/>
-    <beans:bean class="com.order.dao.OrderDao" id="orderdao">
+    <beans:bean class="com.Carservice.dao.OrderDao" id="orderdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.order.service.OrderService" id="orderservice">
-        <beans:property name="orderDao" ref="orderDao"/>
+    <beans:bean class="com.Carservice.service.OrderService" id="orderservice">
+        <beans:property name="orderDao" ref="orderdao"/>
     </beans:bean>
 
     <context:component-scan base-package="com.toorder"/>
-    <beans:bean class="com.toorder.dao.ToorderDao" id="toorderdao">
+    <beans:bean class="com.Carservice.dao.ToorderDao" id="toorderdao">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-    <beans:bean class="com.toorder.service.ToorderService" id="toorderservice">
-        <beans:property name="toorderDao" ref="toorderDao"/>
+    <beans:bean class="com.Carservice.service.ToorderService" id="toorderservice">
+        <beans:property name="toorderDao" ref="toorderdao"/>
     </beans:bean>
 
 
