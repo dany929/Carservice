@@ -15,25 +15,10 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="com.customer">
+    <logger name="com.carservice">
         <level value="info"/>
     </logger>
 
-    <logger name="com.part">
-        <level value="info"/>
-    </logger>
-
-    <logger name="com.operation">
-        <level value="info"/>
-    </logger>
-
-    <logger name="com.order">
-        <level value="info"/>
-    </logger>
-
-    <logger name="com.toorder">
-        <level value="info"/>
-    </logger>
 
     <!-- 3rdparty Loggers -->
     <logger name="org.springframework.core">
