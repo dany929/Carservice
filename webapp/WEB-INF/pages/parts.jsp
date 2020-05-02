@@ -17,11 +17,29 @@
 <head>
     <title>Parts</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <ul>
+        <li>
+            <a  href="/customers">Customers</a>
+        </li>
+        <li>
+            <a class="active"href="/parts">Parts</a>
+        </li>
+        <li>
+            <a href="/operations">Operations</a>
+        </li>
+        <li>
+            <a  href="/orders">Orders</a>
+        </li>
+        <li>
+            <a href="/toorders">ToOrders</a>
+        </li>
+    </ul>
 </head>
 
 <body>
-<%@ include file="header.jsp"%>
 
+<br>
+<br>
 <c:url var="addAction" value="/parts/add"/>
 
 <form:form action="${addAction}" modelAttribute="part">

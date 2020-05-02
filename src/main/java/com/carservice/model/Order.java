@@ -30,7 +30,9 @@ public class Order implements Serializable
     @Column(name = "gosznak")
     private String gosznak;
 
-/*
+
+
+    /*
     @ManyToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name="gosznak")
 

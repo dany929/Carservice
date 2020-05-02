@@ -63,6 +63,31 @@ public class ToorderController {
         return "redirect:/toorders";
     }
 
+    @RequestMapping(value ="/toorders/update", method = RequestMethod.POST)
+    public String updateToOrder(@ModelAttribute("toorder") Toorder toorder)
+    {
+
+        this.toorderService.addToorder(toorder);
+
+        /*
+        System.err.println("Детали у тек объекта"+toorder.getPartid());
+        if(!toorderService.listToorders().contains(toorder))
+        {
+            System.err.println("Контроллер Адд ТООРДЕР попал в иф");
+            this.toorderService.addToorder(toorder);
+        }
+        else
+            {
+                System.err.println("Контроллер Адд ТООРДЕР попал в елсу");
+                this.toorderService.updateToorder(toorder);
+            }
+
+         */
+
+        return "redirect:/toorders";
+    }
+
+
     /**
      * Запрос на удаление по id
      */
@@ -79,9 +104,10 @@ public class ToorderController {
     @RequestMapping("/edittoorder/{id}")
     public String  updateToOrder(@PathVariable("id") int id, Model model)
     {
+
         model.addAttribute("toorder", this.toorderService.getToorderById(id));
         model.addAttribute("listToorder", this.toorderService.listToorders());
-
+        this.toorderService.removeToorder(id);
         System.err.println("Контроллер апдейт заполнил");
 
         return "toorders";

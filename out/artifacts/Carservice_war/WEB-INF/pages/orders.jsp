@@ -18,12 +18,28 @@
     <title>Orders</title>
 
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <ul>
+        <li>
+            <a  href="/customers">Customers</a>
+        </li>
+        <li>
+            <a href="/parts">Parts</a>
+        </li>
+        <li>
+            <a href="/operations">Operations</a>
+        </li>
+        <li>
+            <a class="active" href="/orders">Orders</a>
+        </li>
+        <li>
+            <a href="/toorders">ToOrders</a>
+        </li>
+    </ul>
 </head>
 
 <body>
-<h1>
-    <%@ include file="header.jsp"%>
-</h1>
+<br>
+<br>
 
 <c:url var="addAction" value="/orders/add"/>
 
@@ -103,28 +119,35 @@
 </br>
 
 <c:if test="${!empty listOrders }">
+    <c:forEach items="${listOrders}" var="order">
     <table class="tg">
         <tr>
-            <th width="80">orderid</th>
-
+            <th width="80">Order #${order.orderid}</th>
+        </tr>
+        <tr>
             <th width="80">gosznak</th>
             <th width="80">datein</th>
             <th width="80">dateout</th>
             <th width="80">discount</th>
+
+
             <th width="80">Edit</th>
             <th width="80">Delete</th>
         </tr>
-        <c:forEach items="${listOrders}" var="order">
-            <tr>
-                <td>${order.orderid}</td>
-                <td>${order.gosznak}</td>
-                <td>${order.datein}</td>
-                <td>${order.dateout}</td>
-                <td>${order.discount}</td>
-                <td><a href="<c:url value='/editorder/${order.orderid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
-            </tr>
-        </c:forEach>
+        <tr>
+
+            <td>${order.gosznak}</td>
+            <td>${order.datein}</td>
+            <td>${order.dateout}</td>
+            <td>${order.discount}</td>
+
+            <td><a href="<c:url value='/editorder/${order.orderid}'/>">Edit</a></td>
+            <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
+
+
+        </tr>
+
+    </c:forEach>
     </table>
 </c:if>
 

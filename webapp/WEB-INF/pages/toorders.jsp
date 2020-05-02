@@ -18,10 +18,28 @@
     <title>Parts</title>
 
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+    <ul>
+        <li>
+            <a  href="/customers">Customers</a>
+        </li>
+        <li>
+            <a href="/parts">Parts</a>
+        </li>
+        <li>
+            <a href="/operations">Operations</a>
+        </li>
+        <li>
+            <a  href="/orders">Orders</a>
+        </li>
+        <li>
+            <a class="active" href="/toorders">ToOrders</a>
+        </li>
+    </ul>
 </head>
 
 <body>
-<%@ include file="header.jsp"%>
+<br>
+<br>
 
 
 <c:url var="addAction" value="/toorders/add"/>
@@ -52,6 +70,7 @@
                 <form:input path="partid" required="required"/>
             </td>
         </tr>
+
         <tr>
             <td>
                 <form:label path="operationid">
@@ -62,6 +81,7 @@
                 <form:input path="operationid" required="required"/>
             </td>
         </tr>
+
         <tr>
             <td>
                 <form:label path="numofparts">
@@ -72,6 +92,7 @@
                 <form:input path="numofparts" required="required"/>
             </td>
         </tr>
+
         <tr>
             <td colspan="2">
                 <c:if test="${!empty toorder.orderid}">
@@ -84,8 +105,11 @@
                 </c:if>
             </td>
         </tr>
+
     </table>
 </form:form>
+
+
 
 </br>
 </br>
@@ -106,8 +130,8 @@
                 <td>${toorder.partid}</td>
                 <td>${toorder.operationid}</td>
                 <td>${toorder.numofparts}</td>
-                <td><a href="<c:url value='/edittoorder/${toorder.orderid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removetoorder/${toorder.orderid}'/>">Delete</a></td>
+                <td><a href="<c:url value='/edittoorder/${toorder.orderid}${toorder.partid}${toorder.operationid}'/>">Edit</a></td>
+                <td><a href="<c:url value='/removetoorder/${toorder.orderid}${toorder.partid}${toorder.operationid}'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

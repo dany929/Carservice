@@ -68,7 +68,10 @@ public class ToorderDao
         Session session = this.sessionFactory.getCurrentSession();
       //  Customer c = (Customer) session.load(Customer.class, new String(id));
         List<Toorder> toorderList  =
-                session.createQuery("select  c from Toorder c where c.orderid ="+id).list();
+                session.createQuery("select  c from Toorder c" +
+                        " where c.orderid ="+id/100+
+                        " and c.partid="+id/10%10+
+                        " and c.operationid="+id%10).list();
         for (Toorder c : toorderList)
         {
             session.delete(c);
@@ -83,7 +86,10 @@ public class ToorderDao
         Session session = this.sessionFactory.getCurrentSession();
         Toorder toorder = new Toorder();
         List<Toorder> toorderList  =
-                session.createQuery("select  c from Toorder c where c.orderid ="+id).list();
+                session.createQuery("select  c from Toorder c" +
+                        " where c.orderid ="+id/100+
+                        " and c.partid="+id/10%10+
+                        " and c.operationid="+id%10).list();
         for (Toorder c : toorderList)
         {
             toorder=c;
