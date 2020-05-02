@@ -31,7 +31,7 @@
             $('.gosznak').mask('G000GG000',{
                 translation: {
                     'G':{
-                        pattern: /[A-CEKMOPTY]/
+                        pattern: /[A-CEKMHOPTY]/
                     }
                 }
             });
@@ -107,6 +107,7 @@
 
             </td>
         </tr>
+
         <tr>
             <td colspan="2">
                 <c:if test="${!empty customer.gosznak}">

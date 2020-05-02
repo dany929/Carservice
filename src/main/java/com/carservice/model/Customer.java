@@ -24,8 +24,11 @@ public class Customer
     @Column(name = "tel")
     private String tel;
 
-
-
+/*
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
+    private List<Order> orders;
+*/
     public String getGosznak() {
         return gosznak;
     }

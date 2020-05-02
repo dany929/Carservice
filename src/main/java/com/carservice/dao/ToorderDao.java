@@ -48,7 +48,7 @@ public class ToorderDao
      */
     public void addToorder(Toorder toorder) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.persist(toorder);
+        session.saveOrUpdate(toorder);
         logger.info("Customer added: " + toorder);
     }
 

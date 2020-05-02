@@ -69,7 +69,7 @@ public class CustomerDao
      */
     public void addCustomer(Customer customer) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.persist(customer);
+        session.saveOrUpdate(customer);
         logger.info("Customer added: " + customer);
     }
 

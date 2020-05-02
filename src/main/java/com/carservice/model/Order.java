@@ -30,6 +30,23 @@ public class Order implements Serializable
     @Column(name = "gosznak")
     private String gosznak;
 
+/*
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="gosznak")
+
+    private Customer customer;
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+    public  String getCusName(){
+        return customer.getGosznak();
+}
+*/
 
 
     public String getGosznak() {
@@ -39,6 +56,8 @@ public class Order implements Serializable
     public void setGosznak(String gosznak) {
         this.gosznak = gosznak;
     }
+
+
 
     public int getOrderid() {
         return orderid;
@@ -101,6 +120,8 @@ public class Order implements Serializable
         Order order = (Order) o;
         return Objects.equals(getOrderid(), order.getOrderid());
     }
+
+
 /*
     @Override
     public int hashCode() {

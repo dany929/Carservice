@@ -44,6 +44,8 @@ public class ToorderController {
     @RequestMapping(value ="/toorders/add", method = RequestMethod.POST)
     public String addToOrder(@ModelAttribute("toorder") Toorder toorder)
     {
+        this.toorderService.addToorder(toorder);
+        /*
         System.err.println("Детали у тек объекта"+toorder.getPartid());
         if(!toorderService.listToorders().contains(toorder))
         {
@@ -55,6 +57,8 @@ public class ToorderController {
                 System.err.println("Контроллер Адд ТООРДЕР попал в елсу");
                 this.toorderService.updateToorder(toorder);
             }
+
+         */
 
         return "redirect:/toorders";
     }

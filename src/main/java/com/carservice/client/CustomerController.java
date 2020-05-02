@@ -44,7 +44,8 @@ public class CustomerController {
     @RequestMapping(value ="/customers/add", method = RequestMethod.POST)
     public String addCustomer(@ModelAttribute("customer") Customer customer)
     {
-
+        this.customerService.addCustomer(customer);
+/*
         if(!customerService.listCustomers().contains(customer))
         {
             System.err.println("Контроллер Адд попал в иф");
@@ -55,6 +56,8 @@ public class CustomerController {
             System.err.println("Контроллер Адд попал в елсу");
             this.customerService.updateCustomer(customer);
         }
+
+ */
 
         return "redirect:/customers";
     }
