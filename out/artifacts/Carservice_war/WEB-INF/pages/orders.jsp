@@ -46,7 +46,7 @@
 <form:form action="${addAction}" modelAttribute="order">
     <table>
 
-        <c:if test="${!empty order.gosznak}">
+        <c:if test="${!empty order.customer.gosznak}">
             <tr>
                 <td>
                     <form:label path="orderid">
@@ -61,12 +61,12 @@
         </c:if>
         <tr>
             <td>
-                <form:label path="gosznak">
+                <form:label path="customer.gosznak">
                     <spring:message text="gosznak"/>
                 </form:label>
             </td>
             <td>
-                <form:input path="gosznak" required="required"/>
+                <form:input path="customer.gosznak" required="required"/>
             </td>
         </tr>
 
@@ -102,11 +102,11 @@
         </tr>
         <tr>
             <td colspan="2">
-                <c:if test="${!empty order.gosznak}">
+                <c:if test="${!empty order.customer.gosznak}">
                     <input type="submit"
                            value="<spring:message text="Edit order"/>"/>
                 </c:if>
-                <c:if test="${empty order.gosznak}">
+                <c:if test="${empty order.customer.gosznak}">
                     <input type="submit"
                            value="<spring:message text="Add order"/>"/>
                 </c:if>
@@ -136,10 +136,12 @@
         </tr>
         <tr>
 
-            <td>${order.gosznak}</td>
+            <td>${order.customer.gosznak}</td>
             <td>${order.datein}</td>
             <td>${order.dateout}</td>
             <td>${order.discount}</td>
+
+
 
             <td><a href="<c:url value='/editorder/${order.orderid}'/>">Edit</a></td>
             <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
@@ -152,6 +154,22 @@
 </c:if>
 
 
+<%--
+<table class="tg">
+    <tr>
+        <th width="80">title</th>
+        <th width="80">price</th>
+    </tr>
+    <c:forEach items="${listpart}" var="part">
+        <tr>
+            <td>${part.title}</td>
+            <td>${part.price}</td>
+            <td>${order.discount}</td>
+        </tr>
+    </c:forEach>
+</table>
+
+--%>
 
 
 

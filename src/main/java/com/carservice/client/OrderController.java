@@ -3,6 +3,7 @@ package com.carservice.client;
 
 import com.carservice.model.Order;
 import com.carservice.service.OrderService;
+import com.carservice.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class OrderController {
 
     private OrderService orderService;
+    private PartService partService;
 
+    @Autowired()
+    @Qualifier(value = "partService")
+    public void setProductService(PartService ps)
+    {
+        this.partService = ps;
+    }
     @Autowired(required = true)
     @Qualifier(value = "orderService")
     public void setOrderService(OrderService ps)
@@ -34,10 +42,14 @@ public class OrderController {
     @RequestMapping(value ="orders", method = RequestMethod.GET)
     public String listOrders(Model model) {
         model.addAttribute("order", new Order());
-
+        ///////////////////////////////////////////
+      //  model.addAttribute("listpart",this.orderService.listPartsByOrder());
+        //////////////////////////////////////////
         model.addAttribute("listOrders", this.orderService.listOrders());
         return "orders";
     }
+
+
 
     /**
      * Запрос при нажатии на кнопку добавления записи

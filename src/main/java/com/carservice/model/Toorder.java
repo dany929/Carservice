@@ -2,7 +2,6 @@ package com.carservice.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 //@Embeddable
@@ -10,10 +9,11 @@ import java.util.Objects;
 
 public class Toorder implements Serializable
 {
-
+/*
     @Id
     @Column(name = "orderid")
     private int orderid;
+
     @Id
     @Column(name = "partid")
     private int partid;
@@ -21,13 +21,50 @@ public class Toorder implements Serializable
     @Id
     @Column(name = "operationid")
     private int operationid;
-
+*/
+@Id
     @Column(name = "numofparts")
     private int numofparts;
 
+///////////////////////////////////////////Гибер отн
+ @ManyToOne (optional=false, cascade=CascadeType.ALL)
+@JoinColumn (name="partid")
+private Part part;
 
+    public Part getPart() {
+        return part;
+    }
 
+    public void setPart(Part part) {
+        this.part = part;
+    }
 
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="operationid")
+    private Operation operation;
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="orderid")
+    private Order order;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    ///////////////////////~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~     ~~~~~
+    /*
     public void setOrderid(int orderid) {
         this.orderid = orderid;
     }
@@ -51,7 +88,7 @@ public class Toorder implements Serializable
     public void setOperationid(int operationid) {
         this.operationid = operationid;
     }
-
+*/
     public int getNumofparts() {
         return numofparts;
     }
@@ -72,13 +109,13 @@ public class Toorder implements Serializable
     @Override
     public String toString() {
         return "ToOrder{ " +
-                "orderid='" + orderid +'\'' +
-                ", partid='" + partid + '\'' +
-                ", operationid='" + operationid + '\'' +
+                "orderid='" + order.getOrderid() +'\'' +
+                ", partid='" + part.getPartid() + '\'' +
+                ", operationid='" + operation.getOperationid() + '\'' +
                 ", numofparts='" + numofparts + '\'' +
                 '}';
     }
-
+/*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -86,6 +123,9 @@ public class Toorder implements Serializable
         Toorder toorder = (Toorder) o;
         return Objects.equals(getOrderid(), toorder.getOrderid());
     }
+
+
+*/
 
 
 /*

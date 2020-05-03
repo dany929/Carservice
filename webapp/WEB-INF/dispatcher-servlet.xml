@@ -64,11 +64,11 @@
 
     <context:component-scan base-package="com.carservice"/>
 
-    <beans:bean class="com.carservice.dao.CustomerDao" id="customerdao">
+    <beans:bean class="com.carservice.dao.CustomerDao" id="customerDAO">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
     <beans:bean class="com.carservice.service.CustomerService" id="customerservice">
-        <beans:property name="customerDao" ref="customerdao"/>
+        <beans:property name="customerDao" ref="customerDAO"/>
     </beans:bean>
 
 

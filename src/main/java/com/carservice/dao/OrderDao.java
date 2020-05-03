@@ -2,8 +2,6 @@ package com.carservice.dao;
 
 
 import com.carservice.model.Order;
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -42,9 +40,21 @@ public class OrderDao
         }
         return orderList;
     }
+//////////////////////////////////////////
+    /*
+    public List<Part> listPartsByOrder()
+    {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Part> partList= session.createQuery("Select p FROM Part p where p.partid=" +
+                "ANY(Select o.partid FROM Toorder o )").list();
+        for(Part part    : partList)
+        {
+            logger.info(part.toString());
+        }
+        return partList;
+    }
 
-
-
+*//////////////////////////////////////////
     /**
      * Добавление клиента
      */

@@ -31,7 +31,7 @@ public class ToorderDao
     {
         Session session = this.sessionFactory.getCurrentSession();
         List<Toorder> toorderList =
-                session.createQuery("SELECT p FROM Toorder p ORDER BY p.orderid").list();
+                session.createQuery("SELECT p FROM Toorder p ORDER BY p.order.orderid").list();
 
         //вывод в консоль сервера
         for(Toorder p: toorderList)

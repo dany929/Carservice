@@ -47,41 +47,41 @@
 <form:form action="${addAction}" modelAttribute="toorder">
     <table>
 
+            <%--
+                        <tr>
+                            <td>
+                                <form:label path="orderid">
+                                    <spring:message text="Orderid"/>
+                                </form:label>
+                            </td>
+                            <td>
+                                <form:input path="orderid" required="required"/>
 
-            <tr>
-                <td>
-                    <form:label path="orderid">
-                        <spring:message text="Orderid"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="orderid" required="required"/>
+                            </td>
+                        </tr>
 
-                </td>
-            </tr>
+                    <tr>
+                        <td>
+                            <form:label path="partid">
+                                <spring:message text="partid"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="partid" required="required"/>
+                        </td>
+                    </tr>
 
-        <tr>
-            <td>
-                <form:label path="partid">
-                    <spring:message text="partid"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="partid" required="required"/>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <form:label path="operationid">
-                    <spring:message text="operationid"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="operationid" required="required"/>
-            </td>
-        </tr>
-
+                    <tr>
+                        <td>
+                            <form:label path="operationid">
+                                <spring:message text="operationid"/>
+                            </form:label>
+                        </td>
+                        <td>
+                            <form:input path="operationid" required="required"/>
+                        </td>
+                    </tr>
+             --%>
         <tr>
             <td>
                 <form:label path="numofparts">
@@ -95,11 +95,11 @@
 
         <tr>
             <td colspan="2">
-                <c:if test="${!empty toorder.orderid}">
+                <c:if test="${!empty toorder.order.orderid}">
                     <input type="submit"
                            value="<spring:message text="Edit Toorder"/>"/>
                 </c:if>
-                <c:if test="${empty toorder.orderid}">
+                <c:if test="${empty toorder.order.orderid}">
                     <input type="submit"
                            value="<spring:message text="Add Toorder"/>"/>
                 </c:if>
@@ -119,19 +119,27 @@
         <tr>
             <th width="80">Orderid</th>
             <th width="80">Partid</th>
+            <th width="80">PartTitle</th>
+            <th width="80">PartPrice</th>
+            <th width="80">Numofparts</th>
             <th width="80">Operid</th>
-            <th width="80">NumofParts</th>
+            <th width="80">OperDescr</th>
+            <th width="80">OperPrice</th>
             <th width="80">Edit</th>
             <th width="80">Delete</th>
         </tr>
         <c:forEach items="${listToorder}" var="toorder">
             <tr>
-                <td>${toorder.orderid}</td>
-                <td>${toorder.partid}</td>
-                <td>${toorder.operationid}</td>
+                <td>${toorder.order.orderid}</td>
+                <td>${toorder.part.partid}</td>
+                <td>${toorder.part.title}</td>
+                <td>${toorder.part.price}</td>
                 <td>${toorder.numofparts}</td>
-                <td><a href="<c:url value='/edittoorder/${toorder.orderid}${toorder.partid}${toorder.operationid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removetoorder/${toorder.orderid}${toorder.partid}${toorder.operationid}'/>">Delete</a></td>
+                <td>${toorder.operation.operationid}</td>
+                <td>${toorder.operation.description}</td>
+                <td>${toorder.operation.price}</td>
+                <td><a href="<c:url value='/edittoorder/${toorder.order.orderid}${toorder.part.partid}${toorder.operation.operationid}'/>">Edit</a></td>
+                <td><a href="<c:url value='/removetoorder/${toorder.order.orderid}${toorder.part.partid}${toorder.operation.operationid}'/>">Delete</a></td>
             </tr>
         </c:forEach>
     </table>

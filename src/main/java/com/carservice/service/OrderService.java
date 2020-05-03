@@ -1,9 +1,7 @@
 package com.carservice.service;
 
 import com.carservice.dao.OrderDao;
-
 import com.carservice.model.Order;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +19,17 @@ public class OrderService
     {
         this.orderDao = orderDao;
     }
+
+//////////////////////
+    /*
+    @Transactional
+    public List<Part> listPartsByOrder(){
+        return this.orderDao.listPartsByOrder();
+    }
+
+     */
+    //////////////////////
+
 
     @Transactional
     public List<Order> listOrders()

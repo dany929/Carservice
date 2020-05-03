@@ -1,6 +1,9 @@
 package com.carservice.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,6 +27,19 @@ public class Part
     @Column(name = "price")
     private int price;
 
+//////////////////////////////////////////////////
+@OneToMany(fetch = FetchType.EAGER, mappedBy = "part")
+@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+private List<Toorder> toorders;
+
+    public List<Toorder> getToorders() {
+        return toorders;
+    }
+
+    public void setToorders(List<Toorder> toorders) {
+        this.toorders = toorders;
+    }
+//////////////////////////////////////////////-----------
     public int getPartid() {
         return partid;
     }

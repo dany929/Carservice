@@ -1,6 +1,9 @@
 package com.carservice.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -24,11 +27,21 @@ public class Customer
     @Column(name = "tel")
     private String tel;
 
-/*
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
+
+    //////////////////////////////////////////////////
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Order> orders;
-*/
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+//////////////////////////////////////////////-----------
+
     public String getGosznak() {
         return gosznak;
     }

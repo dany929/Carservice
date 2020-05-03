@@ -1,7 +1,10 @@
 package com.carservice.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -26,29 +29,39 @@ public class Order implements Serializable
 
     @Column(name = "discount")
     private int discount;
-
+/*
     @Column(name = "gosznak")
     private String gosznak;
 
+ */
+    //////////////////////////////////////////////////
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private List<Toorder> toorders;
+
+    public List<Toorder> getToorders() {
+        return toorders;
+    }
+
+    public void setToorders(List<Toorder> toorders) {
+        this.toorders = toorders;
+    }
 
 
-    /*
     @ManyToOne (optional=false, cascade=CascadeType.ALL)
     @JoinColumn (name="gosznak")
-
     private Customer customer;
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public Customer getCustomer() {
         return customer;
     }
-    public  String getCusName(){
-        return customer.getGosznak();
-}
-*/
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+//////////////////////////////////////////////-----------
+
+/*
 
 
     public String getGosznak() {
@@ -59,7 +72,7 @@ public class Order implements Serializable
         this.gosznak = gosznak;
     }
 
-
+*/
 
     public int getOrderid() {
         return orderid;
@@ -111,7 +124,7 @@ public class Order implements Serializable
                 ", datein='" + datein + '\'' +
                 ", dateout='" + dateout + '\'' +
                 ", discount='" + discount + '\'' +
-                ", gosznak='" + gosznak + '\'' +
+                ", gosznak='" + customer.getGosznak() + '\'' +
                 '}';
     }
 
