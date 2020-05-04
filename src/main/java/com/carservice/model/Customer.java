@@ -29,7 +29,7 @@ public class Customer
 
 
     //////////////////////////////////////////////////
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private List<Order> orders;
 

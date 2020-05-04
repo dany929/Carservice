@@ -2,6 +2,7 @@ package com.carservice.service;
 
 import com.carservice.dao.OrderDao;
 import com.carservice.model.Order;
+import com.carservice.model.Toorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +42,11 @@ public class OrderService
     @Transactional
     public void addOrder(Order order)
     {
+        System.err.println("ADDORDER SERVICE");
+        for(Toorder line : order.getToorders())
+        {
+            line.setOrder(order);
+        }
         this.orderDao.addOrder(order);
      /*
        if(!listOrder().contains(order))
@@ -82,6 +88,17 @@ public class OrderService
         this.orderDao.removeOrder(id);
     }
 
+
+    //////
+    public void deleteOrders(int id)
+    {
+        this.orderDao.deleteOrders(findOrder(id));
+    }
+
+    public Order findOrder(int id) {
+        return this.orderDao.findOrders(id);
+    }
+/////////////
     @Transactional
     public Order getOrderById(int id)
     {

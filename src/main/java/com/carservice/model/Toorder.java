@@ -9,20 +9,33 @@ import java.io.Serializable;
 
 public class Toorder implements Serializable
 {
-/*
     @Id
-    @Column(name = "orderid")
-    private int orderid;
+    @Column(name = "toorderid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int toorderid;
 
-    @Id
-    @Column(name = "partid")
-    private int partid;
+    public int getToorderid() {
+        return toorderid;
+    }
 
-    @Id
-    @Column(name = "operationid")
-    private int operationid;
-*/
-@Id
+    public void setToorderid(int toorderid) {
+        this.toorderid = toorderid;
+    }
+
+    /*
+            @Id
+            @Column(name = "orderid")
+            private int orderid;
+
+            @Id
+            @Column(name = "partid")
+            private int partid;
+
+            @Id
+            @Column(name = "operationid")
+            private int operationid;
+        */
+
     @Column(name = "numofparts")
     private int numofparts;
 
@@ -89,6 +102,7 @@ private Part part;
         this.operationid = operationid;
     }
 */
+    public Toorder() {}
     public int getNumofparts() {
         return numofparts;
     }
@@ -109,7 +123,8 @@ private Part part;
     @Override
     public String toString() {
         return "ToOrder{ " +
-                "orderid='" + order.getOrderid() +'\'' +
+                "toorderid='" + toorderid +'\'' +
+                ", orderid='" + order.getOrderid() +'\'' +
                 ", partid='" + part.getPartid() + '\'' +
                 ", operationid='" + operation.getOperationid() + '\'' +
                 ", numofparts='" + numofparts + '\'' +

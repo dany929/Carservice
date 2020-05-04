@@ -100,5 +100,19 @@ public class ToorderDao
         return toorder;
     }
 
+    public void deleteToorder(Toorder o)
+    {
+        Session session = this.sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.delete(o);
+            session.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            logger.info("!!!!!!!!!!" + e.toString());
+        }
+        session.close();
+    }
 
 }

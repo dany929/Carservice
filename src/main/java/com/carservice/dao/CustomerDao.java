@@ -30,7 +30,7 @@ public class CustomerDao
      */
     public List<Customer> listCustomers()
     {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         List<Customer> customerList =
                 session.createQuery("SELECT p FROM Customer p ").list();
 
@@ -39,6 +39,7 @@ public class CustomerDao
         {
             logger.info(p.toString());
         }
+        session.close();
         return customerList;
     }
 
@@ -49,7 +50,7 @@ public class CustomerDao
 
     public List<Customer> listCustomerFiltered()
     {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         List<Customer> customerListFiltered =
                 session.createQuery("SELECT p FROM Customer p where" +
                         " p.gosznak LIKE 'А%' OR" +
@@ -61,32 +62,36 @@ public class CustomerDao
         {
             logger.info(p.toString());
         }
+        session.close();
         return customerListFiltered;
+
     }
 
     /**
      * Добавление клиента
      */
     public void addCustomer(Customer customer) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         session.saveOrUpdate(customer);
         logger.info("Customer added: " + customer);
+        session.close();
     }
 
     /**
      * Обновление клиента
      */
     public void updateCustomer(Customer c) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         session.update(c);
         logger.info("Customer updated: " + c);
+        session.close();
     }
 
     /**
      * Удаление клиента
      */
     public void removeCustomer(String id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         //  Customer c = (Customer) session.load(Customer.class, new String(id));
 
 
@@ -106,14 +111,14 @@ public class CustomerDao
         }
 
         */
-
+        session.close();
     }
 
     /**
      * Нахождение клиента по ид
      */
     public Customer getCustomerById(String id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         Customer customer = new Customer();
         List<Customer> customerList  =
                 session.createQuery("select  c from Customer c where c.gosznak ="+"'"+id+"'").list();
@@ -123,7 +128,7 @@ public class CustomerDao
         }
 
         logger.info("Customer found: " + customer);
-
+session.close();
         return customer;
     }
 

@@ -4,7 +4,6 @@ import com.carservice.dao.OperationDao;
 import com.carservice.model.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,14 +19,14 @@ public class OperationService
         this.operationDao = operationDao;
     }
 
-    @Transactional
+
     public List<Operation> listOperations()
     {
         return this.operationDao.listOperations();
     }
 
 
-    @Transactional
+
     public void addOperation(Operation Operation)
     {
         this.operationDao.addOperation(Operation);
@@ -47,7 +46,7 @@ public class OperationService
 
       */
     }
-    @Transactional
+
     public void updateOperation(Operation Operation)
     {
         this.operationDao.updateOperation(Operation);
@@ -65,13 +64,13 @@ public class OperationService
 
        */
     }
-    @Transactional
+
     public void removeOperation(int id)
     {
         this.operationDao.removeOperation(id);
     }
 
-    @Transactional
+
     public Operation getOperationById(int id)
     {
         return this.operationDao.getOperationById(id);

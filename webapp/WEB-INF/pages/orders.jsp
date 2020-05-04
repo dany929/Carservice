@@ -118,6 +118,8 @@
 </br>
 </br>
 
+<a class="buttonEdit" href="/orders/chooseCustomer">Add order</a><br><br>
+
 <c:if test="${!empty listOrders }">
     <c:forEach items="${listOrders}" var="order">
     <table class="tg">
@@ -143,7 +145,7 @@
 
 
 
-            <td><a href="<c:url value='/editorder/${order.orderid}'/>">Edit</a></td>
+            <td><a  href="/orders/edit?id=${order.orderid}" >Edit</a></td>
             <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
 
 

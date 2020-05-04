@@ -29,8 +29,11 @@ public class Part
 
 //////////////////////////////////////////////////
 @OneToMany(fetch = FetchType.EAGER, mappedBy = "part")
-@Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+@Cascade(org.hibernate.annotations.CascadeType.ALL)
 private List<Toorder> toorders;
+
+
+
 
     public List<Toorder> getToorders() {
         return toorders;

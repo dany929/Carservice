@@ -2,11 +2,8 @@ package com.carservice.service;
 
 import com.carservice.dao.CustomerDao;
 import com.carservice.model.Customer;
-
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.*;
-
 
 import java.util.List;
 
@@ -22,19 +19,19 @@ public class CustomerService
         this.customerDao = customerDao;
     }
 
-    @Transactional
+
     public List<Customer> listCustomers()
     {
         return this.customerDao.listCustomers();
     }
 
-    @Transactional
+
     public  List<Customer> listFilter()
     {
         return  this.customerDao.listCustomerFiltered();
     }
 
-    @Transactional
+
     public void addCustomer(Customer customer)
     {
         this.customerDao.addCustomer(customer);
@@ -54,7 +51,7 @@ public class CustomerService
 
       */
     }
-    @Transactional
+
     public void updateCustomer(Customer customer)
     {
         this.customerDao.updateCustomer(customer);
@@ -72,13 +69,13 @@ public class CustomerService
 
        */
     }
-    @Transactional
+
     public void removeCustomer(String id)
     {
         this.customerDao.removeCustomer(id);
     }
 
-    @Transactional
+
     public Customer getCustomerById(String gosznak)
     {
         return this.customerDao.getCustomerById(gosznak);

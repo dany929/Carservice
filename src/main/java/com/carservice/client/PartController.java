@@ -11,12 +11,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.logging.Logger;
+
 //@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
 public class PartController {
 
     private PartService partService;
-
+    Logger logger = Logger.getLogger(String.valueOf(PartController.class));
     @Autowired(required = true)
     @Qualifier(value = "partService")
     public void setPartService(PartService ps)
@@ -36,6 +38,7 @@ public class PartController {
         model.addAttribute("listParts", this.partService.listParts());
         return "parts";
     }
+
 
     /**
      * Запрос при нажатии на кнопку добавления записи

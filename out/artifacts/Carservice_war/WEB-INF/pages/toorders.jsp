@@ -118,6 +118,7 @@
     <table class="tg">
         <tr>
             <th width="80">Orderid</th>
+            <th width="80">Gosznak</th>
             <th width="80">Partid</th>
             <th width="80">PartTitle</th>
             <th width="80">PartPrice</th>
@@ -125,12 +126,15 @@
             <th width="80">Operid</th>
             <th width="80">OperDescr</th>
             <th width="80">OperPrice</th>
+            <th width="80">Total</th>
+
             <th width="80">Edit</th>
             <th width="80">Delete</th>
         </tr>
         <c:forEach items="${listToorder}" var="toorder">
             <tr>
                 <td>${toorder.order.orderid}</td>
+                <td>${toorder.order.customer.gosznak}</td>
                 <td>${toorder.part.partid}</td>
                 <td>${toorder.part.title}</td>
                 <td>${toorder.part.price}</td>
@@ -138,6 +142,7 @@
                 <td>${toorder.operation.operationid}</td>
                 <td>${toorder.operation.description}</td>
                 <td>${toorder.operation.price}</td>
+                <td>${toorder.order.totalcost}</td>
                 <td><a href="<c:url value='/edittoorder/${toorder.order.orderid}${toorder.part.partid}${toorder.operation.operationid}'/>">Edit</a></td>
                 <td><a href="<c:url value='/removetoorder/${toorder.order.orderid}${toorder.part.partid}${toorder.operation.operationid}'/>">Delete</a></td>
             </tr>

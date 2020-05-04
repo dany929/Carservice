@@ -59,48 +59,86 @@ public class OrderDao
      * Добавление клиента
      */
     public void addOrder(Order order) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.persist(order);
-        logger.info("Customer added: " + order);
+        Session session = this.sessionFactory.openSession();
+        session.saveOrUpdate(order);
+        logger.info("Order added: " + order);
+        session.close();
     }
 
     /**
      * Обновление клиента
      */
     public void updateOrder(Order c) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         session.update(c);
-        logger.info("Customer updated: " + c);
+        logger.info("Order updated: " + c);
+        session.close();
     }
 
     /**
      * Удаление клиента
      */
     public void removeOrder(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
       //  Customer c = (Customer) session.load(Customer.class, new String(id));
         Order order = (Order) session.load(Order.class, new Integer(id));
 
         if ( order != null)
         {
+            session.beginTransaction();
             session.delete(order);
+            session.getTransaction().commit();
         }
         logger.info("Order deleted "+order);
-
+        session.close();
     }
 
     /**
      * Нахождение клиента по ид
      */
     public Order getOrderById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         Order order = (Order) session.load(Order.class, new Integer(id));
 
 
         logger.info("Order found: " + order);
-
+        session.close();
         return order;
     }
 
+///////////////////////////
+    public void deleteOrders(Order o)
+    {
+        Session session = this.sessionFactory.openSession();
+        try {
+            session.beginTransaction();
+            session.delete(o);
+            session.getTransaction().commit();
+        }
+        catch (Exception e)
+        {
+            logger.info("!!!!!!!!!!" + e.toString());
+        }
+        session.close();
+    }
 
+    @SuppressWarnings("unchecked")
+    public Order findOrders(int id)
+    {
+        Session session = this.sessionFactory.openSession();
+        Order c = new Order();
+        try
+        {
+            session.load(c, id);
+            //Из-за ленивой загрузки необходимо вызвать связанную сущность пока сессия ещё открыта
+            logger.info(c.toString() +  c.getToorders().toString());
+        }
+        catch (Exception e)
+        {
+            logger.info("!!!!!!!!!!" + e.toString());
+        }
+        session.close();
+        return c;
+    }
 }
+

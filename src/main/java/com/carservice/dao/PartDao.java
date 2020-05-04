@@ -28,9 +28,10 @@ public class PartDao
     /**
      * Вывод всех клиентов
      */
+
     public List<Part> listParts()
     {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         List<Part> partList =
                 session.createQuery("SELECT p FROM Part p ORDER BY p.partid").list();
 
@@ -39,6 +40,7 @@ public class PartDao
         {
             logger.info(p.toString());
         }
+session.close();
         return partList;
     }
 
@@ -48,25 +50,27 @@ public class PartDao
      * Добавление клиента
      */
     public void addPart(Part part) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.persist(part);
+        Session session = this.sessionFactory.openSession();
+        session.saveOrUpdate(part);
         logger.info("Customer added: " + part);
+        session.close();
     }
 
     /**
      * Обновление клиента
      */
     public void updatePart(Part c) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         session.update(c);
         logger.info("Customer updated: " + c);
+        session.close();
     }
 
     /**
      * Удаление клиента
      */
     public void removePart(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
       //  Customer c = (Customer) session.load(Customer.class, new String(id));
         Part part = (Part) session.load(Part.class, new Integer(id));
 
@@ -75,19 +79,19 @@ public class PartDao
             session.delete(part);
         }
         logger.info("Part deleted "+part);
-
+        session.close();
     }
 
     /**
      * Нахождение клиента по ид
      */
     public Part getPartById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
         Part part = (Part) session.load(Part.class, new Integer(id));
 
 
         logger.info("Part found: " + part);
-
+        session.close();
         return part;
     }
 

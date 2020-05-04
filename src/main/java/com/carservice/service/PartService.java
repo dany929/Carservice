@@ -2,11 +2,8 @@ package com.carservice.service;
 
 import com.carservice.dao.PartDao;
 import com.carservice.model.Part;
-
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.*;
-
 
 import java.util.List;
 
@@ -22,14 +19,14 @@ public class PartService
         this.partDao = partDao;
     }
 
-    @Transactional
+
     public List<Part> listParts()
     {
         return this.partDao.listParts();
     }
 
     
-    @Transactional
+
     public void addPart(Part part)
     {
         this.partDao.addPart(part);
@@ -49,7 +46,7 @@ public class PartService
 
       */
     }
-    @Transactional
+
     public void updatePart(Part part)
     {
         this.partDao.updatePart(part);
@@ -67,13 +64,13 @@ public class PartService
 
        */
     }
-    @Transactional
+
   public void removePart(int id)
     {
         this.partDao.removePart(id);
     }
 
-    @Transactional
+
     public Part getPartById(int id)
     {
         return this.partDao.getPartById(id);
