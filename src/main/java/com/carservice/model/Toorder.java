@@ -1,5 +1,7 @@
 package com.carservice.model;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -40,8 +42,9 @@ public class Toorder implements Serializable
     private int numofparts;
 
 ///////////////////////////////////////////Гибер отн
- @ManyToOne (optional=false, cascade=CascadeType.ALL)
+ @ManyToOne (fetch = FetchType.LAZY)
 @JoinColumn (name="partid")
+ @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
 private Part part;
 
     public Part getPart() {
@@ -52,8 +55,9 @@ private Part part;
         this.part = part;
     }
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name="operationid")
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     private Operation operation;
 
     public Operation getOperation() {
@@ -64,7 +68,8 @@ private Part part;
         this.operation = operation;
     }
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.LAZY)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     @JoinColumn (name="orderid")
     private Order order;
 

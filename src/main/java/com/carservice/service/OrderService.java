@@ -2,10 +2,8 @@ package com.carservice.service;
 
 import com.carservice.dao.OrderDao;
 import com.carservice.model.Order;
-import com.carservice.model.Toorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,22 +30,29 @@ public class OrderService
     //////////////////////
 
 
-    @Transactional
+
     public List<Order> listOrders()
     {
         return this.orderDao.listOrders();
     }
 
-    
-    @Transactional
+    public int listLastOrder(){return this.orderDao.listLastOrder();}
+
+
     public void addOrder(Order order)
     {
         System.err.println("ADDORDER SERVICE");
+/*
         for(Toorder line : order.getToorders())
         {
+            System.err.println("до сета одера");
             line.setOrder(order);
+            System.err.println("После сета");
         }
+*/
+        System.err.println("Пошел в дао");
         this.orderDao.addOrder(order);
+
      /*
        if(!listOrder().contains(order))
 
@@ -64,7 +69,7 @@ public class OrderService
 
       */
     }
-    @Transactional
+
     public void updateOrder(Order order)
     {
         this.orderDao.updateOrder(order);
@@ -82,9 +87,12 @@ public class OrderService
 
        */
     }
-    @Transactional
+
   public void removeOrder(int id)
     {
+
+
+
         this.orderDao.removeOrder(id);
     }
 
@@ -99,7 +107,7 @@ public class OrderService
         return this.orderDao.findOrders(id);
     }
 /////////////
-    @Transactional
+
     public Order getOrderById(int id)
     {
         return this.orderDao.getOrderById(id);

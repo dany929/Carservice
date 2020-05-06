@@ -4,7 +4,7 @@
   Date: 03.04.2020
   Time: 14:07
   To change this template use File | Settings | File Templates.
---%>
+<%-- --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
@@ -40,7 +40,7 @@
 <body>
 <br>
 <br>
-
+<%--
 <c:url var="addAction" value="/orders/add"/>
 
 <form:form action="${addAction}" modelAttribute="order">
@@ -114,11 +114,11 @@
         </tr>
     </table>
 </form:form>
+--%>
+<br>
+<br>
 
-</br>
-</br>
-
-<a class="buttonEdit" href="/orders/chooseCustomer">Add order</a><br><br>
+<a class="buttonEdit" href="/orders/chooseCustomer">Add New Order</a><br><br>
 
 <c:if test="${!empty listOrders }">
     <c:forEach items="${listOrders}" var="order">
@@ -130,8 +130,9 @@
             <th width="80">gosznak</th>
             <th width="80">datein</th>
             <th width="80">dateout</th>
-            <th width="80">discount</th>
 
+            <th width="80">discount</th>
+            <th width="80">Total</th>
 
             <th width="80">Edit</th>
             <th width="80">Delete</th>
@@ -141,16 +142,42 @@
             <td>${order.customer.gosznak}</td>
             <td>${order.datein}</td>
             <td>${order.dateout}</td>
+
+
             <td>${order.discount}</td>
+            <td>${order.totalcost}</td>
 
-
-
-            <td><a  href="/orders/edit?id=${order.orderid}" >Edit</a></td>
+            <td><a  href="/orders/edit?id=${order.orderid}" >Add new Position</a></td>
             <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
 
 
         </tr>
 
+        <c:if test="${!empty order.toorders}">
+            <tr>
+                <th width="80" colspan="6"> Parts'n'Works </th>
+            </tr>
+            <tr>
+                <th width="80" >Toorderid</th>
+                <th width="80" >Product</th>
+                <th width="80" >Category</th>
+                <th width="80" >Type of work</th>
+                <th width="80">Number of parts</th>
+                <th width="80">Delete</th>
+            </tr>
+            <c:forEach items="${order.toorders}" var="prod">
+                <tr>
+                    <td>${prod.toorderid}</td>
+                    <td>${prod.part.title}</td>
+                    <td>${prod.part.category}</td>
+                    <td>${prod.operation.description}</td>
+                    <td>${prod.numofparts}</td>
+                    <td><a a  href="/removetoorder/${prod.toorderid}">Delete</a></td>
+                </tr>
+
+            </c:forEach>
+        </c:if>
+        <br>
     </c:forEach>
     </table>
 </c:if>

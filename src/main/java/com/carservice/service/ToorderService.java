@@ -4,7 +4,6 @@ import com.carservice.dao.ToorderDao;
 import com.carservice.model.Toorder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,14 +19,18 @@ public class ToorderService
         this.toorderDao = toorderDao;
     }
 
-    @Transactional
+
     public List<Toorder> listToorders()
     {
         return this.toorderDao.listToorders();
     }
 
-    
-    @Transactional
+    public int listLastToorder(){return this.toorderDao.listLastToorder();}
+
+    public void addToordertoExistingOrder(Toorder toorder){
+        this.toorderDao.addToordertoExistingOrder(toorder);
+    }
+
     public void addToorder(Toorder toorder)
     {
         this.toorderDao.addToorder(toorder);
@@ -47,7 +50,7 @@ public class ToorderService
 
       */
     }
-    @Transactional
+
     public void updateToorder(Toorder toorder)
     {
         this.toorderDao.updateToorder(toorder);
@@ -65,13 +68,13 @@ public class ToorderService
 
        */
     }
-    @Transactional
+
   public void removeToorder(int id)
     {
         this.toorderDao.removeToorder(id);
     }
 
-    @Transactional
+
     public Toorder getToorderById(int id)
     {
         return this.toorderDao.getToorderById(id);

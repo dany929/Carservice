@@ -1,6 +1,7 @@
 package com.carservice.client;
 
 import com.carservice.model.Toorder;
+import com.carservice.service.PartService;
 import com.carservice.service.ToorderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,12 +11,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 //@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
 public class ToorderController {
 
     private ToorderService toorderService;
+    private  PartService partService;
 
     @Autowired(required = true)
     @Qualifier(value = "toorderService")
@@ -24,18 +27,37 @@ public class ToorderController {
         this.toorderService = ps;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value = "partService")
+    public void setToorderService(PartService pp)
+    {
+        this.partService = pp;
+    }
 
     /**
      * Вывод списка на стартовой странице
      * атрибуты модели используются в jsp файле
      */
-
+/*
     @RequestMapping(value ="toorders", method = RequestMethod.GET)
     public String listToorder(Model model) {
         model.addAttribute("toorder", new Toorder());
         model.addAttribute("listToorder", this.toorderService.listToorders());
         return "toorders";
+    }*/
+
+
+    @RequestMapping(value = "/toorders", method = RequestMethod.GET)
+    public ModelAndView orderLinesList()
+    {
+
+        ModelAndView model = new ModelAndView("toorders");
+        model.addObject("listToorder", this.toorderService.listToorders());
+        model.addObject("productsListFiltered", this.partService.filterByAvgCost());
+     //  model.addObject("productsListOrdered", this.partService.filterByOrderCostProducts());
+        return model;
     }
+
 
     /**
      * Запрос при нажатии на кнопку добавления записи
@@ -45,21 +67,6 @@ public class ToorderController {
     public String addToOrder(@ModelAttribute("toorder") Toorder toorder)
     {
         this.toorderService.addToorder(toorder);
-        /*
-        System.err.println("Детали у тек объекта"+toorder.getPartid());
-        if(!toorderService.listToorders().contains(toorder))
-        {
-            System.err.println("Контроллер Адд ТООРДЕР попал в иф");
-            this.toorderService.addToorder(toorder);
-        }
-        else
-            {
-                System.err.println("Контроллер Адд ТООРДЕР попал в елсу");
-                this.toorderService.updateToorder(toorder);
-            }
-
-         */
-
         return "redirect:/toorders";
     }
 
@@ -68,22 +75,6 @@ public class ToorderController {
     {
 
         this.toorderService.addToorder(toorder);
-
-        /*
-        System.err.println("Детали у тек объекта"+toorder.getPartid());
-        if(!toorderService.listToorders().contains(toorder))
-        {
-            System.err.println("Контроллер Адд ТООРДЕР попал в иф");
-            this.toorderService.addToorder(toorder);
-        }
-        else
-            {
-                System.err.println("Контроллер Адд ТООРДЕР попал в елсу");
-                this.toorderService.updateToorder(toorder);
-            }
-
-         */
-
         return "redirect:/toorders";
     }
 
@@ -94,8 +85,9 @@ public class ToorderController {
     @RequestMapping("/removetoorder/{id}")
     public String  removeToOrder(@PathVariable("id") int id)
     {
+
         this.toorderService.removeToorder(id);
-        return  "redirect:/toorders";
+        return  "redirect:/orders";
     }
 
     /**
@@ -107,7 +99,7 @@ public class ToorderController {
 
         model.addAttribute("toorder", this.toorderService.getToorderById(id));
         model.addAttribute("listToorder", this.toorderService.listToorders());
-        this.toorderService.removeToorder(id);
+
         System.err.println("Контроллер апдейт заполнил");
 
         return "toorders";

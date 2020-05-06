@@ -47,8 +47,8 @@ public class PartController {
     @RequestMapping(value ="/parts/add", method = RequestMethod.POST)
     public String addPart(@ModelAttribute("part") Part part)
     {
-
-
+        this.partService.addPart(part);
+/*
         if(part.getPartid() == 0)
         {
             System.err.println("Контроллер Адд ПАРТ попал в иф");
@@ -59,7 +59,7 @@ public class PartController {
                 System.err.println("Контроллер Адд ПАРТ попал в елсу");
                 this.partService.updatePart(part);
             }
-
+*/
         return "redirect:/parts";
     }
 

@@ -8,27 +8,22 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PartService
-{
+public class PartService {
 
     @Autowired
     private PartDao partDao;
 
-    public void setPartDao(PartDao partDao)
-    {
+    public void setPartDao(PartDao partDao) {
         this.partDao = partDao;
     }
 
 
-    public List<Part> listParts()
-    {
+    public List<Part> listParts() {
         return this.partDao.listParts();
     }
 
-    
 
-    public void addPart(Part part)
-    {
+    public void addPart(Part part) {
         this.partDao.addPart(part);
      /*
        if(!listPart().contains(part))
@@ -47,8 +42,7 @@ public class PartService
       */
     }
 
-    public void updatePart(Part part)
-    {
+    public void updatePart(Part part) {
         this.partDao.updatePart(part);
       /*
       if(this.listPart().contains(part))
@@ -65,15 +59,20 @@ public class PartService
        */
     }
 
-  public void removePart(int id)
-    {
+    public void removePart(int id) {
         this.partDao.removePart(id);
     }
 
 
-    public Part getPartById(int id)
-    {
+    public Part getPartById(int id) {
         return this.partDao.getPartById(id);
     }
 
+    public List<Part> filterByAvgCost() {
+        return this.partDao.filterProductByCost();
+    }
+
+    public List<Part> filterByOrderCostProducts() {
+        return this.partDao.filterByOrderCostProducts();
+    }
 }

@@ -29,14 +29,14 @@ public class Order implements Serializable
 
     @Column(name = "discount")
     private int discount;
-    @Column(name = "totalcost")
-    private int totalcost;
+    @Column(precision = 8,scale = 2)
+    private double totalcost;
 
-    public int getTotalcost() {
+    public double getTotalcost() {
         return totalcost;
     }
 
-    public void setTotalcost(int totalcost) {
+    public void setTotalcost(double totalcost) {
         this.totalcost = totalcost;
     }
 
@@ -46,8 +46,8 @@ public class Order implements Serializable
 
          */
     //////////////////////////////////////////////////
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private List<Toorder> toorders;
 
     public List<Toorder> getToorders() {
@@ -59,9 +59,9 @@ public class Order implements Serializable
     }
 
 
-    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name="gosznak", referencedColumnName = "gosznak")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     private Customer customer;
 
     public Customer getCustomer() {

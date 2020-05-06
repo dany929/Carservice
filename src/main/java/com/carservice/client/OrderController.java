@@ -68,35 +68,29 @@ public class OrderController {
       //  model.addAttribute("listpart",this.orderService.listPartsByOrder());
         //////////////////////////////////////////
         model.addAttribute("listOrders", this.orderService.listOrders());
+
+///Обновление цен заказов
+        List<Order> order =this.orderService.listOrders();
+        for (Order o: order)
+        {
+            double sum = 0;
+            for( Toorder t: o.getToorders())
+            {
+                sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+            }
+            System.err.println(sum);
+            sum=sum*(1-(double)o.getDiscount()/100);
+            System.err.println(sum);
+            o.setTotalcost(sum);
+            System.err.println(o.getTotalcost());
+            this.orderService.updateOrder(o);
+        }
+
         return "orders";
     }
 
-
-
     /**
-     * Запрос при нажатии на кнопку добавления записи
-     * проверка на повторяющийся элемент в списке
-     */
-
-    /*
-    @RequestMapping(value ="/orders/add", method = RequestMethod.POST)
-    public String addOrder(@ModelAttribute("orders") Order order)
-    {
-        System.err.println("Контроллер Адд ");
-        if(order.getOrderid() == 0)
-        {
-            System.err.println("Контроллер Адд попал в иф");
-            this.orderService.addOrder(order);
-        }
-        else
-            {
-                System.err.println("Контроллер Адд попал в елсу");
-                this.orderService.updateOrder(order);
-            }
-
-        return "redirect:/orders";
-    }
-
+     * Добавление клиента к заказу
      */
     @RequestMapping(value ="/orders/chooseCustomer", method = RequestMethod.GET)
     public ModelAndView addOrder() {
@@ -129,108 +123,171 @@ public class OrderController {
         String client = request.getParameter("clt");
 
         int numofparts = Integer.parseInt(request.getParameter("num"));
-        int discount = Integer.parseInt(request.getParameter("dis"));
+        double discount = Double.parseDouble(request.getParameter("dis"));
         int ord = Integer.parseInt(request.getParameter("ord"));
         List<Toorder> products = new ArrayList<>();
-        List<Toorder> operations = new ArrayList<>();
 
-        int sum = 0;
+        double sum = 0;
         Order order;
 
-        //Проверяем новый ли заказ
-        //Если да, ищем его
-        //Если нет, инициализурем как новую переменную
+
+        /**
+         * В положительной ветке подтягивается список параметров
+         * В имеющийся заказ добавляется новые товары и услуги, обновляется цена для заказа
+         *
+         * В отрицательной ветке создается новый заказ
+         */
         if(ord > 0)
         {
+
             order = this.orderService.findOrder(ord);
-            for(Toorder o : order.getToorders())
-            {
-                this.toorderService.deleteOrderLine(o);
-            }
-        }
-        else
-        {
-
-            order = new Order();
-
-            LocalDate localDate = LocalDate.now();
-            order.setDatein(DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate));
-        }
-
-        System.err.println("до парт?");
-        /*
-        //Заполняем заказ
-        for(String p: prds)
-        {
-            Part temp = this.partService.getPartById(Integer.parseInt(p));
-
-            Toorder line = new Toorder();
-            System.err.println("После нового тоордера?");
-            line.setPart(temp);
-            System.err.println("После добавления частей?");
-          //  line.setNumofparts(Integer.parseInt(request.getParameter(p)));
-            line.setNumofparts(8);
-            System.err.println("После колва*?");
-            products.add(line);
-            System.err.println("После добавления в продуктс?");
-            sum += temp.getPrice() * 8;
-            System.err.println("После суммы?");
-        }
-        System.err.println("после парт переж опер?");
-        for(String o: oper)
-        {
-            Operation tmp = this.operationService.getOperationById(Integer.parseInt(o));
-            Toorder line = new Toorder();
-            line.setOperation(tmp);
-            operations.add(line);
-            sum += tmp.getPrice();
-        }
-
-         */
-
-
-        //Заполняем заказ
 
             Part temp = this.partService.getPartById(Integer.parseInt(prds));
 
             Toorder line = new Toorder();
-            System.err.println("После нового тоордера?");
-            line.setPart(temp);
-            System.err.println("После добавления частей?");
-            //  line.setNumofparts(Integer.parseInt(request.getParameter(p)));
-            line.setNumofparts(numofparts);
-            System.err.println("После колва*?");
-            products.add(line);
-            System.err.println("После добавления в продуктс?");
-            sum += temp.getPrice() * numofparts;
-            System.err.println("После суммы?");
 
-        System.err.println("после парт переж опер?");
+            int lastToOrder=this.toorderService.listLastToorder();
+            line.setToorderid(lastToOrder+1);
+            line.setOrder(order);
+            System.err.println("Номер нового тоордера"+lastToOrder);
+
+            line.setPart(temp);
+
+
+            line.setNumofparts(numofparts);
+
+
+            sum += temp.getPrice() * numofparts;
+
 
             Operation tmp = this.operationService.getOperationById(Integer.parseInt(oper));
 
             line.setOperation(tmp);
             products.add(line);
+
             sum += tmp.getPrice();
+
             sum=sum*(1-discount/100);
 
 
+            /**
+             * Заполнение данных о деталях и услугах
+             */
+            order.setToorders(products);
+
+            order.setTotalcost(sum);
 
 
+            if(discount!=-1)
+            {
+                order.setDiscount((int)(discount));
+            }
 
-        //Заполняем остальные данные и отправляем на добавление/обновление
-        order.setToorders(products);
+            System.err.println("!!!!!!!!!!!");
+            System.err.println(order.toString()+order.getToorders().toString());
+            this.orderService.updateOrder(order);
 
-        System.err.println("Хф");
+            //Добавление нового подзаказа
+            this.toorderService.addToorder(line);
+
+            System.err.println("!!!!!!!!!!!");
+            System.err.println(order.toString()+order.getToorders().toString());
+
+          this.orderService.updateOrder(order);
+          System.err.println("!!!!!!!!!!! После апдейта");
+          System.err.println(order.toString()+order.getToorders().toString());
 
 
-        order.setTotalcost(sum);
-        System.err.println(this.customerService.getCustomerById(client));
-        order.setCustomer(this.customerService.getCustomerById(client));
-        order.setDiscount(discount);
+            order = this.orderService.findOrder(ord);
+            System.err.println("!!!!!!!!!!!ОБНОВЛЕНИЕ СУЩНОСТИ");
+            System.err.println(order.toString()+order.getToorders().toString());
 
-        this.orderService.addOrder(order);
-        this.toorderService.addToorder(line);
+            ///ПРОСТАНОВКА СТОИМОСТИ ЗАКАЗА
+            sum=0;
+            for(Toorder t: order.getToorders())
+            {
+              sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+            }
+            System.err.println(sum);
+            sum=sum*(1-(double)order.getDiscount()/100);
+            System.err.println(sum);
+
+            order.setTotalcost(sum);
+            System.err.println(sum + "стоимость ордера"+order.getTotalcost());
+
+            this.orderService.updateOrder(order);
+
+        }
+
+        else
+        {
+            System.err.println("Создание пустого заказа");
+            order = new Order();
+
+            ///Простановка дат
+            LocalDate localDate = LocalDate.now();
+            order.setDatein(DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate));
+            order.setDateout("In Process");
+
+
+            /**
+             * Узнаем ид последнего заказа,
+             * ставим ид новому
+             */
+
+            int lastOrder=this.orderService.listLastOrder();
+            order.setOrderid(lastOrder+1);
+            System.err.println(lastOrder);
+            System.err.println("Новый ийди заказа"+order.getOrderid());
+
+            //Заполняем заказ
+
+            Part temp = this.partService.getPartById(Integer.parseInt(prds));
+
+            /**
+             *Создание и заполнение подзаказа
+             */
+            Toorder line = new Toorder();
+
+            int lastToOrder=this.toorderService.listLastToorder();
+            line.setToorderid(lastToOrder+1);
+            line.setOrder(order);
+            System.err.println("Номер нового тоордера"+lastToOrder);
+
+            line.setPart(temp);
+
+
+            line.setNumofparts(numofparts);
+
+
+            sum += temp.getPrice() * numofparts;
+
+
+            Operation tmp = this.operationService.getOperationById(Integer.parseInt(oper));
+
+            line.setOperation(tmp);
+            products.add(line);
+
+            sum += tmp.getPrice();
+            System.err.println(sum);
+            sum=sum*(1-(double)order.getDiscount()/100);
+            System.err.println(sum);
+
+            //Заполняем остальные данные и отправляем на добавление/обновление
+            order.setToorders(products);
+
+            order.setTotalcost(sum);
+            System.err.println(this.customerService.getCustomerById(client));
+            order.setCustomer(this.customerService.getCustomerById(client));
+            order.setDiscount((int)discount);
+
+            System.err.println(order.toString()+order.getToorders().toString());
+
+            this.orderService.addOrder(order);
+            this.toorderService.addToorder(line);
+
+        }
+
         return new ModelAndView("redirect:/orders");
     }
 
@@ -259,7 +316,7 @@ public class OrderController {
     @RequestMapping("/removeorder/{id}")
     public String  removeOrder(@PathVariable("id") int id)
     {
-        this.orderService.deleteOrders(id);
+        this.orderService.removeOrder(id);
         return  "redirect:/orders";
     }
 

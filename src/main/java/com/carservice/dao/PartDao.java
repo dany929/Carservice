@@ -1,8 +1,7 @@
 package com.carservice.dao;
 
 import com.carservice.model.Part;
-
-
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -34,13 +33,13 @@ public class PartDao
         Session session = this.sessionFactory.openSession();
         List<Part> partList =
                 session.createQuery("SELECT p FROM Part p ORDER BY p.partid").list();
-
+        session.close();
         //вывод в консоль сервера
         for(Part p: partList)
         {
-            logger.info(p.toString());
+            logger.warn(p.toString());
         }
-session.close();
+
         return partList;
     }
 
@@ -51,8 +50,10 @@ session.close();
      */
     public void addPart(Part part) {
         Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
         session.saveOrUpdate(part);
-        logger.info("Customer added: " + part);
+        session.getTransaction().commit();
+        logger.warn("Part added: " + part);
         session.close();
     }
 
@@ -76,7 +77,9 @@ session.close();
 
         if ( part != null)
         {
+            session.beginTransaction();
             session.delete(part);
+            session.getTransaction().commit();
         }
         logger.info("Part deleted "+part);
         session.close();
@@ -87,13 +90,50 @@ session.close();
      */
     public Part getPartById(int id) {
         Session session = this.sessionFactory.openSession();
-        Part part = (Part) session.load(Part.class, new Integer(id));
-
-
-        logger.info("Part found: " + part);
+       // Part part = (Part) session.load(Part.class, new Integer(id));
+        Part p = new Part();
+        session.load(p, id);
+        logger.warn("Part found: " + p.toString());
         session.close();
-        return part;
+        return p;
     }
 
+
+    //Сложный запрос выводящий товары цена которых выше средней
+    @SuppressWarnings("unchecked")
+    public List<Part> filterProductByCost()
+    {
+        Session session = this.sessionFactory.openSession();
+        List<Part> partList = session.createQuery(
+                "SELECT s FROM Part s WHERE s.price > (SELECT avg(s.price) FROM Part s)").list();
+        for(Part product : partList)
+        {
+            logger.info(product.toString());
+        }
+        session.close();
+        return partList;
+    }
+////////////////////////НЕ РОБИТ////
+    //Сложный запрос выводящий все товары которые входят в заказы цены которых выше 30000
+    @SuppressWarnings("unchecked")
+    public List<Part> filterByOrderCostProducts()
+    {
+        Session session = this.sessionFactory.openSession();
+        String sql = "SELECT parts.partid, parts.category, parts.price, parts.title from parts ";
+        SQLQuery query = session.createSQLQuery(sql);
+        query.addEntity(Part.class);
+        List<Part> partList = query.list();
+
+        /*
+        List<Part> partList = session.createQuery("SELECT part.category, sum(part.price) " +
+                "FROM Part part GROUP BY part.category ").list();
+        for(Part product : partList)
+        {
+            logger.info(product.toString());
+        }
+        */
+        session.close();
+        return partList;
+    }
 
 }

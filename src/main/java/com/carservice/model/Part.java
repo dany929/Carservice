@@ -32,9 +32,6 @@ public class Part
 @Cascade(org.hibernate.annotations.CascadeType.ALL)
 private List<Toorder> toorders;
 
-
-
-
     public List<Toorder> getToorders() {
         return toorders;
     }

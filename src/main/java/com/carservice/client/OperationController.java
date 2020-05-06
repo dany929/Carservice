@@ -41,7 +41,8 @@ public class OperationController {
     @RequestMapping(value ="/operations/add", method = RequestMethod.POST)
     public String addOperation(@ModelAttribute("operation") Operation operation)
     {
-
+        this.operationService.addOperation(operation);
+        /*
         if(operation.getOperationid() == 0)
         {
             System.err.println("Контроллер Адд попал в иф");
@@ -52,6 +53,7 @@ public class OperationController {
             System.err.println("Контроллер Адд попал в елсу");
             this.operationService.updateOperation(operation);
         }
+         */
 
         return "redirect:/operations";
     }

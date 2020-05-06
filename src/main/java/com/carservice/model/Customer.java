@@ -29,8 +29,8 @@ public class Customer
 
 
     //////////////////////////////////////////////////
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer",orphanRemoval = true)
+    @Cascade(org.hibernate.annotations.CascadeType.REMOVE)
     private List<Order> orders;
 
     public List<Order> getOrders() {

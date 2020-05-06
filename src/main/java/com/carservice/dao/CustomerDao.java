@@ -72,7 +72,9 @@ public class CustomerDao
      */
     public void addCustomer(Customer customer) {
         Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
         session.saveOrUpdate(customer);
+        session.getTransaction().commit();
         logger.info("Customer added: " + customer);
         session.close();
     }
@@ -100,7 +102,9 @@ public class CustomerDao
 
         for (Customer c : customerList)
         {
+            session.beginTransaction();
             session.delete(c);
+            session.getTransaction().commit();
             logger.info("Customer removed: " + c);
         }
 
@@ -128,7 +132,7 @@ public class CustomerDao
         }
 
         logger.info("Customer found: " + customer);
-session.close();
+        session.close();
         return customer;
     }
 

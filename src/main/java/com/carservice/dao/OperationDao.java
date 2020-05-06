@@ -51,7 +51,9 @@ public class OperationDao
      */
     public void addOperation(Operation operation) {
         Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
         session.saveOrUpdate(operation);
+        session.getTransaction().commit();
         logger.info("Customer added: " + operation);
         session.close();
     }
@@ -76,7 +78,9 @@ public class OperationDao
 
         if ( operation != null)
         {
+            session.beginTransaction();
             session.delete(operation);
+            session.getTransaction().commit();
         }
         logger.info("Operation deleted "+operation);
         session.close();
