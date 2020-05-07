@@ -18,35 +18,33 @@
     <title>Orders</title>
 
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
+
     <ul>
         <li>
-            <a  href="/customers">Customers</a>
+            <a  href="/customers/">Customers</a>
         </li>
         <li>
-            <a href="/parts">Parts</a>
+            <a href="/parts/">Parts</a>
         </li>
         <li>
-            <a href="/operations">Operations</a>
+            <a href="/operations/">Operations</a>
         </li>
         <li>
-            <a class="active" href="/orders">Orders</a>
+            <a class="active" href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders">ToOrders</a>
+            <a href="/toorders/">ToOrders</a>
         </li>
     </ul>
 </head>
 
 <body>
 <br>
-<br>
-<%--
-<c:url var="addAction" value="/orders/add"/>
+<form:form action="update" method="POST"  modelAttribute="order">
+<table>
 
-<form:form action="${addAction}" modelAttribute="order">
-    <table>
+   <c:if test="${!empty order.customer.gosznak}">
 
-        <c:if test="${!empty order.customer.gosznak}">
             <tr>
                 <td>
                     <form:label path="orderid">
@@ -54,21 +52,21 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input path="orderid" readonly="true" size="8" disabled="true" required="required"/>
-                    <form:hidden path="orderid"/>
+                    <form:input path="orderid" readonly="true" size="8" required="required"/>
+
                 </td>
             </tr>
-        </c:if>
-        <tr>
-            <td>
-                <form:label path="customer.gosznak">
-                    <spring:message text="gosznak"/>
-                </form:label>
-            </td>
-            <td>
-                <form:input path="customer.gosznak" required="required"/>
-            </td>
-        </tr>
+
+    <tr>
+        <td>
+            <form:label path="customer.gosznak">
+                <spring:message text="gosznak"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="customer.gosznak" required="required"/>
+        </td>
+    </tr>
 
         <tr>
             <td>
@@ -97,28 +95,30 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="discount" required="required"/>
+                <form:input type="number" min="0" path="discount" required="required"/>
             </td>
         </tr>
+       <br>
+
         <tr>
             <td colspan="2">
-                <c:if test="${!empty order.customer.gosznak}">
+                <c:if test="${!empty order.customer}">
                     <input type="submit"
                            value="<spring:message text="Edit order"/>"/>
                 </c:if>
-                <c:if test="${empty order.customer.gosznak}">
+                <c:if test="${empty order.customer}">
                     <input type="submit"
                            value="<spring:message text="Add order"/>"/>
                 </c:if>
             </td>
         </tr>
+   </c:if>
     </table>
 </form:form>
---%>
-<br>
-<br>
 
-<a class="buttonEdit" href="/orders/chooseCustomer">Add New Order</a><br><br>
+<a class="buttonEdit" href="/orders/chooseCustomer">Add New Order</a>
+<br>
+<br>
 
 <c:if test="${!empty listOrders }">
     <c:forEach items="${listOrders}" var="order">
@@ -127,13 +127,14 @@
             <th width="80">Order #${order.orderid}</th>
         </tr>
         <tr>
-            <th width="80">gosznak</th>
-            <th width="80">datein</th>
-            <th width="80">dateout</th>
+            <th width="80">Gosznak</th>
+            <th width="80">Date In</th>
+            <th width="80">Date Out</th>
 
-            <th width="80">discount</th>
-            <th width="80">Total</th>
-
+            <th width="80">Discount</th>
+            <th width="80">Total with Discount</th>
+            <th width="80">Complition</th>
+            <th width="80">Add Pos</th>
             <th width="80">Edit</th>
             <th width="80">Delete</th>
         </tr>
@@ -147,32 +148,74 @@
             <td>${order.discount}</td>
             <td>${order.totalcost}</td>
 
-            <td><a  href="/orders/edit?id=${order.orderid}" >Add new Position</a></td>
-            <td><a href="<c:url value='/removeorder/${order.orderid}'/>">Delete</a></td>
+            <td>
+                <form:form action="cpl" method="POST">
+                <input type="hidden" name="id" value="${order.orderid}"/>
+                <input type="submit" class="buttonEdit" value="Complete with Today Date">
+                </form:form>
+            </td>
+
+            <td>
+                <form:form action="edit" method="POST">
+                <input type="hidden" name="id" value="${order.orderid}"/>
+                <input type="submit" class="buttonEdit" value="Add new Position">
+                </form:form>
+            </td>
+
+            <td>
+                <form:form action="editorder" method="POST">
+                    <input type="hidden" name="id" value="${order.orderid}"/>
+                    <input type="submit" class="buttonEdit" value="Edit">
+                </form:form>
+            </td>
+
+            <td>
+                <form:form action="delete" method="POST">
+                    <input type="hidden" name="id" value="${order.orderid}"/>
+                    <input type="submit" class="buttonDel" value="Delete ORDER">
+                </form:form>
+            </td>
+
 
 
         </tr>
 
         <c:if test="${!empty order.toorders}">
             <tr>
-                <th width="80" colspan="6"> Parts'n'Works </th>
+                <th width="80" colspan="9"> Parts'n'Works </th>
             </tr>
             <tr>
-                <th width="80" >Toorderid</th>
-                <th width="80" >Product</th>
+
+                <th width="80" >Product Title</th>
                 <th width="80" >Category</th>
-                <th width="80" >Type of work</th>
-                <th width="80">Number of parts</th>
-                <th width="80">Delete</th>
+                <th width="80">Number of Parts</th>
+                <th width="80" >Total Part Cost</th>
+                <th width="80" >Type of Work</th>
+                <th width="80" >Work Cost</th>
+                <th width="80" >Edit</th>
+                <th width="80" colspan="2">Delete</th>
             </tr>
             <c:forEach items="${order.toorders}" var="prod">
                 <tr>
-                    <td>${prod.toorderid}</td>
+
                     <td>${prod.part.title}</td>
                     <td>${prod.part.category}</td>
-                    <td>${prod.operation.description}</td>
                     <td>${prod.numofparts}</td>
-                    <td><a a  href="/removetoorder/${prod.toorderid}">Delete</a></td>
+                    <td>${prod.part.price*prod.numofparts}</td>
+                    <td>${prod.operation.description}</td>
+                    <td>${prod.operation.price}</td>
+                    <td>
+                        <form:form action="edittoorder" method="POST">
+                        <input type="hidden" name="id" value="${prod.toorderid}"/>
+                        <input align="middle" type="submit" class="buttonDel" value="Edit">
+                        </form:form>
+                    </td>
+                    <td colspan="2">
+                        <form:form action="removetoorder" method="POST">
+                        <input type="hidden" name="id" value="${prod.toorderid}"/>
+                        <input type="submit" class="buttonDel" value="Remove from Order">
+                        </form:form>
+                    </td>
                 </tr>
 
             </c:forEach>

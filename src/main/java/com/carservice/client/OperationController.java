@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 //@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
@@ -27,7 +30,7 @@ public class OperationController {
      * атрибуты модели используются в jsp файле
      */
 
-    @RequestMapping(value ="operations", method = RequestMethod.GET)
+    @RequestMapping(value ="/operations/", method = RequestMethod.GET)
     public String listOperations(Model model) {
         model.addAttribute("operation", new Operation());
         model.addAttribute("listOperations", this.operationService.listOperations());
@@ -39,47 +42,33 @@ public class OperationController {
      * проверка на повторяющийся элемент в списке
      */
     @RequestMapping(value ="/operations/add", method = RequestMethod.POST)
-    public String addOperation(@ModelAttribute("operation") Operation operation)
+    public ModelAndView addOperation(Operation operation)
     {
         this.operationService.addOperation(operation);
-        /*
-        if(operation.getOperationid() == 0)
-        {
-            System.err.println("Контроллер Адд попал в иф");
-            this.operationService.addOperation(operation);
-        }
-        else
-        {
-            System.err.println("Контроллер Адд попал в елсу");
-            this.operationService.updateOperation(operation);
-        }
-         */
-
-        return "redirect:/operations";
+        return new ModelAndView("redirect:/operations/") ;
     }
 
     /**
      * Запрос на удаление по id
      */
-    @RequestMapping("/removeoperation/{id}")
-    public String  removeOperation(@PathVariable("id") int id)
+    @RequestMapping(value = "/operations/remove", method = RequestMethod.POST)
+    public ModelAndView  removeOperation(@RequestParam int id)
     {
         this.operationService.removeOperation(id);
-        return  "redirect:/operations";
+        return  new ModelAndView("redirect:/operations/") ;
     }
 
     /**
      * Заполнение полей для добавления\обновления записи
      */
-    @RequestMapping("/editoperation/{id}")
-    public String  updateOperation(@PathVariable("id") int id, Model model)
+    @RequestMapping(value = "/operations/edit", method = RequestMethod.POST)
+    public ModelAndView  updateOperation(@RequestParam int id)
     {
-        model.addAttribute("operation", this.operationService.getOperationById(id));
-        model.addAttribute("listOperations", this.operationService.listOperations());
-
+        ModelAndView model = new ModelAndView("operations");
+        model.addObject("operation", this.operationService.getOperationById(id));
+        model.addObject("listOperations", this.operationService.listOperations());
         System.err.println("Контроллер апдейт заполнил");
-
-        return "operations";
+        return model;
     }
 
 /*

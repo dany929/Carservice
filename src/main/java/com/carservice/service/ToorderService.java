@@ -34,40 +34,16 @@ public class ToorderService
     public void addToorder(Toorder toorder)
     {
         this.toorderDao.addToorder(toorder);
-     /*
-       if(!listToorder().contains(toorder))
 
-       {
-           System.err.println("Сервис Адд попал в иф");
-           this.toorderDao.addToorder(toorder);
-           System.err.println("Сервис Адд попал в иф после дао");
-       }
-       else
-           {
-               System.err.println("Сервис Адд попал в елсу");
-              this.toorderDao.updateToorder(toorder);
-           }
-
-      */
     }
 
     public void updateToorder(Toorder toorder)
     {
         this.toorderDao.updateToorder(toorder);
-      /*
-      if(this.listToorder().contains(toorder))
-        {
-            System.err.println("Сервис Апдейт попал в иф");
-            this.toorderDao.updateToorder(toorder);
-        }
-        else
-        {
-            System.err.println("Сервис Апдейт попал в елсу");
-            this.toorderDao.addToorder(toorder);
-        }
 
-       */
     }
+
+
 
   public void removeToorder(int id)
     {

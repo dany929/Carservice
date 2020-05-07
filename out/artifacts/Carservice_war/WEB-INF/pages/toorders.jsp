@@ -20,19 +20,19 @@
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <ul>
         <li>
-            <a  href="/customers">Customers</a>
+            <a  href="/customers/">Customers</a>
         </li>
         <li>
-            <a href="/parts">Parts</a>
+            <a href="/parts/">Parts</a>
         </li>
         <li>
-            <a href="/operations">Operations</a>
+            <a href="/operations/">Operations</a>
         </li>
         <li>
-            <a  href="/orders">Orders</a>
+            <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a class="active" href="/toorders">ToOrders</a>
+            <a class="active" href="/toorders/">ToOrders</a>
         </li>
     </ul>
 </head>
@@ -41,75 +41,7 @@
 <br>
 <br>
 
-    <%--
-  <c:url var="addAction" value="/toorders/add"/>
 
-  <form:form action="${addAction}" modelAttribute="toorder">
-      <table>
-
-
-                          <tr>
-                              <td>
-                                  <form:label path="orderid">
-                                      <spring:message text="Orderid"/>
-                                  </form:label>
-                              </td>
-                              <td>
-                                  <form:input path="orderid" required="required"/>
-
-                              </td>
-                          </tr>
-
-                      <tr>
-                          <td>
-                              <form:label path="partid">
-                                  <spring:message text="partid"/>
-                              </form:label>
-                          </td>
-                          <td>
-                              <form:input path="partid" required="required"/>
-                          </td>
-                      </tr>
-
-                      <tr>
-                          <td>
-                              <form:label path="operationid">
-                                  <spring:message text="operationid"/>
-                              </form:label>
-                          </td>
-                          <td>
-                              <form:input path="operationid" required="required"/>
-                          </td>
-                      </tr>
-
-          <tr>
-              <td>
-                  <form:label path="numofparts">
-                      <spring:message text="numofparts"/>
-                  </form:label>
-              </td>
-              <td>
-                  <form:input path="numofparts" required="required"/>
-              </td>
-          </tr>
-
-          <tr>
-              <td colspan="2">
-                  <c:if test="${!empty toorder.order.orderid}">
-                      <input type="submit"
-                             value="<spring:message text="Edit Toorder"/>"/>
-                  </c:if>
-                  <c:if test="${empty toorder.order.orderid}">
-                      <input type="submit"
-                             value="<spring:message text="Add Toorder"/>"/>
-                  </c:if>
-              </td>
-          </tr>
-
-      </table>
-  </form:form>
-
-  --%>
 
 <br>
 <br>

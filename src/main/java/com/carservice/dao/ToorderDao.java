@@ -108,7 +108,10 @@ public class ToorderDao
      */
     public void updateToorder(Toorder c) {
         Session session = this.sessionFactory.openSession();
-        session.update(c);
+        session.beginTransaction();
+        session.saveOrUpdate(c);
+        session.getTransaction().commit();
+
         logger.info("Customer updated: " + c);
         session.close();
     }

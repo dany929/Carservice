@@ -5,11 +5,10 @@ import com.carservice.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -32,11 +31,12 @@ public class CustomerController {
      * атрибуты модели используются в jsp файле
      */
 
-    @RequestMapping(value ="customers", method = RequestMethod.GET)
-    public String listCustomers(Model model) {
-        model.addAttribute("customer", new Customer());
-        model.addAttribute("listCustomers", this.customerService.listCustomers());
-        return "customers";
+    @RequestMapping(value ="/customers/", method = RequestMethod.GET)
+    public ModelAndView listCustomers() {
+        ModelAndView model =new ModelAndView("customers");
+        model.addObject("customer", new Customer());
+        model.addObject("listCustomers", this.customerService.listCustomers());
+        return model;
     }
 
 
@@ -46,48 +46,36 @@ public class CustomerController {
      * проверка на повторяющийся элемент в списке
      */
     @RequestMapping(value ="/customers/add", method = RequestMethod.POST)
-    public String addCustomer(@ModelAttribute("customer") Customer customer)
+    public ModelAndView addCustomer(Customer customer)
     {
         this.customerService.addCustomer(customer);
-/*
-        if(!customerService.listCustomers().contains(customer))
-        {
-            System.err.println("Контроллер Адд попал в иф");
-            this.customerService.addCustomer(customer);
-        }
-        else
-        {
-            System.err.println("Контроллер Адд попал в елсу");
-            this.customerService.updateCustomer(customer);
-        }
 
- */
-
-        return "redirect:/customers";
+        return new ModelAndView("redirect:/customers/") ;
     }
 
     /**
      * Запрос на удаление по id
      */
-    @RequestMapping("/remove/{id}")
-    public String  removeCustomer(@PathVariable("id") String id)
+    @RequestMapping(value = "/customers/remove", method = RequestMethod.POST)
+    public ModelAndView  removeCustomer(@RequestParam String id)
     {
         this.customerService.removeCustomer(id);
-        return  "redirect:/customers";
+        return  new ModelAndView("redirect:/customers/") ;
     }
 
     /**
      * Заполнение полей для добавления\обновления записи
      */
-    @RequestMapping("/edit/{id}")
-    public String  updateCustomer(@PathVariable("id") String id, Model model)
+    @RequestMapping(value = "/customers/edit", method = RequestMethod.POST)
+    public ModelAndView  updateCustomer(@RequestParam String id)
     {
-        model.addAttribute("customer", this.customerService.getCustomerById(id));
-        model.addAttribute("listCustomers", this.customerService.listCustomers());
+        ModelAndView model = new ModelAndView("customers");
+        model.addObject("customer", this.customerService.getCustomerById(id));
+        model.addObject("listCustomers", this.customerService.listCustomers());
 
         System.err.println("Контроллер апдейт заполнил");
 
-        return "customers";
+        return model;
     }
 
 

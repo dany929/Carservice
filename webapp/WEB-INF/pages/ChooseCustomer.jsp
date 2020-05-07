@@ -30,7 +30,10 @@
                 <td>${customer.lastname}</td>
                 <td>${customer.tel}</td>
                 <td>
-                    <a  href="/orders/client?id=${customer.gosznak}" > Add </a>
+                    <form:form action="client" method="POST">
+                        <input type="hidden" name="id" value="${customer.gosznak}"/>
+                        <input type="submit" class="buttonEdit" value="Add">
+                    </form:form>
                 </td>
             </tr>
         </c:forEach>

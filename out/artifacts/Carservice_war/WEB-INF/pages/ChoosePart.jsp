@@ -9,9 +9,9 @@
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>
-<form:form action="add" method="get">
+<form:form action="add" method="post">
     <c:if test="${!empty listParts}">
-        <input type="submit"  value="Add">
+
         <input type="hidden" name="ord" value="${orderId}"/>
         <input type="hidden" name="clt" value="${gosznak}"/>
 
@@ -38,11 +38,11 @@
             </c:forEach>
             <th width="80">Number of parts</th>
             <td>
-                <input type="number" name="num"/>
+                <input type="number" name="num" min="1" placeholder="1"/>
             </td>
             <th width="80">Discount</th>
             <td>
-                <input type="number" name="dis"/>
+                <input type="number" name="dis" min="0" placeholder="0"/>
             </td>
         </table>
     </c:if>
@@ -72,6 +72,7 @@
                 </tr>
             </c:forEach>
         </table>
+        <input type="submit"  value="Add">
     </c:if>
 
 </form:form>

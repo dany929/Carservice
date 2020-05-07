@@ -9,10 +9,9 @@ import com.carservice.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,15 +60,17 @@ public class OrderController {
      * атрибуты модели используются в jsp файле
      */
 
-    @RequestMapping(value ="orders", method = RequestMethod.GET)
-    public String listOrders(Model model) {
-        model.addAttribute("order", new Order());
+    @RequestMapping(value ="/orders/", method = RequestMethod.GET)
+    public ModelAndView listOrders() {
+       ModelAndView model = new ModelAndView("orders");
+        model.addObject("order", new Order());
         ///////////////////////////////////////////
       //  model.addAttribute("listpart",this.orderService.listPartsByOrder());
         //////////////////////////////////////////
-        model.addAttribute("listOrders", this.orderService.listOrders());
+        model.addObject("listOrders", this.orderService.listOrders());
 
-///Обновление цен заказов
+            ///Обновление цен заказов
+        /*
         List<Order> order =this.orderService.listOrders();
         for (Order o: order)
         {
@@ -86,7 +87,9 @@ public class OrderController {
             this.orderService.updateOrder(o);
         }
 
-        return "orders";
+         */
+
+        return model;
     }
 
     /**
@@ -95,12 +98,11 @@ public class OrderController {
     @RequestMapping(value ="/orders/chooseCustomer", method = RequestMethod.GET)
     public ModelAndView addOrder() {
         ModelAndView model = new ModelAndView("ChooseCustomer");
-
         model.addObject("listCustomers", this.customerService.listCustomers());
         return model;
     }
 
-    @RequestMapping(value = "/orders/client", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/client", method = RequestMethod.POST)
     public  ModelAndView addOrder(String id)
     {
         ModelAndView model = new ModelAndView("ChoosePart");
@@ -111,7 +113,78 @@ public class OrderController {
         return model;
     }
 
-    @RequestMapping(value = "/orders/add", method = RequestMethod.GET)
+    //Обработчик ссылки редактирования заказа
+    //Принимает номер заказа для редактирования и выводит страницу выбора товаров
+    @RequestMapping(value = "/orders/edittoorder", method = RequestMethod.POST)
+    public ModelAndView editToorder(int id)
+    {
+        ModelAndView model = new ModelAndView("EditToorder");
+        model.addObject("toorderid", id);
+      //  model.addObject("gosznak", this.orderService.findOrder(id).getCustomer().getGosznak());
+        model.addObject("listParts", this.partService.listParts());
+        model.addObject("listOperations", this.operationService.listOperations());
+        return model;
+    }
+//Обновление услуг
+    @RequestMapping(value = "/orders/updatetoorder", method = RequestMethod.POST)
+    public ModelAndView updateToOrder(HttpServletRequest request)
+    {
+        //Парсим параметры и инициализируем все объекты и переменные
+        String prds = request.getParameter("id");
+
+        String oper = request.getParameter("idopr");
+
+       // String client = request.getParameter("clt");
+
+        int numofparts = Integer.parseInt(request.getParameter("num"));
+
+        int tor = Integer.parseInt(request.getParameter("tor"));
+
+        Toorder toorder;
+
+        double sum = 0;
+        toorder = this.toorderService.getToorderById(tor);
+
+        Part temp = this.partService.getPartById(Integer.parseInt(prds));
+        toorder.setPart(temp);
+
+        Operation tmp = this.operationService.getOperationById(Integer.parseInt(oper));
+        toorder.setOperation(tmp);
+        toorder.setNumofparts(numofparts);
+
+        this.toorderService.addToorder(toorder);
+
+
+
+
+
+        //Заполнение сущностей из за ленивой загрузки и простанока цены
+        Toorder f = this.toorderService.getToorderById(tor);
+        Order o = f.getOrder();
+
+        List<Toorder> toorderList = this.orderService.getOrderById(o.getOrderid()).getToorders();
+
+        Order order  = toorder.getOrder();
+
+        for(Toorder t: toorderList)
+        {
+            sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+        }
+        System.err.println(sum);
+        sum=sum*(1-(double)order.getDiscount()/100);
+        System.err.println(sum);
+
+        order.setTotalcost(sum);
+        System.err.println(sum + " стоимость ордера "+order.getTotalcost());
+
+
+
+        this.orderService.updateOrder(order);
+        System.err.println(sum + " стоимость ордера осле апдейта "+order.getTotalcost());
+        return new ModelAndView("redirect:/orders/");
+    }
+
+    @RequestMapping(value = "/orders/add", method = RequestMethod.POST)
     public ModelAndView addOrder(HttpServletRequest request)
     {
 
@@ -123,7 +196,7 @@ public class OrderController {
         String client = request.getParameter("clt");
 
         int numofparts = Integer.parseInt(request.getParameter("num"));
-        double discount = Double.parseDouble(request.getParameter("dis"));
+
         int ord = Integer.parseInt(request.getParameter("ord"));
         List<Toorder> products = new ArrayList<>();
 
@@ -157,7 +230,7 @@ public class OrderController {
             line.setNumofparts(numofparts);
 
 
-            sum += temp.getPrice() * numofparts;
+          //  sum += temp.getPrice() * numofparts;
 
 
             Operation tmp = this.operationService.getOperationById(Integer.parseInt(oper));
@@ -165,9 +238,9 @@ public class OrderController {
             line.setOperation(tmp);
             products.add(line);
 
-            sum += tmp.getPrice();
+          //  sum += tmp.getPrice();
 
-            sum=sum*(1-discount/100);
+           // sum=sum*(1-discount/100);
 
 
             /**
@@ -177,12 +250,12 @@ public class OrderController {
 
             order.setTotalcost(sum);
 
-
+/*
             if(discount!=-1)
             {
                 order.setDiscount((int)(discount));
             }
-
+*/
             System.err.println("!!!!!!!!!!!");
             System.err.println(order.toString()+order.getToorders().toString());
             this.orderService.updateOrder(order);
@@ -194,13 +267,9 @@ public class OrderController {
             System.err.println(order.toString()+order.getToorders().toString());
 
           this.orderService.updateOrder(order);
-          System.err.println("!!!!!!!!!!! После апдейта");
-          System.err.println(order.toString()+order.getToorders().toString());
 
 
             order = this.orderService.findOrder(ord);
-            System.err.println("!!!!!!!!!!!ОБНОВЛЕНИЕ СУЩНОСТИ");
-            System.err.println(order.toString()+order.getToorders().toString());
 
             ///ПРОСТАНОВКА СТОИМОСТИ ЗАКАЗА
             sum=0;
@@ -221,6 +290,9 @@ public class OrderController {
 
         else
         {
+            double discount = Double.parseDouble(request.getParameter("dis"));
+
+
             System.err.println("Создание пустого заказа");
             order = new Order();
 
@@ -288,17 +360,17 @@ public class OrderController {
 
         }
 
-        return new ModelAndView("redirect:/orders");
+        return new ModelAndView("redirect:/orders/");
     }
 
 
 
     //Обработчик ссылки редактирования заказа
     //Принимает номер заказа для редактирования и выводит страницу выбора товаров
-    @RequestMapping(value = "/orders/edit", method = RequestMethod.GET)
+    @RequestMapping(value = "/orders/edit", method = RequestMethod.POST)
     public ModelAndView editOrder(int id)
     {
-        ModelAndView model = new ModelAndView("ChoosePart");
+        ModelAndView model = new ModelAndView("ChoosePartinToorder");
         model.addObject("orderId", id);
         model.addObject("gosznak", this.orderService.findOrder(id).getCustomer().getGosznak());
         model.addObject("listParts", this.partService.listParts());
@@ -309,30 +381,101 @@ public class OrderController {
 
 
 
-
-    /**
-     * Запрос на удаление по id
-     */
-    @RequestMapping("/removeorder/{id}")
-    public String  removeOrder(@PathVariable("id") int id)
+    @RequestMapping(value ="/orders/update", method = RequestMethod.POST)
+    public ModelAndView updateOrder(Order order)
     {
-        this.orderService.removeOrder(id);
-        return  "redirect:/orders";
+        System.err.println(order.toString());
+
+        this.orderService.updateOrder(order);
+
+        List<Toorder> toorderList = this.toorderService.listToorders();
+
+        System.err.println("снаружи");
+            double sum = 0;
+            for( Toorder t: toorderList)
+            {
+                System.err.println("внутри");
+                sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+            }
+            System.err.println(sum);
+            sum=sum*(1-(double)order.getDiscount()/100);
+            System.err.println(sum);
+            order.setTotalcost(sum);
+          //  System.err.println(order.getTotalcost());
+            this.orderService.updateOrder(order);
+
+
+        return new ModelAndView("redirect:/orders/") ;
     }
 
-    /**
-     * Заполнение полей для добавления\обновления записи
-     */
-    @RequestMapping("/editorder/{id}")
-    public String  updateOrder(@PathVariable("id") int id, Model model)
+
+
+    @RequestMapping(value = "/orders/editorder", method = RequestMethod.POST)
+    public ModelAndView  updateCustomer(@RequestParam int id)
     {
-        model.addAttribute("order", this.orderService.getOrderById(id));
-        model.addAttribute("listOrders", this.orderService.listOrders());
+        ModelAndView model = new ModelAndView("orders");
+        model.addObject("order", this.orderService.getOrderById(id));
+        model.addObject("listOrders", this.orderService.listOrders());
 
         System.err.println("Контроллер апдейт заполнил");
 
-        return "orders";
+        return model;
     }
+
+
+
+
+
+    //Обработчик ссылки готовности заказа
+    //Принимает номер заказа и проставляет текущую дату
+    @RequestMapping(value = "/orders/cpl", method = RequestMethod.POST)
+    public ModelAndView completeOrder(int id)
+    {
+        this.orderService.competeOrder(id);
+        return new ModelAndView("redirect:/orders/");
+    }
+
+
+
+    //Обработчик ссылки удаления заказа
+    //Принимает номер заказа для удаления и отдает его в сервис
+    @RequestMapping(value = "/orders/delete", method = RequestMethod.POST)
+    public ModelAndView deleteOrder(int id)
+    {
+        this.orderService.removeOrder(id);
+        return new ModelAndView("redirect:/orders/");
+    }
+
+    //Обработчик ссылки удаления заказа
+    //Принимает номер заказа для удаления и отдает его в сервис
+    @RequestMapping(value = "/orders/removetoorder", method = RequestMethod.POST)
+    public ModelAndView removeToOrder(int id)
+    {
+        Toorder f = this.toorderService.getToorderById(id);
+        Order o=f.getOrder();
+        this.toorderService.removeToorder(id);
+        List<Toorder> toorderList = this.orderService.getOrderById(o.getOrderid()).getToorders();
+
+        double sum = 0;
+        for(Toorder t: toorderList)
+        {
+            sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+        }
+
+        System.err.println(sum);
+        sum=sum*(1-(double)o.getDiscount()/100);
+        System.err.println(sum);
+        o.setTotalcost(sum);
+        System.err.println(o.getTotalcost());
+
+        this.orderService.updateOrder(o);
+        return new ModelAndView("redirect:/orders/");
+    }
+
+
+
+
+
 
 
 

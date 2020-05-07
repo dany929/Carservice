@@ -20,19 +20,19 @@
 
     <ul>
         <li>
-            <a  href="/customers">Customers</a>
+            <a  href="/customers/">Customers</a>
         </li>
         <li>
-            <a href="/parts">Parts</a>
+            <a href="/parts/">Parts</a>
         </li>
         <li>
-            <a class="active" href="/operations">Operations</a>
+            <a class="active" href="/operations/">Operations</a>
         </li>
         <li>
-            <a  href="/orders">Orders</a>
+            <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders">ToOrders</a>
+            <a href="/toorders/">ToOrders</a>
         </li>
     </ul>
 </head>
@@ -40,9 +40,7 @@
 <body>
 <br>
 <br>
-<c:url var="addAction" value="/operations/add"/>
-
-<form:form action="${addAction}" modelAttribute="operation">
+<form:form action="add" method="POST"  modelAttribute="operation">
     <table>
 
         <c:if test="${!empty operation.description}">
@@ -113,8 +111,18 @@
                 <td>${operation.description}</td>
                 <td>${operation.price}</td>
 
-                <td><a href="<c:url value='/editoperation/${operation.operationid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removeoperation/${operation.operationid}'/>">Delete</a></td>
+                <td>
+                    <form:form action="edit" method="POST">
+                        <input type="hidden" name="id" value="${operation.operationid}"/>
+                        <input type="submit" class="buttonEdit" value="Edit">
+                    </form:form>
+                </td>
+                <td>
+                    <form:form action="remove" method="POST">
+                        <input type="hidden" name="id" value="${operation.operationid}"/>
+                        <input type="submit" class="buttonDel" value="Delete">
+                    </form:form>
+                </td>
             </tr>
         </c:forEach>
     </table>

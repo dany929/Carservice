@@ -120,7 +120,7 @@ public class OrderDao
         session.beginTransaction();
         session.update(c);
         session.getTransaction().commit();
-        logger.info("Order updated: " + c);
+        logger.info("Order updated: " + c+c.getToorders());
         session.close();
     }
 
@@ -150,7 +150,7 @@ public class OrderDao
         Order order = (Order) session.load(Order.class, new Integer(id));
 
 
-        logger.info("Order found: " + order);
+        logger.info("Order found: " + order+order.getToorders().toString());
         session.close();
         return order;
     }

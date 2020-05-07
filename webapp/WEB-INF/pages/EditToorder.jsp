@@ -9,12 +9,11 @@
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>
-<form:form action="add" method="post">
+<form:form action="updatetoorder" method="post">
     <c:if test="${!empty listParts}">
 
-        <input type="hidden" name="ord" value="${orderId}"/>
-        <input type="hidden" name="clt" value="${gosznak}"/>
 
+        <input type="hidden" name="tor" value="${toorderid}"/>
 
         <table class="tg">
             <tr>
@@ -38,12 +37,9 @@
             </c:forEach>
             <th width="80">Number of parts</th>
             <td>
-                <input type="number" name="num" min="1" placeholder="1"/>
+                <input type="number" name="num" min="1" required/>
             </td>
-            <th width="80">Discount</th>
-            <td>
-                <input type="number" name="dis" min="0" placeholder="0"/>
-            </td>
+
         </table>
     </c:if>
 
@@ -66,12 +62,13 @@
 
 
                     <td>
-                        <input type="checkbox" name="idopr" value="${opr.operationid}"/>
+                        <input type="checkbox" name="idopr" value="${opr.operationid}" />
 
                     </td>
                 </tr>
             </c:forEach>
         </table>
+
         <input type="submit"  value="Add">
     </c:if>
 

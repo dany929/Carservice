@@ -9,9 +9,9 @@
       <Owner>postgres</Owner>
       <IntrospectionStateNumber>649</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16413|16415|1
+      <Relations>sequence|table|16529|16531|1
+sequence|table|16413|16415|1
 sequence|table|16421|16423|1
-sequence|table|16529|16531|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">

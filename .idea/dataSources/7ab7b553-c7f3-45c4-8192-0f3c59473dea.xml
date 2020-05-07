@@ -12,8 +12,8 @@
       <Current>1</Current>
       <Relations>sequence|table|57667|57669|1
 sequence|table|57680|57682|1
-sequence|table|57429|57431|1
 sequence|table|57437|57439|1
+sequence|table|57429|57431|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">

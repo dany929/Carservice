@@ -5,6 +5,8 @@ import com.carservice.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -53,39 +55,13 @@ public class OrderService
         System.err.println("Пошел в дао");
         this.orderDao.addOrder(order);
 
-     /*
-       if(!listOrder().contains(order))
 
-       {
-           System.err.println("Сервис Адд попал в иф");
-           this.orderDao.addOrder(order);
-           System.err.println("Сервис Адд попал в иф после дао");
-       }
-       else
-           {
-               System.err.println("Сервис Адд попал в елсу");
-              this.orderDao.updateOrder(order);
-           }
-
-      */
     }
 
     public void updateOrder(Order order)
     {
         this.orderDao.updateOrder(order);
-      /*
-      if(this.listOrder().contains(order))
-        {
-            System.err.println("Сервис Апдейт попал в иф");
-            this.orderDao.updateOrder(order);
-        }
-        else
-        {
-            System.err.println("Сервис Апдейт попал в елсу");
-            this.orderDao.addOrder(order);
-        }
 
-       */
     }
 
   public void removeOrder(int id)
@@ -111,6 +87,14 @@ public class OrderService
     public Order getOrderById(int id)
     {
         return this.orderDao.getOrderById(id);
+    }
+
+    public void competeOrder(int id)
+    {
+        LocalDate localDate = LocalDate.now();
+        Order order = this.findOrder(id);
+        order.setDateout(DateTimeFormatter.ofPattern("yyy-MM-dd").format(localDate));
+        this.updateOrder(order);
     }
 
 }

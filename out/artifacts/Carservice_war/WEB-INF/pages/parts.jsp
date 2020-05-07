@@ -19,19 +19,19 @@
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <ul>
         <li>
-            <a  href="/customers">Customers</a>
+            <a  href="/customers/">Customers</a>
         </li>
         <li>
-            <a class="active"href="/parts">Parts</a>
+            <a class="active"href="/parts/">Parts</a>
         </li>
         <li>
-            <a href="/operations">Operations</a>
+            <a href="/operations/">Operations</a>
         </li>
         <li>
-            <a  href="/orders">Orders</a>
+            <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders">ToOrders</a>
+            <a href="/toorders/">ToOrders</a>
         </li>
     </ul>
 </head>
@@ -40,9 +40,9 @@
 
 <br>
 <br>
-<c:url var="addAction" value="/parts/add"/>
 
-<form:form action="${addAction}" modelAttribute="part">
+
+<form:form action="add" method="POST"  modelAttribute="part">
     <table>
 
         <c:if test="${!empty part.title}">
@@ -122,8 +122,18 @@
                 <td>${part.category}</td>
                 <td>${part.title}</td>
                 <td>${part.price}</td>
-                <td><a href="<c:url value='/editpart/${part.partid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removepart/${part.partid}'/>">Delete</a></td>
+                <td>
+                    <form:form action="edit" method="POST">
+                        <input type="hidden" name="id" value="${part.partid}"/>
+                        <input type="submit" class="buttonEdit" value="Edit">
+                    </form:form>
+                </td>
+                <td>
+                    <form:form action="remove" method="POST">
+                        <input type="hidden" name="id" value="${part.partid}"/>
+                        <input type="submit" class="buttonDel" value="Delete">
+                    </form:form>
+                </td>
             </tr>
         </c:forEach>
     </table>

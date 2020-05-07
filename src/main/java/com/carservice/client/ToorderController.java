@@ -1,6 +1,7 @@
 package com.carservice.client;
 
 import com.carservice.model.Toorder;
+import com.carservice.service.OrderService;
 import com.carservice.service.PartService;
 import com.carservice.service.ToorderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class ToorderController {
 
     private ToorderService toorderService;
     private  PartService partService;
+    private OrderService orderService;
 
     @Autowired(required = true)
     @Qualifier(value = "toorderService")
@@ -34,6 +36,13 @@ public class ToorderController {
         this.partService = pp;
     }
 
+    @Autowired(required = true)
+    @Qualifier(value = "orderService")
+    public void setOrderService(OrderService ps)
+    {
+        this.orderService = ps;
+    }
+
     /**
      * Вывод списка на стартовой странице
      * атрибуты модели используются в jsp файле
@@ -47,7 +56,7 @@ public class ToorderController {
     }*/
 
 
-    @RequestMapping(value = "/toorders", method = RequestMethod.GET)
+    @RequestMapping(value = "/toorders/", method = RequestMethod.GET)
     public ModelAndView orderLinesList()
     {
 
@@ -79,17 +88,35 @@ public class ToorderController {
     }
 
 
-    /**
-     * Запрос на удаление по id
-     */
+/*
+
     @RequestMapping("/removetoorder/{id}")
     public String  removeToOrder(@PathVariable("id") int id)
     {
-
+        //Обращение к списку текущего заказа из которого удаляются услуги
+        //Простановка цены по оставшимся услугам
+        Toorder f = this.toorderService.getToorderById(id);
+        Order o=f.getOrder();
         this.toorderService.removeToorder(id);
+        List<Toorder> toorderList = this.orderService.getOrderById(o.getOrderid()).getToorders();
+
+        double sum = 0;
+        for(Toorder t: toorderList)
+        {
+            sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+        }
+
+        System.err.println(sum);
+        sum=sum*(1-(double)o.getDiscount()/100);
+        System.err.println(sum);
+        o.setTotalcost(sum);
+        System.err.println(o.getTotalcost());
+
+        this.orderService.updateOrder(o);
+
         return  "redirect:/orders";
     }
-
+*/
     /**
      * Заполнение полей для добавления\обновления записи
      */

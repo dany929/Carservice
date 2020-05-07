@@ -57,16 +57,16 @@
             <a class="active" href="/customers">Customers</a>
         </li>
         <li>
-            <a href="/parts">Parts</a>
+            <a href="/parts/">Parts</a>
         </li>
         <li>
-            <a href="/operations">Operations</a>
+            <a href="/operations/">Operations</a>
         </li>
         <li>
-            <a  href="/orders">Orders</a>
+            <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders">ToOrders</a>
+            <a href="/toorders/">ToOrders</a>
         </li>
     </ul>
 </head>
@@ -74,9 +74,9 @@
 <body>
 <br>
 <br>
-<c:url var="addAction" value="/customers/add"/>
 
-<form:form action="${addAction}" modelAttribute="customer">
+
+<form:form action="add" method="POST"  modelAttribute="customer">
     <table>
 
 
@@ -127,16 +127,14 @@
         </tr>
 
         <tr>
-            <td colspan="2">
-                <c:if test="${!empty customer.gosznak}">
-                    <input type="submit"
-                           value="<spring:message text="Edit Customer"/>"/>
-                </c:if>
+            <td colspan="2">  <c:if test="${!empty customer.gosznak}">
+                <input type="submit"
+                       value="<spring:message text="Edit Part"/>"/>
+            </c:if>
                 <c:if test="${empty customer.gosznak}">
                     <input type="submit"
-                           value="<spring:message text="Add New Customer"/>"/>
-                </c:if>
-            </td>
+                           value="<spring:message text="Add Part"/>"/>
+                </c:if></td>
         </tr>
     </table>
 </form:form>
@@ -160,8 +158,18 @@
                 <td>${customer.firstname}</td>
                 <td>${customer.lastname}</td>
                 <td>${customer.tel}</td>
-                <td><a href="<c:url value='/edit/${customer.gosznak}'/>">Edit</a></td>
-                <td><a href="<c:url value='/remove/${customer.gosznak}'/>">Delete</a></td>
+                <td>
+                    <form:form action="edit" method="POST">
+                    <input type="hidden" name="id" value="${customer.gosznak}"/>
+                    <input type="submit" class="buttonEdit" value="Edit">
+                </form:form>
+                </td>
+                <td>
+                    <form:form action="remove" method="POST">
+                    <input type="hidden" name="id" value="${customer.gosznak}"/>
+                    <input type="submit" class="buttonDel" value="Delete">
+                </form:form>
+                </td>
             </tr>
         </c:forEach>
     </table>
