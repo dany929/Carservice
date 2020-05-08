@@ -127,12 +127,21 @@ public class OrderController {
     }
 //Обновление услуг
     @RequestMapping(value = "/orders/updatetoorder", method = RequestMethod.POST)
-    public ModelAndView updateToOrder(HttpServletRequest request)
-    {
+    public ModelAndView updateToOrder(HttpServletRequest request) throws Exception {
         //Парсим параметры и инициализируем все объекты и переменные
         String prds = request.getParameter("id");
 
         String oper = request.getParameter("idopr");
+
+        String[] prdss = request.getParameterValues("id");
+
+        String[] opers = request.getParameterValues("idopr");
+
+        Exception ex=null;
+        if(prdss.length>1 || opers.length>1)
+        {
+            throw ex;
+        }
 
        // String client = request.getParameter("clt");
 
@@ -185,8 +194,7 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/orders/add", method = RequestMethod.POST)
-    public ModelAndView addOrder(HttpServletRequest request)
-    {
+    public ModelAndView addOrder(HttpServletRequest request) throws Exception {
 
         //Парсим параметры и инициализируем все объекты и переменные
         String prds = request.getParameter("id");
@@ -194,6 +202,16 @@ public class OrderController {
         String oper = request.getParameter("idopr");
 
         String client = request.getParameter("clt");
+
+        String[] prdss = request.getParameterValues("id");
+
+        String[] opers = request.getParameterValues("idopr");
+
+        Exception ex=null;
+        if(prdss.length>1 || opers.length>1)
+        {
+            throw ex;
+        }
 
         int numofparts = Integer.parseInt(request.getParameter("num"));
 
@@ -384,11 +402,28 @@ public class OrderController {
     @RequestMapping(value ="/orders/update", method = RequestMethod.POST)
     public ModelAndView updateOrder(Order order)
     {
+        int id = order.getOrderid();
+
+
+       // Toorder f = this.toorderService.getToorderById(id);
+      //  Order o = f.getOrder();
+
+        List<Toorder> toorderList = this.orderService.getOrderById(id).getToorders();
+
+      //  Order order  = toorder.getOrder();
+
+
+        System.err.println("Ордерс апдейт");
+
         System.err.println(order.toString());
 
-        this.orderService.updateOrder(order);
+        System.err.println(toorderList);
 
+
+        this.orderService.updateOrder(order);
+/*
         List<Toorder> toorderList = this.toorderService.listToorders();
+        System.err.println(this.toorderService.listToorders());
 
         System.err.println("снаружи");
             double sum = 0;
@@ -403,6 +438,22 @@ public class OrderController {
             order.setTotalcost(sum);
           //  System.err.println(order.getTotalcost());
             this.orderService.updateOrder(order);
+
+             */
+
+        System.err.println("снаружи");
+        double sum = 0;
+        for( Toorder t: toorderList)
+        {
+            System.err.println("внутри");
+            sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
+        }
+        System.err.println(sum);
+        sum=sum*(1-(double)order.getDiscount()/100);
+        System.err.println(sum);
+        order.setTotalcost(sum);
+        //  System.err.println(order.getTotalcost());
+        this.orderService.updateOrder(order);
 
 
         return new ModelAndView("redirect:/orders/") ;

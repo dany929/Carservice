@@ -89,6 +89,9 @@ public class OrderService
         return this.orderDao.getOrderById(id);
     }
 
+    public List<Order> listFilteredOrders(){return this.orderDao.listFilteredOrders();}
+
+
     public void competeOrder(int id)
     {
         LocalDate localDate = LocalDate.now();

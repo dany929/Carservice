@@ -27,9 +27,7 @@ public class ToorderService
 
     public int listLastToorder(){return this.toorderDao.listLastToorder();}
 
-    public void addToordertoExistingOrder(Toorder toorder){
-        this.toorderDao.addToordertoExistingOrder(toorder);
-    }
+
 
     public void addToorder(Toorder toorder)
     {

@@ -65,7 +65,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="category" required="required"/>
+                <form:input path="category" pattern="^[A-Za-z\s]{20}+$" required="required"/>
             </td>
         </tr>
         <tr>
@@ -75,7 +75,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="title" required="required"/>
+                <form:input path="title" pattern="^[A-Za-z\s]+$" required="required"/>
             </td>
         </tr>
         <tr>
@@ -85,17 +85,17 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="price" required="required"/>
+                <form:input path="price" type="number" min="1" pattern="[0-9]{6}" required="required"/>
             </td>
         </tr>
         <tr>
             <td colspan="2">
                 <c:if test="${!empty part.title}">
-                    <input type="submit"
+                    <input class="btnedit" type="submit"
                            value="<spring:message text="Edit Part"/>"/>
                 </c:if>
                 <c:if test="${empty part.title}">
-                    <input type="submit"
+                    <input class="btnadd" type="submit"
                            value="<spring:message text="Add Part"/>"/>
                 </c:if>
             </td>
@@ -125,13 +125,13 @@
                 <td>
                     <form:form action="edit" method="POST">
                         <input type="hidden" name="id" value="${part.partid}"/>
-                        <input type="submit" class="buttonEdit" value="Edit">
+                        <input type="submit" class="btnedit" value="Edit">
                     </form:form>
                 </td>
                 <td>
                     <form:form action="remove" method="POST">
                         <input type="hidden" name="id" value="${part.partid}"/>
-                        <input type="submit" class="buttonDel" value="Delete">
+                        <input type="submit" class="btndel" value="Delete">
                     </form:form>
                 </td>
             </tr>

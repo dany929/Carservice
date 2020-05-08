@@ -62,8 +62,9 @@ public class ToorderController {
 
         ModelAndView model = new ModelAndView("toorders");
         model.addObject("listToorder", this.toorderService.listToorders());
+        model.addObject("ordersFiltered",this.orderService.listFilteredOrders());
         model.addObject("productsListFiltered", this.partService.filterByAvgCost());
-     //  model.addObject("productsListOrdered", this.partService.filterByOrderCostProducts());
+        model.addObject("productsListOrdered", this.partService.filterByOrderCostProducts());
         return model;
     }
 

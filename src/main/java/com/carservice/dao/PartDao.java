@@ -1,7 +1,6 @@
 package com.carservice.dao;
 
 import com.carservice.model.Part;
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -100,12 +99,12 @@ public class PartDao
 
 
     //Сложный запрос выводящий товары цена которых выше средней
-    @SuppressWarnings("unchecked")
+
     public List<Part> filterProductByCost()
     {
         Session session = this.sessionFactory.openSession();
         List<Part> partList = session.createQuery(
-                "SELECT s FROM Part s WHERE s.price > (SELECT avg(s.price) FROM Part s)").list();
+                "FROM Part s WHERE s.price > (SELECT avg(s.price) FROM Part s) ORDER BY s.price").list();
         for(Part product : partList)
         {
             logger.info(product.toString());
@@ -113,16 +112,18 @@ public class PartDao
         session.close();
         return partList;
     }
-////////////////////////НЕ РОБИТ////
+
     //Сложный запрос выводящий все товары которые входят в заказы цены которых выше 30000
-    @SuppressWarnings("unchecked")
+
     public List<Part> filterByOrderCostProducts()
     {
         Session session = this.sessionFactory.openSession();
-        String sql = "SELECT parts.partid, parts.category, parts.price, parts.title from parts ";
-        SQLQuery query = session.createSQLQuery(sql);
-        query.addEntity(Part.class);
-        List<Part> partList = query.list();
+        List<Part> partList = session.createQuery("FROM Part s WHERE s.price > 250 AND s.price < 400").list();
+        for(Part part : partList)
+        {
+            logger.info("Фильтр по цене"+part.toString());
+        }
+
 
         /*
         List<Part> partList = session.createQuery("SELECT part.category, sum(part.price) " +

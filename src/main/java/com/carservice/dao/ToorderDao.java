@@ -58,20 +58,7 @@ public class ToorderDao
         }
         session.close();
         return maxOrder;
-        /*
 
-        List<Toorder> toorderList =
-                session.createQuery("SELECT max(p.toorderid) as p.toorderid FROM Toorder p").list();
-
-        //вывод в консоль сервера
-        for(Toorder p: toorderList)
-        {
-            logger.info(p.toString()+p.getOrder().getCustomer().getGosznak().toString());
-        }
-        session.close();
-        return toorderList;
-
-         */
     }
 
 
@@ -86,7 +73,7 @@ public class ToorderDao
         logger.info("Toorder added: " + toorder);
         session.close();
     }
-
+/*
     public void addToordertoExistingOrder(Toorder toorder) {
 
         Session session = this.sessionFactory.openSession();
@@ -101,7 +88,7 @@ public class ToorderDao
         logger.info("Toorder added to existing : " + toorder);
         session.close();
     }
-
+*/
 
     /**
      * Обновление клиента

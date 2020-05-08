@@ -9,70 +9,70 @@
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>
-<form:form action="updatetoorder" method="post">
-    <c:if test="${!empty listParts}">
+<h1>Choose one combination of part and service work</h1>
 
 
-        <input type="hidden" name="tor" value="${toorderid}"/>
 
-        <table class="tg">
-            <tr>
-                <th width="80">Category</th>
-                <th width="80">Title</th>
-                <th width="80">Price</th>
-                <th width="80">Options</th>
+<table class="tt">
 
-            </tr>
-            <c:forEach items="${listParts}" var="part">
+            <form:form action="updatetoorder" method="post">
                 <tr>
-                    <td>${part.category}</td>
-                    <td>${part.title}</td>
-                    <td>${part.price}</td>
-
-                    <td>
-                        <input type="checkbox" name="id" value="${part.partid}"/>
-                    </td>
-
+                    <input class="btnadd" type="submit"  value="Add">
                 </tr>
-            </c:forEach>
-            <th width="80">Number of parts</th>
-            <td>
-                <input type="number" name="num" min="1" required/>
-            </td>
-
-        </table>
-    </c:if>
-
-    <c:if test="${!empty listOperations}">
-
-
-
-        <table class="tg">
-            <tr>
-
-                <th width="80">Title</th>
-                <th width="80">Price</th>
-
-                <th width="80">Options</th>
-            </tr>
-            <c:forEach items="${listOperations}" var="opr">
                 <tr>
-                    <td>${opr.description}</td>
-                    <td>${opr.price}</td>
-
-
+                    <th width="80">Number of parts</th>
                     <td>
-                        <input type="checkbox" name="idopr" value="${opr.operationid}" />
-
+                        <input type="number" name="num" min="1" max="10" pattern="[0-9]" value="1" required/>
                     </td>
                 </tr>
-            </c:forEach>
-        </table>
 
-        <input type="submit"  value="Add">
-    </c:if>
+                <tr>
+                    <th>
 
-</form:form>
 
+                <c:if test="${!empty listParts}">
+                    <input type="hidden" name="tor" value="${toorderid}"/>
+                    <table class="tg">
+                        <tr>
+                            <th width="80">Category</th>
+                            <th width="80">Title</th>
+                            <th width="80">Price</th>
+                            <th width="80">Options</th>
+                        </tr>
+                        <c:forEach items="${listParts}" var="part">
+                            <tr>
+                                <td>${part.category}</td>
+                                <td>${part.title}</td>
+                                <td>${part.price}</td>
+                                <td>
+                                    <input type="checkbox" name="id" value="${part.partid}"/>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </c:if>
+        </th>
+
+        <th>
+            <c:if test="${!empty listOperations}">
+                <table class="tg">
+                    <tr>
+                        <th width="80">Title</th>
+                        <th width="80">Price</th>
+                        <th width="80">Options</th>
+                    </tr>
+                    <c:forEach items="${listOperations}" var="opr">
+                        <tr>
+                            <td>${opr.description}</td>
+                            <td>${opr.price}</td>
+                            <td><input type="checkbox" name="idopr" value="${opr.operationid}" /></td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:if>
+            </form:form>
+        </th>
+    </tr>
+</table>
 </body>
 </html>

@@ -26,8 +26,27 @@
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
-    <welcome-file-list>
-        <welcome-file>/WEB-INF/view/customers.jsp</welcome-file>
-    </welcome-file-list>
+    <!-- HTTP-error -->
+     <error-page>
+         <error-code>404</error-code>
+         <location>/WEB-INF/pages/404.jsp</location>
+     </error-page>
+
+    <error-page>
+        <error-code>405</error-code>
+        <location>/WEB-INF/pages/405.jsp</location>
+    </error-page>
+
+   <error-page>
+       <error-code>500</error-code>
+       <location>/WEB-INF/pages/500.jsp</location>
+   </error-page>
+
+   <!-- Exception-->
+   <error-page>
+       <exception-type>java.lang.Exception</exception-type>
+       <location>/WEB-INF/pages/exc.jsp</location>
+   </error-page>
+
 
 </web-app>

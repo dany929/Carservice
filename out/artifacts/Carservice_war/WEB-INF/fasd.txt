@@ -11,25 +11,17 @@
 <body>
 <h1>Choose one combination of part and service work</h1>
 
-
-
+<input class="btnadd" type="submit"  value="Add">
+<table class="tg">
+    <th width="80">Number of parts</th>
+    <td>
+        <input type="number" name="num" min="1" max="10" pattern="[0-9]" value="1" required/>
+    </td>
+</table>
 <table class="tt">
-
+    <tr>
+        <th>
             <form:form action="updatetoorder" method="post">
-                <tr>
-                    <input class="btnadd" type="submit"  value="Add">
-                </tr>
-                <tr>
-                    <th width="80">Number of parts</th>
-                    <td>
-                        <input type="number" name="num" min="1" max="10" pattern="[0-9]" value="1" required/>
-                    </td>
-                </tr>
-
-                <tr>
-                    <th>
-
-
                 <c:if test="${!empty listParts}">
                     <input type="hidden" name="tor" value="${toorderid}"/>
                     <table class="tg">

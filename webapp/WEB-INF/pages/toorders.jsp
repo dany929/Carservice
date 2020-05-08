@@ -45,7 +45,7 @@
 
 <br>
 <br>
-
+<%--
 <c:if test="${!empty listToorder }">
 
         <c:forEach items="${listToorder}" var="toorder">
@@ -89,8 +89,23 @@
         </c:forEach>
     </table>
 </c:if>
-<%-- --%>
+ --%>
 <br>
+
+<c:if test="${!empty ordersFiltered}">
+    <table>
+        <tr>
+
+        </tr>
+        <c:forEach items="${ordersFiltered}" var="order">
+            <t>
+                <td>${order.orderid}</td>
+                <td>${order.customer.gosznak}</td>
+                <td>${order.totalcost}</td>
+            </t>
+        </c:forEach>
+    </table>
+</c:if>
 <br>
 <br>
 <c:if test="${!empty productsListFiltered}">
@@ -131,8 +146,6 @@
         </c:forEach>
     </table>
 
-
- --%>
 
 </body>
 </html>

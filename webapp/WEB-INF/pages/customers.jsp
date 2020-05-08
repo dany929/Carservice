@@ -127,13 +127,14 @@
         </tr>
 
         <tr>
-            <td colspan="2">  <c:if test="${!empty customer.gosznak}">
-                <input type="submit"
-                       value="<spring:message text="Edit Part"/>"/>
-            </c:if>
+            <td colspan="2">
+                <c:if test="${!empty customer.gosznak}">
+                <input class="btnedit" type="submit"
+                       value="<spring:message text="Edit Customer"/>"/>
+                </c:if>
                 <c:if test="${empty customer.gosznak}">
-                    <input type="submit"
-                           value="<spring:message text="Add Part"/>"/>
+                    <input class="btnadd" type="submit"
+                           value="<spring:message text="Add Customer"/>"/>
                 </c:if></td>
         </tr>
     </table>
@@ -161,13 +162,13 @@
                 <td>
                     <form:form action="edit" method="POST">
                     <input type="hidden" name="id" value="${customer.gosznak}"/>
-                    <input type="submit" class="buttonEdit" value="Edit">
+                    <input type="submit" class="btnedit" value="Edit">
                 </form:form>
                 </td>
                 <td>
                     <form:form action="remove" method="POST">
                     <input type="hidden" name="id" value="${customer.gosznak}"/>
-                    <input type="submit" class="buttonDel" value="Delete">
+                    <input type="submit" class="btndel" value="Delete">
                 </form:form>
                 </td>
             </tr>

@@ -48,11 +48,11 @@
             <tr>
                 <td>
                     <form:label path="orderid">
-                        <spring:message text="Orderid"/>
+                        <spring:message text="Order ID"/>
                     </form:label>
                 </td>
                 <td>
-                    <form:input path="orderid" readonly="true" size="8" required="required"/>
+                    <form:input path="orderid" readonly="true"  required="required"/>
 
                 </td>
             </tr>
@@ -60,18 +60,18 @@
     <tr>
         <td>
             <form:label path="customer.gosznak">
-                <spring:message text="gosznak"/>
+                <spring:message text="Gosznak"/>
             </form:label>
         </td>
         <td>
-            <form:input path="customer.gosznak" required="required"/>
+            <form:input path="customer.gosznak" readonly="true" required="required"/>
         </td>
     </tr>
 
         <tr>
             <td>
                 <form:label path="datein">
-                    <spring:message text="datein"/>
+                    <spring:message text="Date in"/>
                 </form:label>
             </td>
             <td>
@@ -81,7 +81,7 @@
         <tr>
             <td>
                 <form:label path="dateout">
-                    <spring:message text="dateout"/>
+                    <spring:message text="Date out"/>
                 </form:label>
             </td>
             <td>
@@ -91,11 +91,11 @@
         <tr>
             <td>
                 <form:label path="discount">
-                    <spring:message text="discount"/>
+                    <spring:message text="Discount"/>
                 </form:label>
             </td>
             <td>
-                <form:input type="number" min="0" path="discount" required="required"/>
+                <form:input type="number" min="0" path="discount"  max="100"  pattern="[0-9]" required="required"/>
             </td>
         </tr>
        <br>
@@ -103,11 +103,11 @@
         <tr>
             <td colspan="2">
                 <c:if test="${!empty order.customer}">
-                    <input type="submit"
+                    <input class="btnedit" type="submit"
                            value="<spring:message text="Edit order"/>"/>
                 </c:if>
                 <c:if test="${empty order.customer}">
-                    <input type="submit"
+                    <input class="btndel" type="submit"
                            value="<spring:message text="Add order"/>"/>
                 </c:if>
             </td>
@@ -115,8 +115,9 @@
    </c:if>
     </table>
 </form:form>
+<br>
 
-<a class="buttonEdit" href="/orders/chooseCustomer">Add New Order</a>
+<a class="btnadd" href="/orders/chooseCustomer">Add New Order</a>
 <br>
 <br>
 
@@ -151,28 +152,28 @@
             <td>
                 <form:form action="cpl" method="POST">
                 <input type="hidden" name="id" value="${order.orderid}"/>
-                <input type="submit" class="buttonEdit" value="Complete with Today Date">
+                <input type="submit" class="btnCL" value="Complete with Today Date">
                 </form:form>
             </td>
 
             <td>
                 <form:form action="edit" method="POST">
                 <input type="hidden" name="id" value="${order.orderid}"/>
-                <input type="submit" class="buttonEdit" value="Add new Position">
+                <input type="submit" class="btnadd" value="Add new Position">
                 </form:form>
             </td>
 
             <td>
                 <form:form action="editorder" method="POST">
                     <input type="hidden" name="id" value="${order.orderid}"/>
-                    <input type="submit" class="buttonEdit" value="Edit">
+                    <input type="submit" class="btnedit" value="Edit">
                 </form:form>
             </td>
 
             <td>
                 <form:form action="delete" method="POST">
                     <input type="hidden" name="id" value="${order.orderid}"/>
-                    <input type="submit" class="buttonDel" value="Delete ORDER">
+                    <input type="submit" class="btndel" value="Delete ORDER">
                 </form:form>
             </td>
 
@@ -182,7 +183,7 @@
 
         <c:if test="${!empty order.toorders}">
             <tr>
-                <th width="80" colspan="9"> Parts'n'Works </th>
+                <th width="80" colspan="9" id="part"> Parts'n'Works </th>
             </tr>
             <tr>
 
@@ -207,13 +208,13 @@
                     <td>
                         <form:form action="edittoorder" method="POST">
                         <input type="hidden" name="id" value="${prod.toorderid}"/>
-                        <input align="middle" type="submit" class="buttonDel" value="Edit">
+                        <input  type="submit" class="btnedit" value="Edit">
                         </form:form>
                     </td>
                     <td colspan="2">
                         <form:form action="removetoorder" method="POST">
                         <input type="hidden" name="id" value="${prod.toorderid}"/>
-                        <input type="submit" class="buttonDel" value="Remove from Order">
+                        <input type="submit" class="btndel" value="Remove from Order">
                         </form:form>
                     </td>
                 </tr>

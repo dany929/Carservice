@@ -33,7 +33,7 @@ public class OrderDao
     {
         Session session = this.sessionFactory.openSession();
         List<Order> orderList =
-                session.createQuery("SELECT p FROM Order p ORDER BY p.orderid").list();
+                session.createQuery("SELECT p FROM Order p ORDER BY p.orderid DESC").list();
 
         //вывод в консоль сервера
         for(Order p: orderList)
@@ -43,6 +43,19 @@ public class OrderDao
         session.close();
         return orderList;
     }
+
+   public List<Order> listFilteredOrders()
+   {
+       Session session = this.sessionFactory.openSession();
+
+       List<Order> orderList =   session.createQuery("SELECT s FROM Order s ").list();
+       for(Order p: orderList)
+       {
+           logger.info(p.toString()+p.getCustomer().toString());
+       }
+       session.close();
+       return orderList;
+   }
 
 
     public int listLastOrder()

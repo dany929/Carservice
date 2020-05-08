@@ -11,7 +11,7 @@
 </head>
 <body>
 <h1>
-    Choose Client.
+    Choose Customer
 </h1>
 
 <c:if test="${!empty listCustomers }">
@@ -21,7 +21,7 @@
             <th width="80">Surname</th>
             <th width="80">Age</th>
             <th width="80">Phone</th>
-            <th width="80">Options</th>
+            <th width="80">Add</th>
         </tr>
         <c:forEach items="${listCustomers}" var="customer">
             <tr>
@@ -32,7 +32,7 @@
                 <td>
                     <form:form action="client" method="POST">
                         <input type="hidden" name="id" value="${customer.gosznak}"/>
-                        <input type="submit" class="buttonEdit" value="Add">
+                        <input type="submit" class="btnadd" value="Add">
                     </form:form>
                 </td>
             </tr>
