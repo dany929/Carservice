@@ -21,18 +21,6 @@ public class OrderService
         this.orderDao = orderDao;
     }
 
-//////////////////////
-    /*
-    @Transactional
-    public List<Part> listPartsByOrder(){
-        return this.orderDao.listPartsByOrder();
-    }
-
-     */
-    //////////////////////
-
-
-
     public List<Order> listOrders()
     {
         return this.orderDao.listOrders();
@@ -44,14 +32,6 @@ public class OrderService
     public void addOrder(Order order)
     {
         System.err.println("ADDORDER SERVICE");
-/*
-        for(Toorder line : order.getToorders())
-        {
-            System.err.println("до сета одера");
-            line.setOrder(order);
-            System.err.println("После сета");
-        }
-*/
         System.err.println("Пошел в дао");
         this.orderDao.addOrder(order);
 
@@ -61,28 +41,16 @@ public class OrderService
     public void updateOrder(Order order)
     {
         this.orderDao.updateOrder(order);
-
     }
 
   public void removeOrder(int id)
     {
-
-
-
         this.orderDao.removeOrder(id);
-    }
-
-
-    //////
-    public void deleteOrders(int id)
-    {
-        this.orderDao.deleteOrders(findOrder(id));
     }
 
     public Order findOrder(int id) {
         return this.orderDao.findOrders(id);
     }
-/////////////
 
     public Order getOrderById(int id)
     {
@@ -90,7 +58,6 @@ public class OrderService
     }
 
     public List<Order> listFilteredOrders(){return this.orderDao.listFilteredOrders();}
-
 
     public void competeOrder(int id)
     {

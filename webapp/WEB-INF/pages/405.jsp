@@ -91,7 +91,7 @@
 </div>
 <div class="message">
     <h1>405</h1>
-    <h2>ummm...seems like you missed up something</h2>
+    <h2>ummm...seems like you messed up something</h2>
 
     <h3> <a onclick="goBack()" class="btn" >Bring me back</a> </h3>
 </div>

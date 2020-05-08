@@ -58,7 +58,20 @@ public class ToorderDao
         }
         session.close();
         return maxOrder;
+        /*
 
+        List<Toorder> toorderList =
+                session.createQuery("SELECT max(p.toorderid) as p.toorderid FROM Toorder p").list();
+
+        //вывод в консоль сервера
+        for(Toorder p: toorderList)
+        {
+            logger.info(p.toString()+p.getOrder().getCustomer().getGosznak().toString());
+        }
+        session.close();
+        return toorderList;
+
+         */
     }
 
 

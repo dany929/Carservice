@@ -27,7 +27,7 @@ public class OrderDao
     Logger logger = LoggerFactory.getLogger(OrderDao.class);
 
     /**
-     * Вывод всех клиентов
+     * Вывод всех заказов
      */
     public List<Order> listOrders()
     {
@@ -44,22 +44,23 @@ public class OrderDao
         return orderList;
     }
 
+//Запрос на выдачу заказов, стоимость которых выше средней по всем заказам
    public List<Order> listFilteredOrders()
    {
        Session session = this.sessionFactory.openSession();
 
-       List<Order> orderList =   session.createQuery("SELECT s FROM Order s ").list();
+       List<Order> orderList =   session.createQuery("SELECT s FROM Order s WHERE s.totalcost >" +
+               " (SELECT avg(s.totalcost) FROM Order s) ORDER BY s.totalcost").list();
        for(Order p: orderList)
        {
-           logger.info(p.toString()+p.getCustomer().toString());
+           logger.info(p.toString()+p.getCustomer().getGosznak());
        }
        session.close();
        return orderList;
    }
 
 
-    public int listLastOrder()
-    {
+    public int listLastOrder() {
 
 
         Session session = this.sessionFactory.openSession();
@@ -67,42 +68,16 @@ public class OrderDao
         Criteria criteria = session
                 .createCriteria(Order.class)
                 .setProjection(Projections.max("orderid"));
-        Integer maxOrder = (Integer)criteria.uniqueResult();
+        Integer maxOrder = (Integer) criteria.uniqueResult();
         session.close();
-        if(maxOrder==null)
-        {
-            maxOrder=0;
+        if (maxOrder == null) {
+            maxOrder = 0;
         }
         return maxOrder;
-        /*
-        List<Order> orderList =
-                session.createQuery("SELECT max(p.orderid) as FROM Order p ").list();
-
-        //вывод в консоль сервера
-        for(Order p: orderList)
-        {
-            logger.info(p.toString()+p.getToorders().toString());
-        }
-        session.close();
-        return orderList;*/
-    }
-//////////////////////////////////////////
-    /*
-    public List<Part> listPartsByOrder()
-    {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Part> partList= session.createQuery("Select p FROM Part p where p.partid=" +
-                "ANY(Select o.partid FROM Toorder o )").list();
-        for(Part part    : partList)
-        {
-            logger.info(part.toString());
-        }
-        return partList;
     }
 
-*//////////////////////////////////////////
     /**
-     * Добавление клиента
+     * Добавление заказа
      */
     public void addOrder(Order order) {
         System.err.println("Зашел в дао");
@@ -126,7 +101,7 @@ public class OrderDao
     }
 
     /**
-     * Обновление клиента
+     * Обновление заказа
      */
     public void updateOrder(Order c) {
         Session session = this.sessionFactory.openSession();
@@ -138,7 +113,7 @@ public class OrderDao
     }
 
     /**
-     * Удаление клиента
+     * Удаление заказа
      */
     public void removeOrder(int id) {
         Session session = this.sessionFactory.openSession();
@@ -156,7 +131,7 @@ public class OrderDao
     }
 
     /**
-     * Нахождение клиента по ид
+     * Нахождение заказа по ид
      */
     public Order getOrderById(int id) {
         Session session = this.sessionFactory.openSession();

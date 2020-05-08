@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-//@ImportResource("/WEB-INF/dispatcher-servlet.xml")
+
 @Controller
 public class OperationController {
 
@@ -70,23 +70,6 @@ public class OperationController {
         System.err.println("Контроллер апдейт заполнил");
         return model;
     }
-
-/*
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public List<Customer> listFilter()
-    {
-        return this.operationService.listFilter();
-    }
-
-    @RequestMapping("customerdata/{id}")
-    public String bookData(@PathVariable("id") String id, Model model){
-        model.addAttribute("customer", this.operationService.getCustomerById(id));
-
-        return "customerdata";
-    }
-   // */
-
-
 
 }
 

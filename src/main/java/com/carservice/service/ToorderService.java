@@ -54,7 +54,7 @@ public class ToorderService
         return this.toorderDao.getToorderById(id);
     }
 
-////////
+
     public void deleteOrderLine(Toorder o) { this.toorderDao.deleteToorder(o);
     }
 }

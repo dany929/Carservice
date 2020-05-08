@@ -31,7 +31,7 @@
             <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders/">ToOrders</a>
+            <a href="/toorders/">Queries</a>
         </li>
     </ul>
 </head>
@@ -53,7 +53,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="partid" readonly="true" size="8" disabled="true" required="required"/>
+                <form:input path="partid" readonly="true" size="8"  required="required"/>
                 <form:hidden path="partid"/>
             </td>
         </tr>
@@ -65,7 +65,7 @@
                 </form:label>
             </td>
             <td>
-                <form:input path="category" pattern="^[A-Za-z\s]{20}+$" required="required"/>
+                <form:input path="category" pattern="^[A-Za-z\s]+$" required="required"/>
             </td>
         </tr>
         <tr>

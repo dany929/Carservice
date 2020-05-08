@@ -44,30 +44,6 @@ public class CustomerDao
     }
 
     /**
-     * Вывод клиентов с фильтром по госномеру,
-     * начинающегося c гласной буквы
-     */
-
-    public List<Customer> listCustomerFiltered()
-    {
-        Session session = this.sessionFactory.openSession();
-        List<Customer> customerListFiltered =
-                session.createQuery("SELECT p FROM Customer p where" +
-                        " p.gosznak LIKE 'А%' OR" +
-                        " p.gosznak LIKE 'Е%' OR" +
-                        " p.gosznak LIKE 'О%' OR" +
-                        " p.gosznak LIKE 'У%'").list();
-
-        for(Customer p: customerListFiltered)
-        {
-            logger.info(p.toString());
-        }
-        session.close();
-        return customerListFiltered;
-
-    }
-
-    /**
      * Добавление клиента
      */
     public void addCustomer(Customer customer) {
@@ -94,12 +70,8 @@ public class CustomerDao
      */
     public void removeCustomer(String id) {
         Session session = this.sessionFactory.openSession();
-        //  Customer c = (Customer) session.load(Customer.class, new String(id));
-
-
         List<Customer> customerList  =
                 session.createQuery("select c from Customer c where c.gosznak =" + "'"+id+"'").list();
-
         for (Customer c : customerList)
         {
             session.beginTransaction();
@@ -107,14 +79,6 @@ public class CustomerDao
             session.getTransaction().commit();
             logger.info("Customer removed: " + c);
         }
-
-
-
-       /* if(c!=null){
-            session.delete(c);
-        }
-
-        */
         session.close();
     }
 

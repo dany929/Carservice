@@ -66,7 +66,7 @@
             <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders/">ToOrders</a>
+            <a href="/toorders/">Queries</a>
         </li>
     </ul>
 </head>
@@ -87,7 +87,7 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9" required="required" />
+                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9"  required="required" />
 
                 </td>
             </tr>
@@ -175,13 +175,6 @@
         </c:forEach>
     </table>
 </c:if>
-
-
-
-
-
-
-
 
 </body>
 </html>

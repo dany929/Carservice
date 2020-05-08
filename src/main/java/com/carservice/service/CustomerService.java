@@ -26,48 +26,15 @@ public class CustomerService
     }
 
 
-    public  List<Customer> listFilter()
-    {
-        return  this.customerDao.listCustomerFiltered();
-    }
-
-
     public void addCustomer(Customer customer)
     {
         this.customerDao.addCustomer(customer);
-     /*
-       if(!listCustomers().contains(customer))
-
-       {
-           System.err.println("Сервис Адд попал в иф");
-           this.customerDao.addCustomer(customer);
-           System.err.println("Сервис Адд попал в иф после дао");
-       }
-       else
-           {
-               System.err.println("Сервис Адд попал в елсу");
-              this.customerDao.updateCustomer(customer);
-           }
-
-      */
-    }
+         }
 
     public void updateCustomer(Customer customer)
     {
         this.customerDao.updateCustomer(customer);
-      /*
-      if(this.listCustomers().contains(customer))
-        {
-            System.err.println("Сервис Апдейт попал в иф");
-            this.customerDao.updateCustomer(customer);
-        }
-        else
-        {
-            System.err.println("Сервис Апдейт попал в елсу");
-            this.customerDao.addCustomer(customer);
-        }
 
-       */
     }
 
     public void removeCustomer(String id)

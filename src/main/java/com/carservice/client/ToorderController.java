@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-//@ImportResource("/WEB-INF/dispatcher-servlet.xml")
+
 @Controller
 public class ToorderController {
 
@@ -47,24 +47,13 @@ public class ToorderController {
      * Вывод списка на стартовой странице
      * атрибуты модели используются в jsp файле
      */
-/*
-    @RequestMapping(value ="toorders", method = RequestMethod.GET)
-    public String listToorder(Model model) {
-        model.addAttribute("toorder", new Toorder());
-        model.addAttribute("listToorder", this.toorderService.listToorders());
-        return "toorders";
-    }*/
-
 
     @RequestMapping(value = "/toorders/", method = RequestMethod.GET)
     public ModelAndView orderLinesList()
     {
-
         ModelAndView model = new ModelAndView("toorders");
-        model.addObject("listToorder", this.toorderService.listToorders());
         model.addObject("ordersFiltered",this.orderService.listFilteredOrders());
-        model.addObject("productsListFiltered", this.partService.filterByAvgCost());
-        model.addObject("productsListOrdered", this.partService.filterByOrderCostProducts());
+        model.addObject("partsOrdered", this.partService.filterByOrdered());
         return model;
     }
 
@@ -89,35 +78,7 @@ public class ToorderController {
     }
 
 
-/*
 
-    @RequestMapping("/removetoorder/{id}")
-    public String  removeToOrder(@PathVariable("id") int id)
-    {
-        //Обращение к списку текущего заказа из которого удаляются услуги
-        //Простановка цены по оставшимся услугам
-        Toorder f = this.toorderService.getToorderById(id);
-        Order o=f.getOrder();
-        this.toorderService.removeToorder(id);
-        List<Toorder> toorderList = this.orderService.getOrderById(o.getOrderid()).getToorders();
-
-        double sum = 0;
-        for(Toorder t: toorderList)
-        {
-            sum+=t.getPart().getPrice()*t.getNumofparts()+t.getOperation().getPrice();
-        }
-
-        System.err.println(sum);
-        sum=sum*(1-(double)o.getDiscount()/100);
-        System.err.println(sum);
-        o.setTotalcost(sum);
-        System.err.println(o.getTotalcost());
-
-        this.orderService.updateOrder(o);
-
-        return  "redirect:/orders";
-    }
-*/
     /**
      * Заполнение полей для добавления\обновления записи
      */
@@ -132,23 +93,6 @@ public class ToorderController {
 
         return "toorders";
     }
-
-/*
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public List<Customer> listFilter()
-    {
-        return this.toorderService.listFilter();
-    }
-
-    @RequestMapping("customerdata/{id}")
-    public String bookData(@PathVariable("id") String id, Model model){
-        model.addAttribute("customer", this.toorderService.getCustomerById(id));
-
-        return "customerdata";
-    }
-   // */
-
-
 
 }
 

@@ -32,7 +32,7 @@
             <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders/">ToOrders</a>
+            <a href="/toorders/">Queries</a>
         </li>
     </ul>
 </head>
@@ -127,13 +127,6 @@
         </c:forEach>
     </table>
 </c:if>
-
-
-
-
-
-
-
 
 </body>
 </html>

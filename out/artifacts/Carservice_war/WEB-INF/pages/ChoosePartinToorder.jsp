@@ -31,7 +31,7 @@
 
                 <c:if test="${!empty listParts}">
                     <input type="hidden" name="ord" value="${orderId}"/>
-                    <input type="hidden" name="clt" value="${gosznak}"/>
+                    <input type="hidden" name="cst" value="${gosznak}"/>
                     <table class="tg">
 
                         <tr>

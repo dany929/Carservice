@@ -16,7 +16,6 @@
 <html>
 <head>
     <title>Parts</title>
-
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
     <ul>
         <li>
@@ -32,120 +31,55 @@
             <a  href="/orders/">Orders</a>
         </li>
         <li>
-            <a class="active" href="/toorders/">ToOrders</a>
+            <a class="active" href="/toorders/">Queries</a>
         </li>
     </ul>
 </head>
-
 <body>
 <br>
-<br>
-
-
-
-<br>
-<br>
-<%--
-<c:if test="${!empty listToorder }">
-
-        <c:forEach items="${listToorder}" var="toorder">
-            <table class="tg">
-            <tr>
-                <th width="80" colspan="3">Orderid ${toorder.order.orderid}</th>
-            </tr>
-            <tr>
-                <th width="80">Gosznak</th>
-                <th width="80">Partid</th>
-                <th width="80">PartTitle</th>
-                <th width="80">PartPrice</th>
-                <th width="80">Numofparts</th>
-                <th width="80">Operid</th>
-                <th width="80">OperDescr</th>
-                <th width="80">OperPrice</th>
-                <th width="80">Discount</th>
-                <th width="80">Total</th>
-
-                <th width="80">Edit</th>
-                <th width="80">Delete</th>
-            </tr>
-
-            <tr>
-
-                <td>${toorder.order.customer.gosznak}</td>
-                <td>${toorder.part.partid}</td>
-                <td>${toorder.part.title}</td>
-                <td>${toorder.part.price}</td>
-                <td>${toorder.numofparts}</td>
-                <td>${toorder.operation.operationid}</td>
-                <td>${toorder.operation.description}</td>
-                <td>${toorder.operation.price}</td>
-                <td>${toorder.order.discount}</td>
-                <td>${toorder.order.totalcost}</td>
-
-                <td><a href="<c:url value='/edittoorder/${toorder.toorderid}'/>">Edit</a></td>
-                <td><a href="<c:url value='/removetoorder/${toorder.toorderid}'/>">Delete</a></td>
-            </tr>
-            <br>
-        </c:forEach>
-    </table>
-</c:if>
- --%>
-<br>
-
+<h1>Orders with higher total cost, than average cost among all orders</h1>
 <c:if test="${!empty ordersFiltered}">
-    <table>
+    <table  class="tg">
         <tr>
-
+            <th width="80">Order Num</th>
+            <th width="80">Gosznak</th>
+            <th width="80">First name</th>
+            <th width="80">Last name</th>
+            <th width="80">Date out</th>
+            <th width="80">Total Cost</th>
         </tr>
         <c:forEach items="${ordersFiltered}" var="order">
-            <t>
+            <tr>
                 <td>${order.orderid}</td>
                 <td>${order.customer.gosznak}</td>
+                <td>${order.customer.firstname}</td>
+                <td>${order.customer.lastname}</td>
+                <td>${order.dateout}</td>
                 <td>${order.totalcost}</td>
-            </t>
-        </c:forEach>
-    </table>
-</c:if>
-<br>
-<br>
-<c:if test="${!empty productsListFiltered}">
-    <table class="tg">
-        <tr>
-            <th width="80">Name</th>
-            <th width="80">Type</th>
-            <th width="80">Cost</th>
-            <th width="80">Count</th>
-        </tr>
-        <c:forEach items="${productsListFiltered}" var="product">
-            <tr>
-                <td>${product.title}</td>
-                <td>${product.category}</td>
-                <td>${product.price}</td>
-
             </tr>
         </c:forEach>
     </table>
 </c:if>
+<br>
+<h1>Ordered parts</h1>
 
-<h1> : </h1>
-
-    <table class="tg">
+<c:if test="${!empty partsOrdered}">
+    <table  class="tg">
         <tr>
-            <th width="80">Name</th>
-            <th width="80">Type</th>
-            <th width="80">Cost</th>
-            <th width="80">Count</th>
+            <th>Part Category</th>
+            <th>Title</th>
+            <th>Price</th>
         </tr>
-        <c:forEach items="${productsListOrdered}" var="product">
+        <c:forEach items="${partsOrdered}" var="part">
             <tr>
-                <td>${product.title}</td>
-                <td>${product.category}</td>
-                <td>${product.price}</td>
-
+                <td>${part.category}</td>
+                <td>${part.title}</td>
+                <td>${part.price}</td>
             </tr>
         </c:forEach>
     </table>
 
+</c:if>
 
 </body>
 </html>

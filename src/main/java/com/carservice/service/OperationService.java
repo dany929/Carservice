@@ -30,39 +30,13 @@ public class OperationService
     public void addOperation(Operation Operation)
     {
         this.operationDao.addOperation(Operation);
-     /*
-       if(!listOperation().contains(Operation))
 
-       {
-           System.err.println("Сервис Адд попал в иф");
-           this.OperationDao.addOperation(Operation);
-           System.err.println("Сервис Адд попал в иф после дао");
-       }
-       else
-           {
-               System.err.println("Сервис Адд попал в елсу");
-              this.OperationDao.updateOperation(Operation);
-           }
-
-      */
     }
 
     public void updateOperation(Operation Operation)
     {
         this.operationDao.updateOperation(Operation);
-      /*
-      if(this.listOperation().contains(Operation))
-        {
-            System.err.println("Сервис Апдейт попал в иф");
-            this.OperationDao.updateOperation(Operation);
-        }
-        else
-        {
-            System.err.println("Сервис Апдейт попал в елсу");
-            this.OperationDao.addOperation(Operation);
-        }
 
-       */
     }
 
     public void removeOperation(int id)

@@ -25,7 +25,7 @@ public class OperationDao
     Logger logger = LoggerFactory.getLogger(OperationDao.class);
 
     /**
-     * Вывод всех клиентов
+     * Вывод всех операций
      */
     public List<Operation> listOperations()
     {
@@ -47,7 +47,7 @@ public class OperationDao
 
 
     /**
-     * Добавление клиента
+     * Добавление операции
      */
     public void addOperation(Operation operation) {
         Session session = this.sessionFactory.openSession();
@@ -59,7 +59,7 @@ public class OperationDao
     }
 
     /**
-     * Обновление клиента
+     * Обновление операции
      */
     public void updateOperation(Operation c) {
         Session session = this.sessionFactory.openSession();
@@ -69,11 +69,10 @@ public class OperationDao
     }
 
     /**
-     * Удаление клиента
+     * Удаление операции
      */
     public void removeOperation(int id) {
         Session session = this.sessionFactory.openSession();
-      //  Customer c = (Customer) session.load(Customer.class, new String(id));
         Operation operation = (Operation) session.load(Operation.class, new Integer(id));
 
         if ( operation != null)
@@ -87,7 +86,7 @@ public class OperationDao
     }
 
     /**
-     * Нахождение клиента по ид
+     * Нахождение операции по ид
      */
     public Operation getOperationById(int id) {
         Session session = this.sessionFactory.openSession();

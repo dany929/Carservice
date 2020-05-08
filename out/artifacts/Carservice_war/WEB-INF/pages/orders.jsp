@@ -33,7 +33,7 @@
             <a class="active" href="/orders/">Orders</a>
         </li>
         <li>
-            <a href="/toorders/">ToOrders</a>
+            <a href="/toorders/">Queries</a>
         </li>
     </ul>
 </head>
@@ -222,32 +222,10 @@
             </c:forEach>
         </c:if>
         <br>
+        <br>
     </c:forEach>
     </table>
 </c:if>
-
-
-<%--
-<table class="tg">
-    <tr>
-        <th width="80">title</th>
-        <th width="80">price</th>
-    </tr>
-    <c:forEach items="${listpart}" var="part">
-        <tr>
-            <td>${part.title}</td>
-            <td>${part.price}</td>
-            <td>${order.discount}</td>
-        </tr>
-    </c:forEach>
-</table>
-
---%>
-
-
-
-
-
 
 </body>
 </html>

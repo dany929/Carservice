@@ -17,7 +17,7 @@
 
             <form:form action="updatetoorder" method="post">
                 <tr>
-                    <input class="btnadd" type="submit"  value="Add">
+                    <input class="btnadd" type="submit"  value="Apply Changes">
                 </tr>
                 <tr>
                     <th width="80">Number of parts</th>

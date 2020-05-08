@@ -25,38 +25,12 @@ public class PartService {
 
     public void addPart(Part part) {
         this.partDao.addPart(part);
-     /*
-       if(!listPart().contains(part))
 
-       {
-           System.err.println("Сервис Адд попал в иф");
-           this.partDao.addPart(part);
-           System.err.println("Сервис Адд попал в иф после дао");
-       }
-       else
-           {
-               System.err.println("Сервис Адд попал в елсу");
-              this.partDao.updatePart(part);
-           }
-
-      */
     }
 
     public void updatePart(Part part) {
         this.partDao.updatePart(part);
-      /*
-      if(this.listPart().contains(part))
-        {
-            System.err.println("Сервис Апдейт попал в иф");
-            this.partDao.updatePart(part);
-        }
-        else
-        {
-            System.err.println("Сервис Апдейт попал в елсу");
-            this.partDao.addPart(part);
-        }
 
-       */
     }
 
     public void removePart(int id) {
@@ -68,11 +42,7 @@ public class PartService {
         return this.partDao.getPartById(id);
     }
 
-    public List<Part> filterByAvgCost() {
-        return this.partDao.filterProductByCost();
-    }
-
-    public List<Part> filterByOrderCostProducts() {
-        return this.partDao.filterByOrderCostProducts();
+    public List<Part> filterByOrdered() {
+        return this.partDao.filterByOrdered();
     }
 }

@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 //@ImportResource("/WEB-INF/dispatcher-servlet.xml")
 @Controller
 public class CustomerController {
@@ -38,8 +36,6 @@ public class CustomerController {
         model.addObject("listCustomers", this.customerService.listCustomers());
         return model;
     }
-
-
 
     /**
      * Запрос при нажатии на кнопку добавления записи
@@ -79,19 +75,7 @@ public class CustomerController {
     }
 
 
-    @RequestMapping(value = "/filter", method = RequestMethod.GET)
-    public List<Customer> listFilter()
-    {
-        return this.customerService.listFilter();
-    }
-/*
-    @RequestMapping("customerdata/{id}")
-    public String bookData(@PathVariable("id") String id, Model model){
-        model.addAttribute("customer", this.customerService.getCustomerById(id));
 
-        return "customerdata";
-    }
-*/
 
 
 }

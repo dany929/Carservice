@@ -97,42 +97,16 @@ public class PartDao
         return p;
     }
 
+    //Запрос на вывод заказанных запчастей
 
-    //Сложный запрос выводящий товары цена которых выше средней
-
-    public List<Part> filterProductByCost()
+    public List<Part> filterByOrdered()
     {
         Session session = this.sessionFactory.openSession();
-        List<Part> partList = session.createQuery(
-                "FROM Part s WHERE s.price > (SELECT avg(s.price) FROM Part s) ORDER BY s.price").list();
-        for(Part product : partList)
-        {
-            logger.info(product.toString());
-        }
-        session.close();
-        return partList;
-    }
-
-    //Сложный запрос выводящий все товары которые входят в заказы цены которых выше 30000
-
-    public List<Part> filterByOrderCostProducts()
-    {
-        Session session = this.sessionFactory.openSession();
-        List<Part> partList = session.createQuery("FROM Part s WHERE s.price > 250 AND s.price < 400").list();
+        List<Part> partList = session.createQuery("SELECT s FROM Part s where s.partid IN (SELECT a.part.partid FROM Toorder a)").list();
         for(Part part : partList)
         {
             logger.info("Фильтр по цене"+part.toString());
         }
-
-
-        /*
-        List<Part> partList = session.createQuery("SELECT part.category, sum(part.price) " +
-                "FROM Part part GROUP BY part.category ").list();
-        for(Part product : partList)
-        {
-            logger.info(product.toString());
-        }
-        */
         session.close();
         return partList;
     }
