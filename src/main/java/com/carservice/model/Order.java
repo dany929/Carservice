@@ -40,11 +40,6 @@ public class Order implements Serializable
         this.totalcost = totalcost;
     }
 
-    /*
-            @Column(name = "gosznak")
-            private String gosznak;
-
-         */
     //////////////////////////////////////////////////
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order", orphanRemoval = true)
     @Cascade(org.hibernate.annotations.CascadeType.MERGE)

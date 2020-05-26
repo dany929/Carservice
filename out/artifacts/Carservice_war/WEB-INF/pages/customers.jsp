@@ -87,7 +87,7 @@
                     </form:label>
                 </td>
                 <td>
-                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9"  required="required" />
+                    <form:input class="gosznak" name="znak"  path="gosznak"  size="9"   required="required" />
 
                 </td>
             </tr>

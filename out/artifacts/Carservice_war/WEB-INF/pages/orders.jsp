@@ -152,7 +152,7 @@
             <td>
                 <form:form action="cpl" method="POST">
                 <input type="hidden" name="id" value="${order.orderid}"/>
-                <input type="submit" class="btnCL" value="Complete with Today Date">
+                <input type="submit" class="btnCL" value="Complete with Today's Date">
                 </form:form>
             </td>
 
@@ -166,7 +166,7 @@
             <td>
                 <form:form action="editorder" method="POST">
                     <input type="hidden" name="id" value="${order.orderid}"/>
-                    <input type="submit" class="btnedit" value="Edit">
+                    <input type="submit" class="btnedit" value="Edit Order">
                 </form:form>
             </td>
 
@@ -187,7 +187,7 @@
             </tr>
             <tr>
 
-                <th width="80" >Product Title</th>
+                <th width="80" >Part Title</th>
                 <th width="80" >Category</th>
                 <th width="80">Number of Parts</th>
                 <th width="80" >Total Part Cost</th>
@@ -196,24 +196,24 @@
                 <th width="80" >Edit</th>
                 <th width="80" colspan="2">Delete</th>
             </tr>
-            <c:forEach items="${order.toorders}" var="prod">
+            <c:forEach items="${order.toorders}" var="toorder">
                 <tr>
 
-                    <td>${prod.part.title}</td>
-                    <td>${prod.part.category}</td>
-                    <td>${prod.numofparts}</td>
-                    <td>${prod.part.price*prod.numofparts}</td>
-                    <td>${prod.operation.description}</td>
-                    <td>${prod.operation.price}</td>
+                    <td>${toorder.part.title}</td>
+                    <td>${toorder.part.category}</td>
+                    <td>${toorder.numofparts}</td>
+                    <td>${toorder.part.price*toorder.numofparts}</td>
+                    <td>${toorder.operation.description}</td>
+                    <td>${toorder.operation.price}</td>
                     <td>
                         <form:form action="edittoorder" method="POST">
-                        <input type="hidden" name="id" value="${prod.toorderid}"/>
+                        <input type="hidden" name="id" value="${toorder.toorderid}"/>
                         <input  type="submit" class="btnedit" value="Edit">
                         </form:form>
                     </td>
                     <td colspan="2">
                         <form:form action="removetoorder" method="POST">
-                        <input type="hidden" name="id" value="${prod.toorderid}"/>
+                        <input type="hidden" name="id" value="${toorder.toorderid}"/>
                         <input type="submit" class="btndel" value="Remove from Order">
                         </form:form>
                     </td>

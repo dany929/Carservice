@@ -8,12 +8,12 @@
     <database id="2" parent="1" name="Carservice">
       <ObjectId>16393</ObjectId>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1773</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2502</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|57437|57439|1
-sequence|table|57429|57431|1
-sequence|table|57667|57669|1
+      <Relations>sequence|table|57667|57669|1
 sequence|table|57680|57682|1
+sequence|table|57429|57431|1
+sequence|table|57437|57439|1
 </Relations>
     </database>
     <database id="3" parent="1" name="postgres">
@@ -61,7 +61,7 @@ sequence|table|57680|57682|1
       <Comment>standard public schema</Comment>
       <StateNumber>352</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>1774</IntrospectionStateNumber>
+      <IntrospectionStateNumber>2503</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <access-method id="13" parent="2" name="btree">
@@ -419,7 +419,21 @@ sequence|table|57680|57682|1
       <StateNumber>1554</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <foreign-key id="65" parent="29" name="toorder_orderid_fkey">
+    <index id="65" parent="29" name="toorder_pk">
+      <ObjectId>57758</ObjectId>
+      <StateNumber>2501</StateNumber>
+      <ColNames>toorderid</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="66" parent="29" name="toorder_pk">
+      <ObjectId>57759</ObjectId>
+      <StateNumber>2501</StateNumber>
+      <ColNames>toorderid</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>toorder_pk</UnderlyingIndexName>
+    </key>
+    <foreign-key id="67" parent="29" name="toorder_orderid_fkey">
       <ObjectId>57700</ObjectId>
       <StateNumber>1554</StateNumber>
       <ColNames>orderid</ColNames>
@@ -430,7 +444,7 @@ sequence|table|57680|57682|1
       <RefColNames>orderid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="66" parent="29" name="toorder_partid_fkey">
+    <foreign-key id="68" parent="29" name="toorder_partid_fkey">
       <ObjectId>57690</ObjectId>
       <StateNumber>1554</StateNumber>
       <ColNames>partid</ColNames>
@@ -440,7 +454,7 @@ sequence|table|57680|57682|1
       <RefKeyName>parts_pkey</RefKeyName>
       <RefColNames>partid</RefColNames>
     </foreign-key>
-    <foreign-key id="67" parent="29" name="toorder_operationid_fkey">
+    <foreign-key id="69" parent="29" name="toorder_operationid_fkey">
       <ObjectId>57695</ObjectId>
       <StateNumber>1554</StateNumber>
       <ColNames>operationid</ColNames>

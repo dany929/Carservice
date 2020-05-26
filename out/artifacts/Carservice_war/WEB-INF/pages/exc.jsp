@@ -95,7 +95,7 @@
 <div class="background">
 </div>
 <div class="message">
-    <h1>Yo,</h1>
+    <h1>Ups...something went wrong,</h1>
     <h2>pay just a little attention to your actions</h2>
     <h4>following instructions isn't a bad thing</h4>
     <h3> <a onclick="goBack()" class="btn" >Bring me back</a> </h3>

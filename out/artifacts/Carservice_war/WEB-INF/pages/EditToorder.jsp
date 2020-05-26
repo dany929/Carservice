@@ -5,7 +5,7 @@
 <%@ page language="java" contentType="text/html; charset=Cp1251" pageEncoding="Cp1251" %>
 <html>
 <head>
-    <title>Choose product</title>
+    <title>Choose part</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>

@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Add Product</title>
+    <title>Add Part</title>
     <link rel="stylesheet" type="text/css" href="../../css/style.css">
 </head>
 <body>
